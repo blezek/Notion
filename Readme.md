@@ -34,7 +34,7 @@ Depending on needs, one of the other systems may be a better fit.
 
 [Download and unzip the Notion-X.X.X.zip package.](https://www.nitrc.org/projects/notion/)  Inside you'll find several interesting files, including ```Notion.jar``` and the [documentation](Documentation/html).  Installation is complete at this point.
 
-Notion is released through [NITRIC](http://www.nitric.org), future and older releases can be found on the [Notion downloads page](http://www.nitrc.org/frs/?group_id=793).
+Notion is released through [NITRC](http://www.nitrc.org/), future and older releases can be found on the [Notion downloads page](https://www.nitrc.org/frs/?group_id=793).
 
 #### Getting started
 
