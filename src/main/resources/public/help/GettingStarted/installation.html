@@ -8,14 +8,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; Notion: a PACS for researchers 1.0 documentation</title>
+  <title>Installation &mdash; Notion: a PACS for researchers 3.1 documentation</title>
   
 
   
   
 
   
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   
   
@@ -29,9 +29,7 @@
   
 
   
-
-  
-    <link rel="top" title="Notion: a PACS for researchers 1.0 documentation" href="../index.html"/>
+    <link rel="top" title="Notion: a PACS for researchers 3.1 documentation" href="../index.html"/>
         <link rel="next" title="Getting Started" href="getting_started.html"/>
         <link rel="prev" title="Notion: a ‘PACS’ for researchers" href="../index.html"/>
 <link rel="stylesheet" href="../_static/notion.css" />
@@ -52,12 +50,9 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-nav-search">
-        
-          <a href="../index.html" class="fa fa-home"> Notion: a PACS for researchers</a>
-        
-        
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+        <a href="../index.html" class="fa fa-home"> Notion: a PACS for researchers</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -67,9 +62,8 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
         
-          
-          
-              <ul class="current">
+        
+            <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#running-notion">Running Notion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
@@ -141,7 +135,6 @@
 </li>
 </ul>
 
-          
         
       </div>
       &nbsp;
@@ -170,7 +163,7 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document">
+          <div role="main">
             
   <div class="section" id="installation">
 <span id="id1"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
@@ -236,7 +229,7 @@ dbWeb: 8084
 # For simplicity, Notion uses the Derby embedded database, see
 # http://db.apache.org/derby/ for more information.
 # The directory where the DB in installed is specified after the &#39;directory:&#39;
-# portion of the URL.
+# portion of the URL (./NotionPACS in this case).
 database:
   driverClass: org.apache.derby.jdbc.EmbeddedDriver
   url: jdbc:derby:directory:NotionPACS/DB;create=true
@@ -303,12 +296,11 @@ shiro:
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2014, William Ryan, Patricio Fajnwaks, Daniel Blezek, Steve Langer, Brad Erickson.
+        &copy; Copyright 2014-2015, William Ryan, Patricio Fajnwaks, Daniel Blezek, Steve Langer, Brad Erickson.
     </p>
   </div>
 
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-  
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
 </footer>
         </div>
       </div>
@@ -324,7 +316,7 @@ shiro:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.0',
+            VERSION:'3.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

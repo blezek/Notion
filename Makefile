@@ -4,7 +4,7 @@ tag := $(shell git describe --abbrev=4 --dirty --always --tags)
 
 # How to parse the revision.
 # Makefiles must quote # (hash), \ (backslash) and () (parens)
-re := s\#\\([0-9]*\\)[.]\\([0-9]*\\)[.]\\([0-9]*\\)[.]\\([.0-9A-Za-z-]*\\)\#
+re := s\#\\([0-9]*\\)[.]\\([0-9]*\\)[.]\\([0-9]*\\)\\([.0-9A-Za-z-]*\\)\#
 
 # Now pull off each element
 build.major := $(shell echo $(tag)| sed -e "$(re)\\1\#")

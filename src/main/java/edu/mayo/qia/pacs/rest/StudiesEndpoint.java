@@ -105,7 +105,7 @@ public class StudiesEndpoint {
 
     for (String column : columns) {
       if (qParams.has(column)) {
-        where.append(" and " + column + " like ? ");
+        where.append(" and upper(" + column + ") like upper(?) ");
         parameters.add("%" + qParams.get(column).textValue() + "%");
       }
     }

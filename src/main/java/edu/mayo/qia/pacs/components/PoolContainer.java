@@ -95,7 +95,7 @@ public class PoolContainer {
   File scriptsDirectory;
   File incomingDirectory;
   File imageDirectory;
-  ConcurrentLinkedQueue<File> instancesToForward= new ConcurrentLinkedQueue<File>();
+  ConcurrentLinkedQueue<File> instancesToForward = new ConcurrentLinkedQueue<File>();
   PipelineStage ctpAnonymizer = null;
 
   @Autowired
@@ -359,10 +359,8 @@ public class PoolContainer {
       outFile.getParentFile().mkdirs();
 
       // Start a transaction
-      /*
-       * to debug: select * from syscs_diag.lock_table; select * from
-       * syscs_diag.transaction_table;
-       */
+      /* to debug: select * from syscs_diag.lock_table; select * from
+       * syscs_diag.transaction_table; */
       Session session = sessionFactory.openSession();
       session.beginTransaction();
 
@@ -440,7 +438,7 @@ public class PoolContainer {
 
         // Queue the file up to be forwarded later
         instancesToForward.add(outFile);
-        
+
         // Delete the input file, it is not needed any more
         if (inFile.exists()) {
           inFile.delete();
@@ -519,6 +517,8 @@ public class PoolContainer {
       if (t == null) {
         t = "UNKNOWN";
       }
+      // We want our filenames to be A-Z, a-z, 0-9, . and nothing else.
+      t = t.replaceAll("[^A-Za-z0-9.]", "");
       relativePath = new File(relativePath, t);
     }
     // Always store with .dcm at the end
@@ -620,22 +620,24 @@ public class PoolContainer {
 
   public void processAutoForward() {
     // First check our queue
-    if ( instancesToForward.isEmpty() ) { return; }
+    if (instancesToForward.isEmpty()) {
+      return;
+    }
     // Collect up all the files to forward, send them on and remove
     List<File> toProcess = new ArrayList<File>();
-    
-    while (!instancesToForward.isEmpty()){
+
+    while (!instancesToForward.isEmpty()) {
       toProcess.add(instancesToForward.poll());
     }
     // Get all the devices
     Session session = sessionFactory.openSession();
-    
+
     Pool localPool = (Pool) session.byId(Pool.class).load(this.pool.poolKey);
     // Force load
     localPool.getDevices().size();
 
-    for ( Device device : localPool.getDevices()) {
-      if ( device.isAutoforward) {
+    for (Device device : localPool.getDevices()) {
+      if (device.isAutoforward) {
         // Send our batch of files
         logger.debug("Autoforwarding " + toProcess.size() + " instance(s) to " + device);
         try {
@@ -645,7 +647,9 @@ public class PoolContainer {
           sender.setRemotePort(device.port);
           sender.setCalledAET(device.applicationEntityTitle);
           String calling = device.callingApplicationEntityTitle;
-          if ( calling == null ) { calling = pool.applicationEntityTitle; }
+          if (calling == null) {
+            calling = pool.applicationEntityTitle;
+          }
           sender.setCalling(calling);
           for (File f : toProcess) {
             if (f.isFile()) {
@@ -659,9 +663,9 @@ public class PoolContainer {
 
         } catch (Exception e) {
           logger.error("Failed to autoforward to " + device, e);
-        } 
+        }
       }
     }
-      session.close();
+    session.close();
   }
 }

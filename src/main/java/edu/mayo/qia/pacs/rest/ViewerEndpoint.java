@@ -96,7 +96,7 @@ public class ViewerEndpoint extends Endpoint {
   public Response getStudies(@Auth Subject subject) {
     ObjectNode json = objectMapper.createObjectNode();
     final ArrayNode studies = json.putArray("studyList");
-    template.query("select * from STUDY where PoolKey = ?", new Object[] { poolKey }, new RowCallbackHandler() {
+    template.query("select * from STUDY where PoolKey = ? order by PatientName", new Object[] { poolKey }, new RowCallbackHandler() {
 
       @Override
       public void processRow(ResultSet rs) throws SQLException {
@@ -173,7 +173,7 @@ public class ViewerEndpoint extends Endpoint {
       }
     });
 
-    template.query("select SERIES.* from SERIES, STUDY where STUDY.PoolKey = ? and STUDY.StudyKey = ? and SERIES.StudyKey = STUDY.StudyKey", new Object[] { poolKey, studyKey }, new RowCallbackHandler() {
+    template.query("select SERIES.* from SERIES, STUDY where STUDY.PoolKey = ? and STUDY.StudyKey = ? and SERIES.StudyKey = STUDY.StudyKey order by SERIES.SeriesNumber", new Object[] { poolKey, studyKey }, new RowCallbackHandler() {
 
       @Override
       public void processRow(ResultSet rs) throws SQLException {
@@ -192,7 +192,8 @@ public class ViewerEndpoint extends Endpoint {
       // Fill in the instances
       final ArrayNode instances = s.putArray("instanceList");
       int seriesKey = s.get("seriesKey").asInt();
-      template.query("select * from INSTANCE where SeriesKey = ?", new Object[] { seriesKey }, new RowCallbackHandler() {
+      // Order by InstanceNumber, if it's null, return '0' and cast to integer
+      template.query("select * from INSTANCE where SeriesKey = ? order by cast ( NULLIF(InstanceNumber,'0') as INT )", new Object[] { seriesKey }, new RowCallbackHandler() {
 
         @Override
         public void processRow(ResultSet rs) throws SQLException {
