@@ -29,6 +29,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Notion: a PACS for researchers 3.1 documentation" href="../index.html"/>
         <link rel="next" title="DICOM Configuration" href="dicom.html"/>
         <link rel="prev" title="Installation" href="installation.html"/>
@@ -69,7 +72,7 @@
 <li class="toctree-l2"><a class="reference internal" href="installation.html#configuration">Configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Getting Started</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#create-a-user">Create a User</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-a-pool">Create a Pool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#working-with-the-pool">Working with the pool</a></li>
@@ -167,21 +170,21 @@
             
   <div class="section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>Getting started with Notion is straightforward.  After <a class="reference internal" href="installation.html#installation"><span>installation</span></a> of Notion, an instance should be up and running at <a class="reference external" href="http://localhost:8080">http://localhost:8080</a>. <strong>NB:</strong> links on this page reference <span class="tt">http://localhost:8080</span> and can be visited if Notion is running on the local machine. Visiting the web app gives:</p>
+<p>Getting started with Notion is straightforward.  After <a class="reference internal" href="installation.html#installation"><span class="std std-ref">installation</span></a> of Notion, an instance should be up and running at <a class="reference external" href="http://localhost:8080">http://localhost:8080</a>. <strong>NB:</strong> links on this page reference <span class="tt">http://localhost:8080</span> and can be visited if Notion is running on the local machine. Visiting the web app gives:</p>
 <a class="reference internal image-reference" href="../_images/landing_page.png"><img alt="../_images/landing_page.png" class="align-center" src="../_images/landing_page.png" style="width: 512px;" /></a>
 <div class="section" id="create-a-user">
 <h2>Create a User<a class="headerlink" href="#create-a-user" title="Permalink to this headline">¶</a></h2>
 <p>Click the <em>Register</em> link on the landing page, and create a new user.  For this tutorial, <code class="docutils literal"><span class="pre">notion</span></code> will be the username.</p>
 <a class="reference internal image-reference" href="../_images/register_user.png"><img alt="../_images/register_user.png" class="align-center" src="../_images/register_user.png" style="width: 512px;" /></a>
-<p>The new user will automatically be logged in.  The first user of a new Notion installation will be automatically granted administrator authorization.  <a class="reference internal" href="../Reference/operations.html#users-and-groups"><span>Users and Groups</span></a> gives more detail on configuration of other users and permissions for individual pools.</p>
+<p>The new user will automatically be logged in.  The first user of a new Notion installation will be automatically granted administrator authorization.  <a class="reference internal" href="../Reference/operations.html#users-and-groups"><span class="std std-ref">Users and Groups</span></a> gives more detail on configuration of other users and permissions for individual pools.</p>
 <div class="section" id="goal">
 <h3>Goal<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h3>
-<p>The goal of this tutorial is to introduce several of Notion&#8217;s concepts including <a class="reference internal" href="../Reference/reference.html#pools"><span>Pool</span></a>, <a class="reference internal" href="../Reference/reference.html#devices"><span>Device</span></a>, and <a class="reference internal" href="../Reference/reference.html#anonymization"><span>Anonymization</span></a>.  Once a simple <a class="reference internal" href="../Reference/reference.html#pools"><span>Pool</span></a> is configured, test images will be sent to the Pool, both with and without anonymization.</p>
+<p>The goal of this tutorial is to introduce several of Notion’s concepts including <a class="reference internal" href="../Reference/reference.html#pools"><span class="std std-ref">Pool</span></a>, <a class="reference internal" href="../Reference/reference.html#devices"><span class="std std-ref">Device</span></a>, and <a class="reference internal" href="../Reference/reference.html#anonymization"><span class="std std-ref">Anonymization</span></a>.  Once a simple <a class="reference internal" href="../Reference/reference.html#pools"><span class="std std-ref">Pool</span></a> is configured, test images will be sent to the Pool, both with and without anonymization.</p>
 </div>
 </div>
 <div class="section" id="create-a-pool">
 <span id="createapool"></span><h2>Create a Pool<a class="headerlink" href="#create-a-pool" title="Permalink to this headline">¶</a></h2>
-<p>On the <a class="reference external" href="http://localhost:8080/index.html#/pools">Pool</a> (<a class="reference external" href="http://localhost:8080/index.html#/pools">http://localhost:8080/index.html#/pools</a>) page of the webapp is a list of Pools defined in this Notion installation (none currently, we&#8217;ll fix that shortly).  To create a Pool, click on the <span class="tt">plus</span> icon next to <span class="tt">Pools</span>.</p>
+<p>On the <a class="reference external" href="http://localhost:8080/index.html#/pools">Pool</a> (<a class="reference external" href="http://localhost:8080/index.html#/pools">http://localhost:8080/index.html#/pools</a>) page of the webapp is a list of Pools defined in this Notion installation (none currently, we’ll fix that shortly).  To create a Pool, click on the <span class="tt">plus</span> icon next to <span class="tt">Pools</span>.</p>
 <a class="reference internal image-reference" href="../_images/pools_page.png"><img alt="../_images/pools_page.png" class="align-center" src="../_images/pools_page.png" style="width: 512px;" /></a>
 <p>In the dialog, enter the following information:</p>
 <a class="reference internal image-reference" href="../_images/new_test_pool.png"><img alt="../_images/new_test_pool.png" class="align-right" src="../_images/new_test_pool.png" style="width: 400px;" /></a>
@@ -205,7 +208,7 @@
 <h2>Working with the pool<a class="headerlink" href="#working-with-the-pool" title="Permalink to this headline">¶</a></h2>
 <p>Clicking on the <a class="reference external" href="http://localhost:8080/index.html#/pools/pool/1">Test pool</a> link shows details of our new test pool.</p>
 <img alt="../_images/created_test_pool.png" class="align-center" src="../_images/created_test_pool.png" />
-<p>To interact with a Pool from a DICOM tool, a <a class="reference internal" href="../Reference/reference.html#device"><span>Device</span></a> must be defined.  To create a Device, click on the <span class="tt">plus</span> icon next to <span class="tt">Devices</span> to bring up the Device dialog.  Enter the following information:</p>
+<p>To interact with a Pool from a DICOM tool, a <a class="reference internal" href="../Reference/reference.html#device"><span class="std std-ref">Device</span></a> must be defined.  To create a Device, click on the <span class="tt">plus</span> icon next to <span class="tt">Devices</span> to bring up the Device dialog.  Enter the following information:</p>
 <a class="reference internal image-reference" href="../_images/new_device.png"><img alt="../_images/new_device.png" class="align-left" src="../_images/new_device.png" style="width: 300px;" /></a>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -236,111 +239,111 @@
 </tr>
 </tbody>
 </table>
-<p>All DICOM devices will be allowed to connect to the <span class="tt">test</span> Pool, including query, sending images and moving images to a third destination.  For this tutorial, our wildcard Device will give us great flexibility.  In practice, however, it may not be a good idea, see <a class="reference internal" href="../Reference/reference.html#devices"><span>Device</span></a> for more details on configuring Devices.</p>
+<p>All DICOM devices will be allowed to connect to the <span class="tt">test</span> Pool, including query, sending images and moving images to a third destination.  For this tutorial, our wildcard Device will give us great flexibility.  In practice, however, it may not be a good idea, see <a class="reference internal" href="../Reference/reference.html#devices"><span class="std std-ref">Device</span></a> for more details on configuring Devices.</p>
 <p>Our Device list will look like this:</p>
 <img alt="../_images/device_list.png" class="align-center" src="../_images/device_list.png" />
 </div>
 <div class="section" id="sending-images-to-the-pool">
 <span id="sendimagestoapool"></span><h2>Sending images to the Pool<a class="headerlink" href="#sending-images-to-the-pool" title="Permalink to this headline">¶</a></h2>
-<p>There are several ways to send DICOM images to the Pool.  Graphical tools such as <a class="reference external" href="http://www.osirix-viewer.com/">OsiriX</a> and <a class="reference external" href="http://www.clearcanvas.ca/">ClearCanvas</a> have excellent DICOM networking tools, but may not be available to everyone working through this tutorial.  We will use the <a class="reference external" href="http://www.dcm4che.org">DCM4CHE</a> tools because they <em>happen</em> to be bundled with Notion&#8217;s distribution.</p>
+<p>There are several ways to send DICOM images to the Pool.  Graphical tools such as <a class="reference external" href="http://www.osirix-viewer.com/">OsiriX</a> and <a class="reference external" href="http://www.clearcanvas.ca/">ClearCanvas</a> have excellent DICOM networking tools, but may not be available to everyone working through this tutorial.  We will use the <a class="reference external" href="http://www.dcm4che.org">DCM4CHE</a> tools because they <em>happen</em> to be bundled with Notion’s distribution.</p>
 <div class="section" id="echo-the-server">
 <h3>Echo the server<a class="headerlink" href="#echo-the-server" title="Permalink to this headline">¶</a></h3>
-<p>DICOM provides a method to check if a PACS is awake and listening for connections.  This is similar to a using <a class="reference external" href="http://en.wikipedia.org/wiki/Ping_%28networking_utility%29">ping</a> to test for connectivity to a network connected server.  To issue a DICOM echo (more formally a C-ECHO, see <a class="reference external" href="http://medical.nema.org/Dicom/2011/11_07pu.pdf">the standard</a> for full details), we will use <span class="tt">dcm4che&#8217;s</span> <span class="tt">dcmecho</span> utility.  From Notion&#8217;s install directory, invoke as:</p>
-<div class="highlight-bash"><div class="highlight"><pre>&gt;&gt; java -classpath <span class="s2">&quot;lib/*&quot;</span>:lib org.dcm4che2.tool.dcmecho.DcmEcho <span class="nb">test</span>@localhost:11117
-INFO - Association<span class="o">(</span>1<span class="o">)</span> initiated Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span>11117,localport<span class="o">=</span>59270<span class="o">]</span>
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span>: A-ASSOCIATE-RQ <span class="nb">test</span> <span class="s">&lt;&lt; DCMECHO</span>
+<p>DICOM provides a method to check if a PACS is awake and listening for connections.  This is similar to a using <a class="reference external" href="http://en.wikipedia.org/wiki/Ping_%28networking_utility%29">ping</a> to test for connectivity to a network connected server.  To issue a DICOM echo (more formally a C-ECHO, see <a class="reference external" href="http://medical.nema.org/Dicom/2011/11_07pu.pdf">the standard</a> for full details), we will use <span class="tt">dcm4che’s</span> <span class="tt">dcmecho</span> utility.  From Notion’s install directory, invoke as:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&gt;&gt; java -classpath <span class="s2">&quot;lib/*&quot;</span>:lib org.dcm4che2.tool.dcmecho.DcmEcho test@localhost:11117
+INFO - Association<span class="o">(</span><span class="m">1</span><span class="o">)</span> initiated Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span><span class="m">11117</span>,localport<span class="o">=</span><span class="m">59270</span><span class="o">]</span>
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span>: A-ASSOCIATE-RQ <span class="nb">test</span> <span class="s">&lt;&lt; DCMECHO</span>
 <span class="s">INFO - test(1): A-ASSOCIATE-AC DCMECHO</span> &gt;&gt; <span class="nb">test</span>
-Connected to <span class="nb">test</span>@localhost:11117 in 0.034s
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> <span class="s">&lt;&lt; 1:C-ECHO-RQ[pcid=1</span>
-       <span class="nv">cuid</span><span class="o">=</span>1.2.840.10008.1.1/Verification SOP Class<span class="o">]</span>
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> &gt;&gt; 1:C-ECHO-RSP<span class="o">[</span><span class="nv">pcid</span><span class="o">=</span>1, <span class="nv">status</span><span class="o">=</span>0H<span class="o">]</span>
+Connected to test@localhost:11117 in <span class="m">0</span>.034s
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="s">&lt;&lt; 1:C-ECHO-RQ[pcid=1</span>
+       <span class="nv">cuid</span><span class="o">=</span><span class="m">1</span>.2.840.10008.1.1/Verification SOP Class<span class="o">]</span>
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> &gt;&gt; <span class="m">1</span>:C-ECHO-RSP<span class="o">[</span><span class="nv">pcid</span><span class="o">=</span><span class="m">1</span>, <span class="nv">status</span><span class="o">=</span>0H<span class="o">]</span>
 Perform Verification in -0.05s
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> <span class="s">&lt;&lt; A-RELEA</span>SE-RQ
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> &gt;&gt; A-RELEASE-RP
-Released connection to <span class="nb">test</span>@localhost:11117
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span>: close Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span>11117,localport<span class="o">=</span>59270<span class="o">]</span>
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="s">&lt;&lt; A-RELEA</span>SE-RQ
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> &gt;&gt; A-RELEASE-RP
+Released connection to test@localhost:11117
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span>: close Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span><span class="m">11117</span>,localport<span class="o">=</span><span class="m">59270</span><span class="o">]</span>
 </pre></div>
 </div>
-<p>We have successfully connected to Notion&#8217;s DICOM server.  Let&#8217;s query our first pool:</p>
-<div class="highlight-bash"><div class="highlight"><pre>&gt;&gt; java -classpath lib:<span class="s2">&quot;lib/*&quot;</span> org.dcm4che2.tool.dcmqr.DcmQR  <span class="nb">test</span>@localhost:11117
-INFO - Association<span class="o">(</span>1<span class="o">)</span> initiated Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span>11117,localport<span class="o">=</span>59278<span class="o">]</span>
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span>: A-ASSOCIATE-RQ <span class="nb">test</span> <span class="s">&lt;&lt; DCMQR</span>
+<p>We have successfully connected to Notion’s DICOM server.  Let’s query our first pool:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&gt;&gt; java -classpath lib:<span class="s2">&quot;lib/*&quot;</span> org.dcm4che2.tool.dcmqr.DcmQR  test@localhost:11117
+INFO - Association<span class="o">(</span><span class="m">1</span><span class="o">)</span> initiated Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span><span class="m">11117</span>,localport<span class="o">=</span><span class="m">59278</span><span class="o">]</span>
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span>: A-ASSOCIATE-RQ <span class="nb">test</span> <span class="s">&lt;&lt; DCMQR</span>
 <span class="s">INFO - test(1): A-ASSOCIATE-AC DCMQR</span> &gt;&gt; <span class="nb">test</span>
-INFO - Connected to <span class="nb">test</span>@localhost:11117 in 0.03 s
-INFO - Send Query Request using 1.2.840.10008.5.1.4.1.2.2.1/Study Root Query/Retrieve Information Model - FIND:
-<span class="o">(</span>0008,0020<span class="o">)</span> DA <span class="c">#0 [] Study Date</span>
-<span class="o">(</span>0008,0030<span class="o">)</span> TM <span class="c">#0 [] Study Time</span>
-<span class="o">(</span>0008,0050<span class="o">)</span> SH <span class="c">#0 [] Accession Number</span>
-<span class="o">(</span>0008,0052<span class="o">)</span> CS <span class="c">#6 [STUDY] Query/Retrieve Level</span>
-<span class="o">(</span>0020,000D<span class="o">)</span> UI <span class="c">#0 [] Study Instance UID</span>
-<span class="o">(</span>0020,0010<span class="o">)</span> SH <span class="c">#0 [] Study ID</span>
-<span class="o">(</span>0020,1206<span class="o">)</span> IS <span class="c">#0 [] Number of Study Related Series</span>
-<span class="o">(</span>0020,1208<span class="o">)</span> IS <span class="c">#0 [] Number of Study Related Instances</span>
+INFO - Connected to test@localhost:11117 in <span class="m">0</span>.03 s
+INFO - Send Query Request using <span class="m">1</span>.2.840.10008.5.1.4.1.2.2.1/Study Root Query/Retrieve Information Model - FIND:
+<span class="o">(</span><span class="m">0008</span>,0020<span class="o">)</span> DA <span class="c1">#0 [] Study Date</span>
+<span class="o">(</span><span class="m">0008</span>,0030<span class="o">)</span> TM <span class="c1">#0 [] Study Time</span>
+<span class="o">(</span><span class="m">0008</span>,0050<span class="o">)</span> SH <span class="c1">#0 [] Accession Number</span>
+<span class="o">(</span><span class="m">0008</span>,0052<span class="o">)</span> CS <span class="c1">#6 [STUDY] Query/Retrieve Level</span>
+<span class="o">(</span><span class="m">0020</span>,000D<span class="o">)</span> UI <span class="c1">#0 [] Study Instance UID</span>
+<span class="o">(</span><span class="m">0020</span>,0010<span class="o">)</span> SH <span class="c1">#0 [] Study ID</span>
+<span class="o">(</span><span class="m">0020</span>,1206<span class="o">)</span> IS <span class="c1">#0 [] Number of Study Related Series</span>
+<span class="o">(</span><span class="m">0020</span>,1208<span class="o">)</span> IS <span class="c1">#0 [] Number of Study Related Instances</span>
 
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> <span class="s">&lt;&lt; 1:C-FIND-RQ[pcid=7, prior=0</span>
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="s">&lt;&lt; 1:C-FIND-RQ[pcid=7, prior=0</span>
 <span class="s">       cuid=1</span>.2.840.10008.5.1.4.1.2.2.1/Study Root Query/Retrieve Information Model - FIND
-       <span class="nv">ts</span><span class="o">=</span>1.2.840.10008.1.2.1/Explicit VR Little Endian<span class="o">]</span>
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> &gt;&gt; 1:C-FIND-RSP<span class="o">[</span><span class="nv">pcid</span><span class="o">=</span>7, <span class="nv">status</span><span class="o">=</span>0H<span class="o">]</span>
-INFO - Received <span class="m">0</span> matching entries in 0.055 s
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> <span class="s">&lt;&lt; A-RELEA</span>SE-RQ
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> &gt;&gt; A-RELEASE-RP
-INFO - Released connection to <span class="nb">test</span>@localhost:11117
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span>: close Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span>11117,localport<span class="o">=</span>59278<span class="o">]</span>
+       <span class="nv">ts</span><span class="o">=</span><span class="m">1</span>.2.840.10008.1.2.1/Explicit VR Little Endian<span class="o">]</span>
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> &gt;&gt; <span class="m">1</span>:C-FIND-RSP<span class="o">[</span><span class="nv">pcid</span><span class="o">=</span><span class="m">7</span>, <span class="nv">status</span><span class="o">=</span>0H<span class="o">]</span>
+INFO - Received <span class="m">0</span> matching entries in <span class="m">0</span>.055 s
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="s">&lt;&lt; A-RELEA</span>SE-RQ
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> &gt;&gt; A-RELEASE-RP
+INFO - Released connection to test@localhost:11117
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span>: close Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span><span class="m">11117</span>,localport<span class="o">=</span><span class="m">59278</span><span class="o">]</span>
 </pre></div>
 </div>
-<p>The command ran sucessfully, but didn&#8217;t return anything (<span class="tt">Received 0 matching entries in 0.055 s</span>) because there is no data in the Pool.  Let&#8217;s send some data:</p>
-<div class="highlight-bash"><div class="highlight"><pre>&gt;&gt; java -classpath lib:<span class="s2">&quot;lib/*&quot;</span> org.dcm4che2.tool.dcmsnd.DcmSnd <span class="nb">test</span>@localhost:11117 /path/to/DICOM/Data
+<p>The command ran sucessfully, but didn’t return anything (<span class="tt">Received 0 matching entries in 0.055 s</span>) because there is no data in the Pool.  Let’s send some data:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&gt;&gt; java -classpath lib:<span class="s2">&quot;lib/*&quot;</span> org.dcm4che2.tool.dcmsnd.DcmSnd test@localhost:11117 /path/to/DICOM/Data
 Scanning files to send
 ....................................................................................................................................................................
-Scanned <span class="m">164</span> files in 0.176s <span class="o">(=</span>1ms/file<span class="o">)</span>
-Connected to <span class="nb">test</span>@localhost:11117 in 0.
+Scanned <span class="m">164</span> files in <span class="m">0</span>.176s <span class="o">(=</span>1ms/file<span class="o">)</span>
+Connected to test@localhost:11117 in <span class="m">0</span>.
 &lt;NB: INFO message removed <span class="k">for</span> brevity&gt;
 ....................................................................................................................................................................
-Sent <span class="m">164</span> objects <span class="o">(=</span>3.0736637MB<span class="o">)</span> in 3.579s <span class="o">(=</span>879.4165KB/s<span class="o">)</span>
-Released connection to <span class="nb">test</span>@localhost:11117
+Sent <span class="m">164</span> objects <span class="o">(=</span><span class="m">3</span>.0736637MB<span class="o">)</span> in <span class="m">3</span>.579s <span class="o">(=</span><span class="m">879</span>.4165KB/s<span class="o">)</span>
+Released connection to test@localhost:11117
 </pre></div>
 </div>
 <p>To verify that Notion recieved images, check the <a class="reference external" href="http://localhost:8080/index.html#/pools/studies/1">Study web page</a> for our Pool.  This page can be accessed directly, or by clicking on the <span class="tt">View Studies</span> link under the <span class="tt">Test pool</span> in the <a class="reference external" href="http://localhost:8080/index.html#/pools">Pools</a> list.</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/study_page.png"><img alt="../_images/study_page.png" src="../_images/study_page.png" style="width: 768px;" /></a>
 </div>
-<p>Study data stored in the <span class="tt">Test Pool</span>.  In this case a patient named <span class="tt">MRA-0068</span> was sent to the server, your particular data may be different.  To delete the study, click the &#8220;x&#8221; icon, and to download click the blue download icon to the right of the study.</p>
+<p>Study data stored in the <span class="tt">Test Pool</span>.  In this case a patient named <span class="tt">MRA-0068</span> was sent to the server, your particular data may be different.  To delete the study, click the “x” icon, and to download click the blue download icon to the right of the study.</p>
 <p>Now, if we try our query once again:</p>
-<div class="highlight-bash"><div class="highlight"><pre>&gt;&gt; java -classpath lib:<span class="s2">&quot;lib/*&quot;</span> org.dcm4che2.tool.dcmqr.DcmQR  <span class="nb">test</span>@localhost:11117
-INFO - Association<span class="o">(</span>1<span class="o">)</span> initiated Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span>11117,localport<span class="o">=</span>59286<span class="o">]</span>
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span>: A-ASSOCIATE-RQ <span class="nb">test</span> <span class="s">&lt;&lt; DCMQR</span>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>&gt;&gt; java -classpath lib:<span class="s2">&quot;lib/*&quot;</span> org.dcm4che2.tool.dcmqr.DcmQR  test@localhost:11117
+INFO - Association<span class="o">(</span><span class="m">1</span><span class="o">)</span> initiated Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span><span class="m">11117</span>,localport<span class="o">=</span><span class="m">59286</span><span class="o">]</span>
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span>: A-ASSOCIATE-RQ <span class="nb">test</span> <span class="s">&lt;&lt; DCMQR</span>
 <span class="s">INFO - test(1): A-ASSOCIATE-AC DCMQR</span> &gt;&gt; <span class="nb">test</span>
-INFO - Connected to <span class="nb">test</span>@localhost:11117 in 0.03 s
-INFO - Send Query Request using 1.2.840.10008.5.1.4.1.2.2.1/Study Root Query/Retrieve Information Model - FIND:
-<span class="o">(</span>0008,0020<span class="o">)</span> DA <span class="c">#0 [] Study Date</span>
-<span class="o">(</span>0008,0030<span class="o">)</span> TM <span class="c">#0 [] Study Time</span>
-<span class="o">(</span>0008,0050<span class="o">)</span> SH <span class="c">#0 [] Accession Number</span>
-<span class="o">(</span>0008,0052<span class="o">)</span> CS <span class="c">#6 [STUDY] Query/Retrieve Level</span>
-<span class="o">(</span>0020,000D<span class="o">)</span> UI <span class="c">#0 [] Study Instance UID</span>
-<span class="o">(</span>0020,0010<span class="o">)</span> SH <span class="c">#0 [] Study ID</span>
-<span class="o">(</span>0020,1206<span class="o">)</span> IS <span class="c">#0 [] Number of Study Related Series</span>
-<span class="o">(</span>0020,1208<span class="o">)</span> IS <span class="c">#0 [] Number of Study Related Instances</span>
+INFO - Connected to test@localhost:11117 in <span class="m">0</span>.03 s
+INFO - Send Query Request using <span class="m">1</span>.2.840.10008.5.1.4.1.2.2.1/Study Root Query/Retrieve Information Model - FIND:
+<span class="o">(</span><span class="m">0008</span>,0020<span class="o">)</span> DA <span class="c1">#0 [] Study Date</span>
+<span class="o">(</span><span class="m">0008</span>,0030<span class="o">)</span> TM <span class="c1">#0 [] Study Time</span>
+<span class="o">(</span><span class="m">0008</span>,0050<span class="o">)</span> SH <span class="c1">#0 [] Accession Number</span>
+<span class="o">(</span><span class="m">0008</span>,0052<span class="o">)</span> CS <span class="c1">#6 [STUDY] Query/Retrieve Level</span>
+<span class="o">(</span><span class="m">0020</span>,000D<span class="o">)</span> UI <span class="c1">#0 [] Study Instance UID</span>
+<span class="o">(</span><span class="m">0020</span>,0010<span class="o">)</span> SH <span class="c1">#0 [] Study ID</span>
+<span class="o">(</span><span class="m">0020</span>,1206<span class="o">)</span> IS <span class="c1">#0 [] Number of Study Related Series</span>
+<span class="o">(</span><span class="m">0020</span>,1208<span class="o">)</span> IS <span class="c1">#0 [] Number of Study Related Instances</span>
 
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> <span class="s">&lt;&lt; 1:C-FIND-RQ[pcid=7, prior=0</span>
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="s">&lt;&lt; 1:C-FIND-RQ[pcid=7, prior=0</span>
 <span class="s">       cuid=1</span>.2.840.10008.5.1.4.1.2.2.1/Study Root Query/Retrieve Information Model - FIND
-       <span class="nv">ts</span><span class="o">=</span>1.2.840.10008.1.2.1/Explicit VR Little Endian<span class="o">]</span>
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> &gt;&gt; 1:C-FIND-RSP<span class="o">[</span><span class="nv">pcid</span><span class="o">=</span>7, <span class="nv">status</span><span class="o">=</span>ff00H
-       <span class="nv">ts</span><span class="o">=</span>1.2.840.10008.1.2.1/Explicit VR Little Endian<span class="o">]</span>
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> &gt;&gt; 1:C-FIND-RSP<span class="o">[</span><span class="nv">pcid</span><span class="o">=</span>7, <span class="nv">status</span><span class="o">=</span>0H<span class="o">]</span>
-INFO - Query Response <span class="c">#1:</span>
-<span class="o">(</span>0008,0050<span class="o">)</span> SH <span class="c">#10 [8863218-1] Accession Number</span>
-<span class="o">(</span>0008,0052<span class="o">)</span> CS <span class="c">#6 [STUDY] Query/Retrieve Level</span>
-<span class="o">(</span>0008,0054<span class="o">)</span> AE <span class="c">#4 [test] Retrieve AE Title</span>
-<span class="o">(</span>0020,000D<span class="o">)</span> UI <span class="c">#52 [1.2.40.0.13.1.1.172.22.2.90.20080613130257614.49733] Study Instance UID</span>
-<span class="o">(</span>0020,0010<span class="o">)</span> SH <span class="c">#6 [23274] Study ID</span>
-<span class="o">(</span>0020,1206<span class="o">)</span> IS <span class="c">#2 [2] Number of Study Related Series</span>
-<span class="o">(</span>0020,1208<span class="o">)</span> IS <span class="c">#4 [164] Number of Study Related Instances</span>
+       <span class="nv">ts</span><span class="o">=</span><span class="m">1</span>.2.840.10008.1.2.1/Explicit VR Little Endian<span class="o">]</span>
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> &gt;&gt; <span class="m">1</span>:C-FIND-RSP<span class="o">[</span><span class="nv">pcid</span><span class="o">=</span><span class="m">7</span>, <span class="nv">status</span><span class="o">=</span>ff00H
+       <span class="nv">ts</span><span class="o">=</span><span class="m">1</span>.2.840.10008.1.2.1/Explicit VR Little Endian<span class="o">]</span>
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> &gt;&gt; <span class="m">1</span>:C-FIND-RSP<span class="o">[</span><span class="nv">pcid</span><span class="o">=</span><span class="m">7</span>, <span class="nv">status</span><span class="o">=</span>0H<span class="o">]</span>
+INFO - Query Response <span class="c1">#1:</span>
+<span class="o">(</span><span class="m">0008</span>,0050<span class="o">)</span> SH <span class="c1">#10 [8863218-1] Accession Number</span>
+<span class="o">(</span><span class="m">0008</span>,0052<span class="o">)</span> CS <span class="c1">#6 [STUDY] Query/Retrieve Level</span>
+<span class="o">(</span><span class="m">0008</span>,0054<span class="o">)</span> AE <span class="c1">#4 [test] Retrieve AE Title</span>
+<span class="o">(</span><span class="m">0020</span>,000D<span class="o">)</span> UI <span class="c1">#52 [1.2.40.0.13.1.1.172.22.2.90.20080613130257614.49733] Study Instance UID</span>
+<span class="o">(</span><span class="m">0020</span>,0010<span class="o">)</span> SH <span class="c1">#6 [23274] Study ID</span>
+<span class="o">(</span><span class="m">0020</span>,1206<span class="o">)</span> IS <span class="c1">#2 [2] Number of Study Related Series</span>
+<span class="o">(</span><span class="m">0020</span>,1208<span class="o">)</span> IS <span class="c1">#4 [164] Number of Study Related Instances</span>
 
-INFO - Received <span class="m">1</span> matching entries in 0.043 s
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> <span class="s">&lt;&lt; A-RELEA</span>SE-RQ
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span> &gt;&gt; A-RELEASE-RP
-INFO - Released connection to <span class="nb">test</span>@localhost:11117
-INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</span>: close Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span>11117,localport<span class="o">=</span>59286<span class="o">]</span>
+INFO - Received <span class="m">1</span> matching entries in <span class="m">0</span>.043 s
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="s">&lt;&lt; A-RELEA</span>SE-RQ
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span> &gt;&gt; A-RELEASE-RP
+INFO - Released connection to test@localhost:11117
+INFO - test<span class="o">(</span><span class="m">1</span><span class="o">)</span>: close Socket<span class="o">[</span><span class="nv">addr</span><span class="o">=</span>localhost/127.0.0.1,port<span class="o">=</span><span class="m">11117</span>,localport<span class="o">=</span><span class="m">59286</span><span class="o">]</span>
 </pre></div>
 </div>
 <p>And we receive one matching response containing 2 Series and 164 Instances (images in DICOM-speak).  The images in the Pool may be queried or retrieved by a variety of tools, including command line tools like dcm4che.</p>
@@ -348,7 +351,7 @@ INFO - <span class="nb">test</span><span class="o">(</span>1<span class="o">)</s
 </div>
 <div class="section" id="next-steps">
 <h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
-<p>Learn you some <a class="reference internal" href="dicom.html#dicom"><span>DICOM</span></a> for great good!</p>
+<p>Learn you some <a class="reference internal" href="dicom.html#dicom"><span class="std std-ref">DICOM</span></a> for great good!</p>
 </div>
 </div>
 

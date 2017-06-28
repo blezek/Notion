@@ -29,6 +29,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Notion: a PACS for researchers 3.1 documentation" href="../index.html"/>
         <link rel="next" title="Use Cases" href="use_cases.html"/>
         <link rel="prev" title="Anonymziation" href="anonymization.html"/>
@@ -90,7 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="anonymization.html#anonymize-images">Anonymize Images</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Using Connectors</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Connectors</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#configure-a-connector">Configure a Connector</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#performing-a-query">Performing a Query</a></li>
 </ul>
@@ -167,10 +170,10 @@
             
   <div class="section" id="using-connectors">
 <span id="usingconnectors"></span><h1>Using Connectors<a class="headerlink" href="#using-connectors" title="Permalink to this headline">¶</a></h1>
-<p>Glad you have made it this far in the tutorials!  By now, you have learned <a class="reference internal" href="getting_started.html#createapool"><span>how to create Pools and Devices</span></a>, <a class="reference internal" href="getting_started.html#sendimagestoapool"><span>send images via the command line</span></a> and <a class="reference internal" href="anonymization.html#anonymizationintro"><span>construct a simple anonymizer</span></a>.  Here we are going to demonstrate a <a class="reference internal" href="use_cases.html#multiresearcherusecase"><span>simple use case</span></a> using a <a class="reference internal" href="../Reference/reference.html#connector"><span>Connectors</span></a>.  This scenario is useful for multiple researchers to share a common Connection to a PACS, allowing each to create custom anonymization rules and keep images isolated from other Pools.</p>
+<p>Glad you have made it this far in the tutorials!  By now, you have learned <a class="reference internal" href="getting_started.html#createapool"><span class="std std-ref">how to create Pools and Devices</span></a>, <a class="reference internal" href="getting_started.html#sendimagestoapool"><span class="std std-ref">send images via the command line</span></a> and <a class="reference internal" href="anonymization.html#anonymizationintro"><span class="std std-ref">construct a simple anonymizer</span></a>.  Here we are going to demonstrate a <a class="reference internal" href="use_cases.html#multiresearcherusecase"><span class="std std-ref">simple use case</span></a> using a <a class="reference internal" href="../Reference/reference.html#connector"><span class="std std-ref">Connectors</span></a>.  This scenario is useful for multiple researchers to share a common Connection to a PACS, allowing each to create custom anonymization rules and keep images isolated from other Pools.</p>
 <div class="section" id="configure-a-connector">
 <h2>Configure a Connector<a class="headerlink" href="#configure-a-connector" title="Permalink to this headline">¶</a></h2>
-<p>A <a class="reference internal" href="../Reference/reference.html#connector"><span>Connector</span></a> defines a three party connection.  The role of each party is:</p>
+<p>A <a class="reference internal" href="../Reference/reference.html#connector"><span class="std std-ref">Connector</span></a> defines a three party connection.  The role of each party is:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">PACS</span></code> An institutional PACS holding clinicial data.  Must be configured to allow queries from the Query Pool, and send to the Destination Pool.</li>
 <li><code class="docutils literal"><span class="pre">Query</span> <span class="pre">Pool</span></code> A Notion pool with permission to query the PACS.</li>
@@ -186,13 +189,13 @@
 <li><code class="docutils literal"><span class="pre">Receiving</span> <span class="pre">Pool</span></code> moves images into the local Pool for storage and anonymization.</li>
 <li><code class="docutils literal"><span class="pre">Receiving</span> <span class="pre">Pool</span></code> deletes received images.</li>
 </ol>
-<p>Connectors are a complicated topic involving many moving parts, but from a study coordinator&#8217;s perspective, they are simple.</p>
+<p>Connectors are a complicated topic involving many moving parts, but from a study coordinator’s perspective, they are simple.</p>
 <p>To add a Connector, click on the <code class="docutils literal"><span class="pre">Connectors</span></code> link on the menu bar and then the <cite>plus</cite> icon next to Connectors:</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/create_connector.png"><img alt="../_images/create_connector.png" src="../_images/create_connector.png" style="width: 512px;" /></a>
 </div>
 <p>Click Save to save the Connector and enable it for use.  A Connector is accessible from any Pool.</p>
-<p><strong>NB:</strong> The Device used in a connector <strong>must not</strong> use a regular expression.  The query and retieve require a correct Application Entity Title, full hostname and valid port.  See <a class="reference internal" href="dicom.html#dicom"><span>DICOM Configuration</span></a> for details.</p>
+<p><strong>NB:</strong> The Device used in a connector <strong>must not</strong> use a regular expression.  The query and retieve require a correct Application Entity Title, full hostname and valid port.  See <a class="reference internal" href="dicom.html#dicom"><span class="std std-ref">DICOM Configuration</span></a> for details.</p>
 </div>
 <div class="section" id="performing-a-query">
 <h2>Performing a Query<a class="headerlink" href="#performing-a-query" title="Permalink to this headline">¶</a></h2>
@@ -201,7 +204,7 @@
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/individual_query.png"><img alt="../_images/individual_query.png" src="../_images/individual_query.png" style="width: 512px;" /></a>
 </div>
-<p>Multiple MRN&#8217;s may be specified using the spreadsheet query.  A template spreadsheet is available through the <cite>Excel template</cite> link.  The only required entry in each row is <code class="docutils literal"><span class="pre">PatientID</span></code>, the other columns can be used to limit the query by Modality, Date, AccessionNumber, etc.  Once the spreadsheet is filled out, it can be uploaded to Notion to start the query.</p>
+<p>Multiple MRN’s may be specified using the spreadsheet query.  A template spreadsheet is available through the <cite>Excel template</cite> link.  The only required entry in each row is <code class="docutils literal"><span class="pre">PatientID</span></code>, the other columns can be used to limit the query by Modality, Date, AccessionNumber, etc.  Once the spreadsheet is filled out, it can be uploaded to Notion to start the query.</p>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/spreadsheet_query.png"><img alt="../_images/spreadsheet_query.png" src="../_images/spreadsheet_query.png" style="width: 512px;" /></a>
 </div>
@@ -211,7 +214,7 @@
 </div>
 <div class="section" id="next-steps">
 <h3>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h3>
-<p>This completes the Notion tutorial.  For further information checkout Notion&#8217;s <a class="reference internal" href="../Reference/reference.html#concepts"><span>concepts</span></a> and <a class="reference internal" href="use_cases.html#usecases"><span>use cases</span></a>.</p>
+<p>This completes the Notion tutorial.  For further information checkout Notion’s <a class="reference internal" href="../Reference/reference.html#concepts"><span class="std std-ref">concepts</span></a> and <a class="reference internal" href="use_cases.html#usecases"><span class="std std-ref">use cases</span></a>.</p>
 </div>
 </div>
 </div>

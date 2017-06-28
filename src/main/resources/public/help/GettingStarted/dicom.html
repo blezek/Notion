@@ -29,6 +29,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Notion: a PACS for researchers 3.1 documentation" href="../index.html"/>
         <link rel="next" title="Anonymziation" href="anonymization.html"/>
         <link rel="prev" title="Getting Started" href="getting_started.html"/>
@@ -77,7 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#next-steps">Next steps</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">DICOM Configuration</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DICOM Configuration</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#device-setup">Device Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#store">Store</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#query">Query</a></li>
@@ -168,10 +171,10 @@
   <div class="section" id="dicom-configuration">
 <span id="dicom"></span><h1>DICOM Configuration<a class="headerlink" href="#dicom-configuration" title="Permalink to this headline">¶</a></h1>
 <p>For those new to DICOM, the <a class="reference external" href="http://en.wikipedia.org/wiki/DICOM">Wikipedia DICOM Article</a> is especially helpful in understanding the different concepts discussed.</p>
-<p>Notion operates multiple Application Entities as Service Class Providers.  An Application Entity eithor provides a service or uses a service (and sometimes both).  Each Pool in Notion is configured as an Application Entity providing Store and Query/Retrieve.  External DICOM Application Entities can send images to Pools by using the Pool&#8217;s Application Entity Title, hostname and port.  The Query service enables other Application Entities to issue C-FIND requests to a Pool and retrieve a list of studies in the Pool.  The Retrive service of a Notion Pool sends images outbound to a properly specifed remote Application Entity (a Device).</p>
+<p>Notion operates multiple Application Entities as Service Class Providers.  An Application Entity eithor provides a service or uses a service (and sometimes both).  Each Pool in Notion is configured as an Application Entity providing Store and Query/Retrieve.  External DICOM Application Entities can send images to Pools by using the Pool’s Application Entity Title, hostname and port.  The Query service enables other Application Entities to issue C-FIND requests to a Pool and retrieve a list of studies in the Pool.  The Retrive service of a Notion Pool sends images outbound to a properly specifed remote Application Entity (a Device).</p>
 <div class="section" id="device-setup">
 <h2>Device Setup<a class="headerlink" href="#device-setup" title="Permalink to this headline">¶</a></h2>
-<p>Access to a Pool&#8217;s services (Store, Query and Retrieve) are controlled by the list of Devices associated with a Pool.  Each operation on a Pool requires a matching Device to be found before the operation is allowed.  A Device consists of 4 elements:</p>
+<p>Access to a Pool’s services (Store, Query and Retrieve) are controlled by the list of Devices associated with a Pool.  Each operation on a Pool requires a matching Device to be found before the operation is allowed.  A Device consists of 4 elements:</p>
 <dl class="docutils">
 <dt><code class="docutils literal"><span class="pre">Application</span> <span class="pre">Entity</span> <span class="pre">Title</span></code></dt>
 <dd>The 16 character name of the Application Entity</dd>
@@ -180,12 +183,12 @@
 <dt><code class="docutils literal"><span class="pre">Port</span></code></dt>
 <dd>Port where the Application Entity is listening.</dd>
 <dt><code class="docutils literal"><span class="pre">IsAutoforward</span></code></dt>
-<dd>When true, forward this Pool&#8217;s incoming messages to this destination.</dd>
+<dd>When true, forward this Pool’s incoming messages to this destination.</dd>
 <dt><code class="docutils literal"><span class="pre">Description</span></code></dt>
 <dd>An optional description of the Device.</dd>
 </dl>
 <a class="reference internal image-reference" href="../_images/new_device.png"><img alt="../_images/new_device.png" class="align-center" src="../_images/new_device.png" style="width: 300px;" /></a>
-<p>To find a matching Device, Notion examines the incoming request, trying to find a match in the list of Devices.  Matches are found using <a class="reference external" href="http://www.vogella.com/tutorials/JavaRegularExpressions/article.html">Java&#8217;s regular expression rules</a>.  For instance, the incoming Application Entity <code class="docutils literal"><span class="pre">Incoming</span></code> will match <code class="docutils literal"><span class="pre">Incoming</span></code>, <code class="docutils literal"><span class="pre">Incom.*</span></code> and <code class="docutils literal"><span class="pre">.*</span></code>.  The Application Entity Title and Hostname are matched according to the regular expression rules.  Port is not matched.</p>
+<p>To find a matching Device, Notion examines the incoming request, trying to find a match in the list of Devices.  Matches are found using <a class="reference external" href="http://www.vogella.com/tutorials/JavaRegularExpressions/article.html">Java’s regular expression rules</a>.  For instance, the incoming Application Entity <code class="docutils literal"><span class="pre">Incoming</span></code> will match <code class="docutils literal"><span class="pre">Incoming</span></code>, <code class="docutils literal"><span class="pre">Incom.*</span></code> and <code class="docutils literal"><span class="pre">.*</span></code>.  The Application Entity Title and Hostname are matched according to the regular expression rules.  Port is not matched.</p>
 <p>If a matching Device is not found, the incoming operation is rejected.  This is the only available DICOM mechanism for authorization, and does not allow very fine grain access controls.</p>
 </div>
 <div class="section" id="store">
@@ -198,7 +201,7 @@
 </div>
 <div class="section" id="retrieve">
 <h2>Retrieve<a class="headerlink" href="#retrieve" title="Permalink to this headline">¶</a></h2>
-<p>The Query service is invoked when a remote Application Entity requests Notion to send images.  In this case two matches are required, the Application Entity requesting the retrive and the destination Application Entity.  The destination Application Entity&#8217;s Title, Hostname and Port are used to initiate the DICOM send from Notion.  Thus the destination Application Entity is generally not a regular expression.</p>
+<p>The Query service is invoked when a remote Application Entity requests Notion to send images.  In this case two matches are required, the Application Entity requesting the retrive and the destination Application Entity.  The destination Application Entity’s Title, Hostname and Port are used to initiate the DICOM send from Notion.  Thus the destination Application Entity is generally not a regular expression.</p>
 </div>
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
