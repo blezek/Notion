@@ -21,7 +21,6 @@ DATE := $(shell /bin/date +%F-%T)
 define help
 
 Makefile for Notion $(build)
-  install - install Notion on qia server
   dist    - build a zipped distribution file
   build   - build UI, documentation and Jar file
   sync    - rsync the current build to qia server
@@ -43,22 +42,12 @@ dist: build
 	rsync Readme.md $(dir)
 	rsync notion.example.yml $(dir)/notion.yml
 	rsync -r Documentation/_build/html $(dir)/Documentation
+	rsync -r Documentation/_build/latex/ResearchPACS.pdf $(dir)/Notion.pdf
 	(cd zip-temp && zip -r $(versionDir).zip $(versionDir) && mv $(versionDir).zip ../)
 
 build:
 	rm -rf src/main/resources/public
 	(cd ui/ && make clean install)
-	(cd Documentation && make clean install)
-
-install: dist
-	${MAKE} sync
-	${MAKE} restart
-
-sync:
-	rsync -arvz zip-temp/$(versionDir)/ qin@qia:/research/images/Notion/$(versionDir)-$(DATE)
-	ssh qin@qia "cd /research/images/Notion ;ln -sfn $(versionDir)-$(DATE) Notion"
-
-restart:
-	ssh -t qia sudo /sbin/service notion restart
+	(cd Documentation && make clean install latexpdf)
 
 .PHONY: build dist install watch server sync restart

@@ -32,7 +32,7 @@ Depending on needs, one of the other systems may be a better fit.
 
 #### Installation
 
-[Download and unzip the Notion-X.X.X.zip package.](https://www.nitrc.org/projects/notion/)  Inside you'll find several interesting files, including ```Notion.jar``` and the [documentation](Documentation/html).  Installation is complete at this point.
+[Download and unzip the Notion-X.X.X.zip package.](https://github.com/blezek/Notion/releases)  Inside you'll find several interesting files, including ```Notion.jar``` and the [documentation](Documentation/html).  Installation is complete at this point.
 
 Notion is released through [NITRC](http://www.nitrc.org/), future and older releases can be found on the [Notion downloads page](https://www.nitrc.org/frs/?group_id=793).
 
@@ -42,7 +42,7 @@ Notion is released through [NITRC](http://www.nitrc.org/), future and older rele
 ```bash
 java -jar Notion.jar server notion.yml
 ```
-Point a browser at [http://localhost:11118](http://localhost:11118).
+Point a browser at [http://localhost:8080](http://localhost:8080).
 
 ###### Command line options
 Notion supports setting several command line parameters:
