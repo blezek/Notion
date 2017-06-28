@@ -1,6 +1,16 @@
 
+# Where does the web server run?
+server:
+  type: simple
+  applicationContextPath: /  # Default value*
+  connector:
+    type: http
+    port: 8080
+
+
+
 # Creates a web interface to the database, if set to a particular port.
-dbWeb: 8084
+dbWeb: 8082
 
 # Database connection info
 # For simplicity, Notion uses the Derby embedded database, see
@@ -21,10 +31,11 @@ notion:
   dicomPort: 11117
   # where to store images
   imageDirectory: NotionPACS/Images
+  allowRegistration: true
 
 logging:
   # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
-  level: ERROR
+  level: INFO
 
 
 # Configure user authentication

@@ -29,6 +29,9 @@
   
 
   
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Notion: a PACS for researchers 3.1 documentation" href="../index.html"/>
         <link rel="next" title="Getting Started" href="getting_started.html"/>
         <link rel="prev" title="Notion: a ‘PACS’ for researchers" href="../index.html"/>
@@ -64,7 +67,7 @@
         
         
             <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Installation</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#running-notion">Running Notion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration">Configuration</a></li>
 </ul>
@@ -183,7 +186,7 @@
 <h2>Running Notion<a class="headerlink" href="#running-notion" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="tl-dr">
 <h3>TL;DR<a class="headerlink" href="#tl-dr" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-bash"><div class="highlight"><pre>java -jar Notion.jar server notion.yml
+<div class="highlight-bash"><div class="highlight"><pre><span></span>java -jar Notion.jar server notion.yml
 </pre></div>
 </div>
 <p>Point a browser at <a class="reference external" href="http://localhost:8080">http://localhost:8080</a></p>
@@ -192,7 +195,7 @@
 <div class="section" id="configuration">
 <span id="cli"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <p>Notion is configured through a YAML file.  A starting configuration is included in the distribution.  The Notion-specific sections are described below.  Additional configuration options may be found at <a class="reference external" href="http://dropwizard.io/manual/configuration.html">http://dropwizard.io/manual/configuration.html</a></p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-default"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -222,42 +225,66 @@
 28
 29
 30
-31</pre></div></td><td class="code"><div class="highlight"><pre># Creates a web interface to the database, if set to a particular port.
-dbWeb: 8084
-
-# Database connection info
-# For simplicity, Notion uses the Derby embedded database, see
-# http://db.apache.org/derby/ for more information.
-# The directory where the DB in installed is specified after the &#39;directory:&#39;
-# portion of the URL (./NotionPACS in this case).
-database:
-  driverClass: org.apache.derby.jdbc.EmbeddedDriver
-  url: jdbc:derby:directory:NotionPACS/DB;create=true
-  validationQuery: &quot;VALUES 1&quot;
-  user:
-  password:
-  autoCommitByDefault: true
-
-# Notion specific configuration.  dicomPort is the port Notion uses to
-notion:
-  # where to listen for incoming DICOM connections
-  dicomPort: 11117
-  # where to store images
-  imageDirectory: NotionPACS/Images
-
-logging:
-  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
-  level: ERROR
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span>
+<span class="c1"># Where does the web server run?</span>
+<span class="n">server</span><span class="p">:</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="n">simple</span>
+  <span class="n">applicationContextPath</span><span class="p">:</span> <span class="o">/</span>  <span class="c1"># Default value*</span>
+  <span class="n">connector</span><span class="p">:</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">http</span>
+    <span class="n">port</span><span class="p">:</span> <span class="mi">8080</span>
 
 
-# Configure user authentication
-shiro:
-  iniConfigs: [&quot;classpath:shiro.ini&quot;]
+
+<span class="c1"># Creates a web interface to the database, if set to a particular port.</span>
+<span class="n">dbWeb</span><span class="p">:</span> <span class="mi">8082</span>
+
+<span class="c1"># Database connection info</span>
+<span class="c1"># For simplicity, Notion uses the Derby embedded database, see</span>
+<span class="c1"># http://db.apache.org/derby/ for more information.</span>
+<span class="c1"># The directory where the DB in installed is specified after the &#39;directory:&#39;</span>
+<span class="c1"># portion of the URL (./NotionPACS in this case).</span>
+<span class="n">database</span><span class="p">:</span>
+  <span class="n">driverClass</span><span class="p">:</span> <span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">derby</span><span class="o">.</span><span class="n">jdbc</span><span class="o">.</span><span class="n">EmbeddedDriver</span>
+  <span class="n">url</span><span class="p">:</span> <span class="n">jdbc</span><span class="p">:</span><span class="n">derby</span><span class="p">:</span><span class="n">directory</span><span class="p">:</span><span class="n">NotionPACS</span><span class="o">/</span><span class="n">DB</span><span class="p">;</span><span class="n">create</span><span class="o">=</span><span class="n">true</span>
+  <span class="n">validationQuery</span><span class="p">:</span> <span class="s2">&quot;VALUES 1&quot;</span>
+  <span class="n">user</span><span class="p">:</span>
+  <span class="n">password</span><span class="p">:</span>
+  <span class="n">autoCommitByDefault</span><span class="p">:</span> <span class="n">true</span>
+
+<span class="c1"># Notion specific configuration.  dicomPort is the port Notion uses to</span>
+<span class="n">notion</span><span class="p">:</span>
+  <span class="c1"># where to listen for incoming DICOM connections</span>
+  <span class="n">dicomPort</span><span class="p">:</span> <span class="mi">11117</span>
+  <span class="c1"># where to store images</span>
+  <span class="n">imageDirectory</span><span class="p">:</span> <span class="n">NotionPACS</span><span class="o">/</span><span class="n">Images</span>
+  <span class="n">allowRegistration</span><span class="p">:</span> <span class="n">true</span>
+
+<span class="n">logging</span><span class="p">:</span>
+  <span class="c1"># The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.</span>
+  <span class="n">level</span><span class="p">:</span> <span class="n">INFO</span>
+
+
+<span class="c1"># Configure user authentication</span>
+<span class="n">shiro</span><span class="p">:</span>
+  <span class="n">iniConfigs</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;classpath:shiro.ini&quot;</span><span class="p">]</span>
 </pre></div>
 </td></tr></table></div>
 <div class="section" id="db-web-interface">
 <h3>DB Web Interface<a class="headerlink" href="#db-web-interface" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal"><span class="pre">dbWeb</span></code> option gives a port where Notion listens and shows a web interface to the embedded Derby database.  If omitted, Notion does not specify the DB interface.  More details are at <a class="reference internal" href="../Reference/operations.html#dbweb"><span>DBWeb Interface</span></a>.</p>
+<p>The <code class="docutils literal"><span class="pre">dbWeb</span></code> option gives a port where Notion listens and shows a web interface to the embedded Derby database.  If omitted, Notion does not specify the DB interface.  More details are at <a class="reference internal" href="../Reference/operations.html#dbweb"><span class="std std-ref">DBWeb Interface</span></a>.</p>
 </div>
 <div class="section" id="database">
 <h3>Database<a class="headerlink" href="#database" title="Permalink to this headline">¶</a></h3>
@@ -272,8 +299,8 @@ shiro:
 <p>The logging level of the entire application (including non-Notion components such as Derby) can be controlled in the <code class="docutils literal"><span class="pre">logging</span></code> section of the configuration.  See <a class="reference external" href="http://dropwizard.io/manual/core.html#logging">http://dropwizard.io/manual/core.html#logging</a> for extensive documentation of logging.</p>
 </div>
 <div class="section" id="user-authentication-and-authorization-shiro">
-<h3>User Authentication and Authorization &#8211; Shiro<a class="headerlink" href="#user-authentication-and-authorization-shiro" title="Permalink to this headline">¶</a></h3>
-<p>Notion uses Shiro (<a class="reference external" href="http://shiro.apache.org/">http://shiro.apache.org/</a>) a pluggable authorization and authentication package.  Shiro enables Notion to authenticate against a diverse set of providers, including LDAP and Active Directory.  Configuration of Shiro is somewhat outside the scope of this documentation, but covered briefly in <a class="reference internal" href="../Reference/operations.html#shiro-config"><span>Authentication and Authorization Configuration</span></a>.</p>
+<h3>User Authentication and Authorization – Shiro<a class="headerlink" href="#user-authentication-and-authorization-shiro" title="Permalink to this headline">¶</a></h3>
+<p>Notion uses Shiro (<a class="reference external" href="http://shiro.apache.org/">http://shiro.apache.org/</a>) a pluggable authorization and authentication package.  Shiro enables Notion to authenticate against a diverse set of providers, including LDAP and Active Directory.  Configuration of Shiro is somewhat outside the scope of this documentation, but covered briefly in <a class="reference internal" href="../Reference/operations.html#shiro-config"><span class="std std-ref">Authentication and Authorization Configuration</span></a>.</p>
 </div>
 </div>
 </div>
