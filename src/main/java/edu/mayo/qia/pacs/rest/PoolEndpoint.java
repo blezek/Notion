@@ -1,5 +1,6 @@
 package edu.mayo.qia.pacs.rest;
 
+import edu.mayo.qia.pacs.job.CacheCleaner;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import java.io.File;
@@ -318,6 +319,11 @@ public class PoolEndpoint extends Endpoint {
     gr.isPoolAdmin = true;
     groupRoleDAO.create(gr);
 
+    // Added by Xiaojiang Yang:
+    // Remove current user from authorizationCache, so that user permission will be re-fetched next time whenever needed:
+    CacheCleaner.cleanUser(subject.getPrincipal().toString());
+    //..
+
     return Response.ok(pool).build();
   }
 
@@ -352,7 +358,7 @@ public class PoolEndpoint extends Endpoint {
   @Path("/{id: [1-9][0-9]*}")
   @UnitOfWork
   @RequiresPermissions({ "admin:delete" })
-  public Response modifyPool(@PathParam("id") int id) {
+  public Response modifyPool(@Auth Subject subject, @PathParam("id") int id) {
     // Look up the pool and change it
     Session session = sessionFactory.getCurrentSession();
     Pool pool = (Pool) session.byId(Pool.class).load(id);
@@ -362,6 +368,12 @@ public class PoolEndpoint extends Endpoint {
     // Delete
     // session.delete(pool);
     poolManager.deletePool(pool);
+
+    // Added by Xiaojiang Yang:
+    // Remove current user from authorizationCache, so that user permission will be re-fetched next time whenever needed:
+    CacheCleaner.cleanUser(subject.getPrincipal().toString());
+    //..
+
     return Response.ok().build();
   }
 

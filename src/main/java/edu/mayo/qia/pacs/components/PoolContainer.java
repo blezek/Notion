@@ -23,6 +23,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import com.codahale.metrics.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -48,11 +49,6 @@ import org.trimou.engine.MustacheEngineBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.codahale.metrics.CachedGauge;
-import com.codahale.metrics.Counter;
-import com.codahale.metrics.Meter;
-import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.Timer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.io.Files;
@@ -474,6 +470,21 @@ public class PoolContainer {
     logger.debug("Shutting down pool: " + pool);
     // Stop all the stages
     ctpAnonymizer.shutdown();
+
+      // Bug fixed by Xiaojiang Yang - Remove all Matching metrics - otherwise, user will not be able to re-create the just-deleted pool:
+      Notion.metrics.removeMatching(new MetricFilter() {
+                                        @Override
+                                        public boolean matches(String name, Metric metric) {
+                                            if(name.startsWith( "Pool." + pool.applicationEntityTitle )) {
+                                                return true;
+                                            }
+                                            else{
+                                                return false;
+                                            }
+                                        }
+                                    }
+                                    );
+      //..
   }
 
   public File getPoolDirectory() {
