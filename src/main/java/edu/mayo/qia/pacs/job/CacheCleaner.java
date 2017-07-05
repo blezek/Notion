@@ -14,8 +14,7 @@ public class CacheCleaner implements Job {
 
     /**
      * Clean (remove) the specific user from authorizationCache bean.
-     * Added by Xiaojiang Yang
-     * @param user
+     * @param user the name of user whose information should be removed from the cache bean.
      */
     public static void cleanUser(String user) {
         Notion.context.getBean("authorizationCache", Map.class).remove(user);
