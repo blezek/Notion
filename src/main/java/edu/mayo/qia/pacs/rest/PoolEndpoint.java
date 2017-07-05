@@ -319,10 +319,8 @@ public class PoolEndpoint extends Endpoint {
     gr.isPoolAdmin = true;
     groupRoleDAO.create(gr);
 
-    // Added by Xiaojiang Yang:
     // Remove current user from authorizationCache, so that user permission will be re-fetched next time whenever needed:
     CacheCleaner.cleanUser(subject.getPrincipal().toString());
-    //..
 
     return Response.ok(pool).build();
   }
@@ -369,10 +367,8 @@ public class PoolEndpoint extends Endpoint {
     // session.delete(pool);
     poolManager.deletePool(pool);
 
-    // Added by Xiaojiang Yang:
     // Remove current user from authorizationCache, so that user permission will be re-fetched next time whenever needed:
     CacheCleaner.cleanUser(subject.getPrincipal().toString());
-    //..
 
     return Response.ok().build();
   }

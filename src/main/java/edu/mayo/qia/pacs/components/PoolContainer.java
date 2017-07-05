@@ -471,20 +471,19 @@ public class PoolContainer {
     // Stop all the stages
     ctpAnonymizer.shutdown();
 
-      // Bug fixed by Xiaojiang Yang - Remove all Matching metrics - otherwise, user will not be able to re-create the just-deleted pool:
-      Notion.metrics.removeMatching(new MetricFilter() {
-                                        @Override
-                                        public boolean matches(String name, Metric metric) {
-                                            if(name.startsWith( "Pool." + pool.applicationEntityTitle )) {
-                                                return true;
-                                            }
-                                            else{
-                                                return false;
-                                            }
-                                        }
-                                    }
-                                    );
-      //..
+    // Remove all Matching metrics - otherwise, user will not be able to re-create the just-deleted pool:
+    Notion.metrics.removeMatching(new MetricFilter() {
+        @Override
+        public boolean matches(String name, Metric metric) {
+          if(name.startsWith( "Pool." + pool.applicationEntityTitle )) {
+            return true;
+          }
+          else{
+            return false;
+          }
+        }
+      }
+    );
   }
 
   public File getPoolDirectory() {
