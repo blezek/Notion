@@ -3,18 +3,16 @@ package edu.mayo.qia.pacs;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
-import io.dropwizard.Application;
-import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.hibernate.HibernateBundle;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
+
+import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
+import com.codahale.metrics.json.MetricsModule;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.sun.jersey.api.core.ResourceConfig;
+import com.sun.jersey.spi.container.ResourceFilterFactory;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.shiro.web.env.IniWebEnvironment;
@@ -37,12 +35,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
-import com.codahale.metrics.json.MetricsModule;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.sun.jersey.api.core.ResourceConfig;
-import com.sun.jersey.spi.container.ResourceFilterFactory;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import edu.mayo.qia.pacs.components.AnonymizationMapProcessor;
 import edu.mayo.qia.pacs.components.Connector;
@@ -66,7 +61,6 @@ import edu.mayo.qia.pacs.db.GroupRoleDAO;
 import edu.mayo.qia.pacs.db.UserDAO;
 import edu.mayo.qia.pacs.dicom.DICOMReceiver;
 import edu.mayo.qia.pacs.job.AutoForwarder;
-import edu.mayo.qia.pacs.job.CacheCleaner;
 import edu.mayo.qia.pacs.managed.DBWebServer;
 import edu.mayo.qia.pacs.managed.QuartzManager;
 import edu.mayo.qia.pacs.rest.AuthorizationEndpoint;
@@ -74,6 +68,11 @@ import edu.mayo.qia.pacs.rest.ConnectorEndpoint;
 import edu.mayo.qia.pacs.rest.MetricsEndpoint;
 import edu.mayo.qia.pacs.rest.PoolEndpoint;
 import edu.mayo.qia.pacs.rest.UserEndpoint;
+import io.dropwizard.Application;
+import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
 
 public class NotionApplication extends Application<NotionConfiguration> {
   static Logger logger = LoggerFactory.getLogger(NotionApplication.class);
@@ -220,10 +219,6 @@ public class NotionApplication extends Application<NotionConfiguration> {
     Trigger trigger = newTrigger().withIdentity("trigger1", "group1").startNow().withSchedule(simpleSchedule().withIntervalInSeconds(60).repeatForever()).build();
 
     // Tell quartz to schedule the job using our trigger
-    scheduler.scheduleJob(job, trigger);
-
-    job = newJob(CacheCleaner.class).build();
-    trigger = newTrigger().startNow().withSchedule(simpleSchedule().withIntervalInMinutes(10).repeatForever()).build();
     scheduler.scheduleJob(job, trigger);
 
     job = newJob(AutoForwarder.class).build();

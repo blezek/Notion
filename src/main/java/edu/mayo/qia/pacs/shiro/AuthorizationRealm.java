@@ -1,9 +1,5 @@
 package edu.mayo.qia.pacs.shiro;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Map;
-
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -15,6 +11,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import edu.mayo.qia.pacs.Notion;
 
 public class AuthorizationRealm extends AuthorizingRealm {
@@ -22,11 +21,6 @@ public class AuthorizationRealm extends AuthorizingRealm {
   @Override
   protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
     String user = principals.getPrimaryPrincipal().toString();
-    @SuppressWarnings("unchecked")
-    Map<String, AuthorizationInfo> authorizationCache = Notion.context.getBean("authorizationCache", Map.class);
-    if (authorizationCache.containsKey(user)) {
-      return authorizationCache.get(user);
-    }
 
     JdbcTemplate template = Notion.context.getBean(JdbcTemplate.class);
     final SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
@@ -61,7 +55,6 @@ public class AuthorizationRealm extends AuthorizingRealm {
       info.addObjectPermission(new WildcardPermission("admin:*"));
       info.addObjectPermission(new WildcardPermission("pool:*"));
     }
-    authorizationCache.put(user, info);
     return info;
   }
 

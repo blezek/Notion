@@ -1,11 +1,5 @@
 package edu.mayo.qia.pacs.rest;
 
-import edu.mayo.qia.pacs.job.CacheCleaner;
-import io.dropwizard.hibernate.UnitOfWork;
-
-import java.io.File;
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,6 +10,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sun.jersey.api.client.ClientResponse.Status;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -28,11 +28,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.sun.jersey.api.client.ClientResponse.Status;
+import java.io.File;
+import java.util.List;
 
 import edu.mayo.qia.pacs.components.Group;
 import edu.mayo.qia.pacs.components.GroupRole;
@@ -45,6 +42,7 @@ import edu.mayo.qia.pacs.components.User;
 import edu.mayo.qia.pacs.db.GroupDAO;
 import edu.mayo.qia.pacs.db.GroupRoleDAO;
 import edu.mayo.qia.pacs.db.UserDAO;
+import io.dropwizard.hibernate.UnitOfWork;
 
 @Component
 @Path("/pool")
@@ -151,8 +149,8 @@ public class PoolEndpoint extends Endpoint {
     for (int studyKey : request.studyKeys) {
       ObjectNode studyResult = records.addObject();
       try {
-        List<String> filePaths = template.queryForList("select FilePath from INSTANCE, SERIES, STUDY where INSTANCE.SeriesKey = SERIES.SeriesKey and SERIES.StudyKey = STUDY.StudyKey and STUDY.PoolKey = ? and STUDY.StudyKey = ?", new Object[] { id,
-            studyKey }, String.class);
+        List<String> filePaths = template.queryForList("select FilePath from INSTANCE, SERIES, STUDY where INSTANCE.SeriesKey = SERIES.SeriesKey and SERIES.StudyKey = STUDY.StudyKey and STUDY.PoolKey = ? and STUDY.StudyKey = ?",
+            new Object[] { id, studyKey }, String.class);
         for (String file : filePaths) {
           destinationContainer.importFromPool(new File(container.getPoolDirectory(), file));
         }
@@ -319,9 +317,6 @@ public class PoolEndpoint extends Endpoint {
     gr.isPoolAdmin = true;
     groupRoleDAO.create(gr);
 
-    // Remove current user from authorizationCache, so that user permission will be re-fetched next time whenever needed:
-    CacheCleaner.cleanUser(subject.getPrincipal().toString());
-
     return Response.ok(pool).build();
   }
 
@@ -366,10 +361,6 @@ public class PoolEndpoint extends Endpoint {
     // Delete
     // session.delete(pool);
     poolManager.deletePool(pool);
-
-    // Remove current user from authorizationCache, so that user permission will be re-fetched next time whenever needed:
-    CacheCleaner.cleanUser(subject.getPrincipal().toString());
-
     return Response.ok().build();
   }
 
