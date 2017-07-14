@@ -1,21 +1,25 @@
 package edu.mayo.qia.pacs;
 
-import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
-import static org.quartz.TriggerBuilder.newTrigger;
+import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
+import com.codahale.metrics.json.MetricsModule;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.sun.jersey.api.core.ResourceConfig;
+import com.sun.jersey.spi.container.ResourceFilterFactory;
+import edu.mayo.qia.pacs.components.*;
+import edu.mayo.qia.pacs.db.GroupDAO;
+import edu.mayo.qia.pacs.db.GroupRoleDAO;
+import edu.mayo.qia.pacs.db.UserDAO;
+import edu.mayo.qia.pacs.dicom.DICOMReceiver;
+import edu.mayo.qia.pacs.job.AutoForwarder;
+import edu.mayo.qia.pacs.managed.DBWebServer;
+import edu.mayo.qia.pacs.managed.QuartzManager;
+import edu.mayo.qia.pacs.rest.*;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-
-import java.util.EnumSet;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.servlet.DispatcherType;
-import javax.servlet.Filter;
-
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.shiro.web.env.IniWebEnvironment;
 import org.apache.shiro.web.filter.authc.UserFilter;
@@ -37,43 +41,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
-import com.codahale.metrics.json.MetricsModule;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
-import com.sun.jersey.api.core.ResourceConfig;
-import com.sun.jersey.spi.container.ResourceFilterFactory;
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import edu.mayo.qia.pacs.components.AnonymizationMapProcessor;
-import edu.mayo.qia.pacs.components.Connector;
-import edu.mayo.qia.pacs.components.Device;
-import edu.mayo.qia.pacs.components.Group;
-import edu.mayo.qia.pacs.components.GroupRole;
-import edu.mayo.qia.pacs.components.Instance;
-import edu.mayo.qia.pacs.components.Item;
-import edu.mayo.qia.pacs.components.MoveRequest;
-import edu.mayo.qia.pacs.components.Pool;
-import edu.mayo.qia.pacs.components.PoolContainer;
-import edu.mayo.qia.pacs.components.PoolManager;
-import edu.mayo.qia.pacs.components.Query;
-import edu.mayo.qia.pacs.components.Result;
-import edu.mayo.qia.pacs.components.Script;
-import edu.mayo.qia.pacs.components.Series;
-import edu.mayo.qia.pacs.components.Study;
-import edu.mayo.qia.pacs.components.User;
-import edu.mayo.qia.pacs.db.GroupDAO;
-import edu.mayo.qia.pacs.db.GroupRoleDAO;
-import edu.mayo.qia.pacs.db.UserDAO;
-import edu.mayo.qia.pacs.dicom.DICOMReceiver;
-import edu.mayo.qia.pacs.job.AutoForwarder;
-import edu.mayo.qia.pacs.job.CacheCleaner;
-import edu.mayo.qia.pacs.managed.DBWebServer;
-import edu.mayo.qia.pacs.managed.QuartzManager;
-import edu.mayo.qia.pacs.rest.AuthorizationEndpoint;
-import edu.mayo.qia.pacs.rest.ConnectorEndpoint;
-import edu.mayo.qia.pacs.rest.MetricsEndpoint;
-import edu.mayo.qia.pacs.rest.PoolEndpoint;
-import edu.mayo.qia.pacs.rest.UserEndpoint;
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
 
 public class NotionApplication extends Application<NotionConfiguration> {
   static Logger logger = LoggerFactory.getLogger(NotionApplication.class);
@@ -220,10 +196,6 @@ public class NotionApplication extends Application<NotionConfiguration> {
     Trigger trigger = newTrigger().withIdentity("trigger1", "group1").startNow().withSchedule(simpleSchedule().withIntervalInSeconds(60).repeatForever()).build();
 
     // Tell quartz to schedule the job using our trigger
-    scheduler.scheduleJob(job, trigger);
-
-    job = newJob(CacheCleaner.class).build();
-    trigger = newTrigger().startNow().withSchedule(simpleSchedule().withIntervalInMinutes(10).repeatForever()).build();
     scheduler.scheduleJob(job, trigger);
 
     job = newJob(AutoForwarder.class).build();
