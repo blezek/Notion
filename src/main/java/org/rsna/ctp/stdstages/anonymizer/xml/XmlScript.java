@@ -7,14 +7,15 @@
 
 package org.rsna.ctp.stdstages.anonymizer.xml;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Hashtable;
+import org.apache.log4j.Logger;
 import org.rsna.ctp.stdstages.anonymizer.AnonymizerFunctions;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
 /**
  * A utility for executing script commands.

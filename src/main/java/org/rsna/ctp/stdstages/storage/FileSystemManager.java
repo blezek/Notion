@@ -7,13 +7,14 @@
 
 package org.rsna.ctp.stdstages.storage;
 
+import org.apache.log4j.Logger;
+import org.rsna.server.User;
+
 import java.io.File;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import org.apache.log4j.Logger;
-import org.rsna.server.User;
 
 /**
  * A class to keep track of FileSystems.

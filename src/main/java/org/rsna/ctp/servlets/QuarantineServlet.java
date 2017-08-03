@@ -7,24 +7,24 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
-import java.util.List;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.pipeline.AbstractQueuedExportService;
 import org.rsna.ctp.pipeline.AbstractImportService;
+import org.rsna.ctp.pipeline.AbstractQueuedExportService;
 import org.rsna.ctp.pipeline.Pipeline;
 import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.pipeline.Quarantine;
 import org.rsna.ctp.pipeline.QueueManager;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
-import org.rsna.server.User;
 import org.rsna.servlets.Servlet;
 import org.rsna.util.FileUtil;
 import org.rsna.util.HtmlUtil;
 import org.rsna.util.StringUtil;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * The QuarantineServlet. This implementation provides access

@@ -1,19 +1,18 @@
 package edu.mayo.qia.pacs;
 
-import io.dropwizard.Configuration;
-import io.dropwizard.db.DataSourceFactory;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
-import org.secnod.dropwizard.shiro.ShiroConfiguration;
 
 import com.bazaarvoice.dropwizard.assets.AssetsBundleConfiguration;
 import com.bazaarvoice.dropwizard.assets.AssetsConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import org.secnod.dropwizard.shiro.ShiroConfiguration;
+
 import edu.mayo.qia.pacs.configuration.EmailConfiguration;
 import edu.mayo.qia.pacs.configuration.ServerConfiguration;
+import io.dropwizard.Configuration;
+import io.dropwizard.db.DataSourceFactory;
 
 public class NotionConfiguration extends Configuration implements AssetsBundleConfiguration {
 

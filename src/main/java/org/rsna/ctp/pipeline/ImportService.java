@@ -7,8 +7,9 @@
 
 package org.rsna.ctp.pipeline;
 
-import java.io.File;
 import org.rsna.ctp.objects.FileObject;
+
+import java.io.File;
 
 /**
  * The interface specifying the additional methods that must

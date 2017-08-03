@@ -7,9 +7,10 @@
 
 package org.rsna.ctp.stdstages.anonymizer.xml;
 
-import java.util.LinkedList;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.util.LinkedList;
 
 /**
  * A class to assist in walking down an XML path, with support for wildcards.

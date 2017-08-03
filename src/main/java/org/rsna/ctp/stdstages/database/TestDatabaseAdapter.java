@@ -7,17 +7,14 @@
 
 package org.rsna.ctp.stdstages.database;
 
-import java.io.File;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.Status;
+
+import java.io.File;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * An adapter for testing the DatabaseAdapter query mechanism.

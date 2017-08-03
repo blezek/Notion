@@ -7,8 +7,9 @@
 
 package org.rsna.util;
 
-import java.security.cert.X509Certificate;
 import javax.net.ssl.X509TrustManager;
+
+import java.security.cert.X509Certificate;
 
 /**
  * An All-accepting X509 Trust Manager.

@@ -7,14 +7,15 @@
 
 package org.rsna.servlets;
 
-import java.io.*;
-import java.net.URL;
 import org.apache.log4j.Logger;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
 import org.rsna.util.Cache;
 import org.rsna.util.FileUtil;
 import org.rsna.util.StringUtil;
+
+import java.io.File;
+import java.net.URL;
 
 /**
  * The base class for servlets.

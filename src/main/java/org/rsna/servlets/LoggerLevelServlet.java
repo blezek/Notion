@@ -7,19 +7,16 @@
 
 package org.rsna.servlets;
 
-import java.io.File;
-import java.io.InputStream;
-import org.rsna.server.HttpRequest;
-import org.rsna.server.HttpResponse;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.rsna.server.HttpRequest;
+import org.rsna.server.HttpResponse;
 import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
-
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+
+import java.io.File;
+import java.io.InputStream;
 
 /**
  * The Logger Level Servlet.

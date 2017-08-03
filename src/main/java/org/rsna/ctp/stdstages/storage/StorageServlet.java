@@ -7,10 +7,6 @@
 
 package org.rsna.ctp.stdstages.storage;
 
-import java.io.File;
-import java.util.Iterator;
-import java.util.List;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
@@ -19,9 +15,12 @@ import org.rsna.server.HttpResponse;
 import org.rsna.server.Path;
 import org.rsna.server.User;
 import org.rsna.servlets.Servlet;
-import org.rsna.servlets.Servlet;
 import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
+
+import java.io.File;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * A Servlet which provides web access to the studies stored in a FileStorageService.

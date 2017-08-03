@@ -1,9 +1,5 @@
 package edu.mayo.qia.pacs.rest;
 
-import io.dropwizard.hibernate.UnitOfWork;
-
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,6 +10,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
@@ -26,10 +24,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 
 import edu.mayo.qia.pacs.components.GroupRole;
 import edu.mayo.qia.pacs.db.GroupRoleDAO;
+import io.dropwizard.hibernate.UnitOfWork;
 
 @Component
 public class GroupRoleEndpoint {

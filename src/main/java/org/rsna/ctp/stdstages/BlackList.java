@@ -7,12 +7,13 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.util.LinkedList;
-import java.util.HashSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A class representing a set of values that are not acceptable.

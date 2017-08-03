@@ -7,10 +7,11 @@
 
 package org.rsna.ctp.stdstages.verifier;
 
+import org.rsna.util.StringUtil;
+
 import java.io.Serializable;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import org.rsna.util.StringUtil;
 
 /**
  * A class to encapsulate a study for the purpose of verification..

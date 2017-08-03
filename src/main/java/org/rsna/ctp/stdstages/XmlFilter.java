@@ -7,15 +7,15 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.objects.XmlObject;
 import org.rsna.ctp.objects.FileObject;
+import org.rsna.ctp.objects.XmlObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.Processor;
 import org.rsna.util.FileUtil;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * A script-based filter for XmlObjects.

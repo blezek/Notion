@@ -7,13 +7,13 @@
 
 package org.rsna.server;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.rsna.util.Base64;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.util.HashSet;
 
 /**
  * A class to encapsulate an authenticated user.

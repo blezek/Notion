@@ -1,6 +1,31 @@
 package edu.mayo.qia.pacs.rest;
 
-import io.dropwizard.hibernate.UnitOfWork;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.sun.jersey.api.client.ClientResponse.Status;
+import com.sun.jersey.core.header.FormDataContentDisposition;
+import com.sun.jersey.multipart.FormDataParam;
+import com.sun.jersey.spi.resource.PerRequest;
+
+import org.apache.log4j.Logger;
+import org.apache.shiro.subject.Subject;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.secnod.shiro.jaxrs.Auth;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,33 +38,6 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
-
-import org.apache.log4j.Logger;
-import org.apache.shiro.subject.Subject;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.secnod.shiro.jaxrs.Auth;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.sun.jersey.api.client.ClientResponse.Status;
-import com.sun.jersey.core.header.FormDataContentDisposition;
-import com.sun.jersey.multipart.FormDataParam;
-import com.sun.jersey.spi.resource.PerRequest;
-
 import edu.mayo.qia.pacs.Audit;
 import edu.mayo.qia.pacs.components.Connector;
 import edu.mayo.qia.pacs.components.Device;
@@ -49,6 +47,7 @@ import edu.mayo.qia.pacs.components.PoolManager;
 import edu.mayo.qia.pacs.components.Query;
 import edu.mayo.qia.pacs.components.Result;
 import edu.mayo.qia.pacs.components.Study;
+import io.dropwizard.hibernate.UnitOfWork;
 
 @Scope("prototype")
 @Component

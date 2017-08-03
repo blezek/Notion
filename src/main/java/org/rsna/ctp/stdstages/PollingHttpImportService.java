@@ -7,6 +7,14 @@
 
 package org.rsna.ctp.stdstages;
 
+import org.apache.log4j.Logger;
+import org.rsna.ctp.objects.FileObject;
+import org.rsna.ctp.pipeline.AbstractPipelineStage;
+import org.rsna.ctp.pipeline.ImportService;
+import org.rsna.util.FileUtil;
+import org.rsna.util.StringUtil;
+import org.w3c.dom.Element;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,17 +22,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URL;
-import org.apache.log4j.Logger;
-import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
-import org.rsna.ctp.pipeline.AbstractPipelineStage;
-import org.rsna.ctp.pipeline.ImportService;
-import org.rsna.ctp.pipeline.Quarantine;
-import org.rsna.util.FileUtil;
-import org.rsna.util.StringUtil;
-import org.w3c.dom.Element;
 
 /**
  * An ImportService that polls a PolledHttpExportService to obtain files on request.

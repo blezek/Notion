@@ -1,6 +1,5 @@
 package edu.mayo.qia.pacs.shiro;
 
-import edu.mayo.qia.pacs.Notion;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,6 +13,8 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import edu.mayo.qia.pacs.Notion;
 
 public class AuthorizationRealm extends AuthorizingRealm {
 

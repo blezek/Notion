@@ -7,17 +7,8 @@
 
 package org.rsna.ctp.stdstages.database;
 
-import java.io.File;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.util.Map;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.Status;
 import org.rsna.server.HttpResponse;
 import org.rsna.util.Base64;
@@ -26,7 +17,12 @@ import org.rsna.util.HttpUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * An adapter for passing data on objects to an external

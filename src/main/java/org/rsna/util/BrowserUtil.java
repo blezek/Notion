@@ -7,8 +7,9 @@
 
 package org.rsna.util;
 
-import java.util.*;
-import javax.swing.*;
+import javax.swing.JOptionPane;
+
+import java.util.Arrays;
 
 public class BrowserUtil {
 

@@ -7,11 +7,10 @@
 
 package org.rsna.ctp.stdstages.anonymizer.dicom;
 
-import java.io.File;
+import org.apache.log4j.Logger;
+
 import java.util.LinkedList;
 import java.util.List;
-import org.apache.log4j.Logger;
-import org.rsna.util.FileUtil;
 
 /**
  * An encapsulation of pixel regions.

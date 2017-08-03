@@ -7,23 +7,17 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.*;
-import java.util.Iterator;
-import java.util.List;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.ImportService;
-import org.rsna.ctp.pipeline.Pipeline;
-import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.stdstages.archive.FileSource;
 import org.rsna.util.FileUtil;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * An ImportService that monitors a directory. This is an import service

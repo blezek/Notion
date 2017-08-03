@@ -7,27 +7,23 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import jdbm.helper.FastIterator;
-import jdbm.htree.HTree;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
-import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.objects.FileObject;
 import org.rsna.ctp.pipeline.Pipeline;
 import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.stdstages.IDMap;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
-import org.rsna.server.User;
 import org.rsna.servlets.Servlet;
-import org.rsna.util.FileUtil;
 import org.rsna.util.HtmlUtil;
-import org.rsna.util.XmlUtil;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import jdbm.helper.FastIterator;
+import jdbm.htree.HTree;
 
 /**
  * A Servlet which provides web access to the indexed data stored by an IDMap pipeline stage.

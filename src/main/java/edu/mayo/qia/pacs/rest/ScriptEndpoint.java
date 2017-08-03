@@ -1,7 +1,5 @@
 package edu.mayo.qia.pacs.rest;
 
-import io.dropwizard.hibernate.UnitOfWork;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -9,6 +7,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.sun.jersey.spi.resource.PerRequest;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -18,13 +18,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.sun.jersey.spi.resource.PerRequest;
-
 import edu.mayo.qia.pacs.components.Pool;
 import edu.mayo.qia.pacs.components.PoolContainer;
 import edu.mayo.qia.pacs.components.PoolManager;
 import edu.mayo.qia.pacs.components.Script;
 import edu.mayo.qia.pacs.ctp.Anonymizer;
+import io.dropwizard.hibernate.UnitOfWork;
 
 @Scope("prototype")
 @Component

@@ -7,8 +7,10 @@
 
 package org.rsna.ui;
 
-import java.io.*;
-import java.util.regex.*;
+import java.io.File;
+import java.io.FileFilter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * An implementation of java.io.FileFilter that matches all directories

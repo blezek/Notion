@@ -7,18 +7,20 @@
 
 package org.rsna.ctp.stdstages.anonymizer.zip;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Enumeration;
-import java.util.zip.*;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.stdstages.anonymizer.AnonymizerStatus;
 import org.rsna.ctp.stdstages.anonymizer.xml.XMLAnonymizer;
-import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
 /**
  * The MIRC Zip anonymizer. This anonymizer provides de-identification and

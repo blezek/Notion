@@ -7,10 +7,11 @@
 
 package org.rsna.ui;
 
-import javax.swing.*;
-import javax.swing.event.*;
-import java.io.*;
-import java.util.*;
+import javax.swing.SwingUtilities;
+import javax.swing.event.EventListenerList;
+
+import java.io.File;
+import java.util.EventListener;
 
 /**
  * An extension of PropertiesFile that provides PropertyEvents

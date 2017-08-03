@@ -8,8 +8,8 @@
 package org.rsna.multipart;
 
 import java.io.FilterInputStream;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * FilterInputStream that limits the bytes read to the content length

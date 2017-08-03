@@ -7,10 +7,15 @@
 
 package org.rsna.ui;
 
-import java.awt.*;
-import java.util.LinkedList;
-import java.util.Hashtable;
 import javax.swing.JComponent;
+
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.LayoutManager2;
+import java.util.Hashtable;
+import java.util.LinkedList;
 
 /**
  * A LayoutManager2 that puts components in rows and columns.

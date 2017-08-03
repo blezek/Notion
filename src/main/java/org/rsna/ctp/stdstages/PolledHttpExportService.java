@@ -7,15 +7,18 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
 import javax.net.ServerSocketFactory;
-import javax.net.ssl.SSLServerSocketFactory;
+
 import org.apache.log4j.Logger;
 import org.rsna.ctp.pipeline.AbstractQueuedExportService;
-import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * An ExportService that serves files via the HTTP protocol.

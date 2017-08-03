@@ -7,26 +7,23 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.*;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketAddress;
-import java.util.Enumeration;
-import java.util.zip.*;
-import javax.net.ServerSocketFactory;
-import javax.net.ssl.SSLServerSocketFactory;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.FileObject;
 import org.rsna.ctp.pipeline.AbstractImportService;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
-import org.rsna.server.User;
-import org.rsna.server.Users;
 import org.rsna.service.HttpService;
 import org.rsna.service.Service;
 import org.w3c.dom.Element;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * An ImportService that receives files via the HTTP protocol.

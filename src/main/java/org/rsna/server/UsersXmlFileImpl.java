@@ -7,21 +7,18 @@
 
 package org.rsna.server;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.rsna.util.DigestUtil;
 import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Hashtable;
 
 /**
  * A class to extend the org.rsna.server.Users abstract class

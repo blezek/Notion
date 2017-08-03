@@ -7,10 +7,9 @@
 
 package org.rsna.ctp.stdstages.storage;
 
-import java.io.File;
-import java.util.Iterator;
-import java.util.List;
 import org.apache.log4j.Logger;
+
+import java.io.File;
 
 /**
  * The Thread that automatically removes studies from

@@ -7,8 +7,10 @@
 
 package org.rsna.ctp.stdstages.archive;
 
-import java.io.*;
 import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.io.Serializable;
 
 /**
  * A stack frame encapsulating a single directory in a tree.

@@ -7,12 +7,14 @@
 
 package org.rsna.servlets;
 
-import java.io.File;
-import java.util.*;
 import org.apache.log4j.Logger;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
 import org.rsna.util.HtmlUtil;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Map;
 
 /**
  * The EnvironmentServlet.

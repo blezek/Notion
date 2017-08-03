@@ -1,22 +1,22 @@
 package edu.mayo.qia.pacs.rest;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sun.jersey.api.client.ClientResponse.Status;
-import edu.mayo.qia.pacs.components.MoveRequest;
-import edu.mayo.qia.pacs.components.Pool;
-import edu.mayo.qia.pacs.components.PoolManager;
-import edu.mayo.qia.pacs.components.PoolContainer;
-import edu.mayo.qia.pacs.components.Script;
-import edu.mayo.qia.pacs.components.User;
-import edu.mayo.qia.pacs.components.Group;
-import edu.mayo.qia.pacs.components.GroupRole;
-import edu.mayo.qia.pacs.db.GroupDAO;
-import edu.mayo.qia.pacs.db.GroupRoleDAO;
-import edu.mayo.qia.pacs.db.UserDAO;
-import io.dropwizard.hibernate.UnitOfWork;
+
 import org.apache.log4j.Logger;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
@@ -28,18 +28,21 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.io.File;
 import java.util.List;
+
+import edu.mayo.qia.pacs.components.Group;
+import edu.mayo.qia.pacs.components.GroupRole;
+import edu.mayo.qia.pacs.components.MoveRequest;
+import edu.mayo.qia.pacs.components.Pool;
+import edu.mayo.qia.pacs.components.PoolContainer;
+import edu.mayo.qia.pacs.components.PoolManager;
+import edu.mayo.qia.pacs.components.Script;
+import edu.mayo.qia.pacs.components.User;
+import edu.mayo.qia.pacs.db.GroupDAO;
+import edu.mayo.qia.pacs.db.GroupRoleDAO;
+import edu.mayo.qia.pacs.db.UserDAO;
+import io.dropwizard.hibernate.UnitOfWork;
 
 //import edu.mayo.qia.pacs.components.*;
 

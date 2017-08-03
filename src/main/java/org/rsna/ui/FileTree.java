@@ -7,9 +7,10 @@
 
 package org.rsna.ui;
 
-import java.io.File;
 import javax.swing.JTree;
 import javax.swing.tree.TreeSelectionModel;
+
+import java.io.File;
 
 /**
  * A JTree that displays a directory tree with filenames.

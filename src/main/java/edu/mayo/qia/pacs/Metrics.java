@@ -1,12 +1,12 @@
 package edu.mayo.qia.pacs;
 
-import java.util.concurrent.TimeUnit;
-
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import com.codahale.metrics.CachedGauge;
 import com.codahale.metrics.Counter;
 import com.codahale.metrics.MetricRegistry;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class is simply a catch-all for Notion metrics

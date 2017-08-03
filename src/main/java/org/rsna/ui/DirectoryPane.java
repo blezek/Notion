@@ -7,14 +7,17 @@
 
 package org.rsna.ui;
 
-import java.awt.*;
-import java.io.*;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.event.EventListenerList;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.Position;
-import javax.swing.text.Position.Bias;
-import javax.swing.tree.*;
+import javax.swing.tree.TreePath;
+
+import java.io.File;
+import java.util.EventListener;
+import java.util.Properties;
 
 /**
  * A JScrollPane containing a directory tree with file selection and event notification.

@@ -7,13 +7,14 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
 import org.rsna.servlets.Servlet;
 import org.rsna.util.CipherUtil;
+
+import java.io.File;
 
 /**
  * The Decipher servlet.

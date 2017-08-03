@@ -8,7 +8,7 @@
 package org.rsna.server;
 
 import java.math.BigInteger;
-import java.security.*;
+import java.security.MessageDigest;
 
 /**
  * Class to encapsulate a session.

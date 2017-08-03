@@ -7,9 +7,17 @@
 
 package org.rsna.ui;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.BorderFactory;
+import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 
 /**
  * A JTextPane that supports text color and includes thread-safe methods.

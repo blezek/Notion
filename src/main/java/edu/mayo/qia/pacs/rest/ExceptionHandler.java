@@ -4,9 +4,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import org.apache.log4j.Logger;
-
 import com.sun.jersey.api.NotFoundException;
+
+import org.apache.log4j.Logger;
 
 @Provider
 public class ExceptionHandler implements ExceptionMapper<NotFoundException> {

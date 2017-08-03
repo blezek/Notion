@@ -1,11 +1,11 @@
 package edu.mayo.qia.pacs.test;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowCountCallbackHandler;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DumpHandler extends RowCountCallbackHandler {
 

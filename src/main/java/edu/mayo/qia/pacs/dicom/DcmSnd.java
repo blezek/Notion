@@ -37,18 +37,6 @@
  * ***** END LICENSE BLOCK ***** */
 package edu.mayo.qia.pacs.dicom;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.Executor;
-
 import org.apache.log4j.Logger;
 import org.dcm4che2.data.BasicDicomObject;
 import org.dcm4che2.data.DicomObject;
@@ -71,6 +59,18 @@ import org.dcm4che2.net.PDVOutputStream;
 import org.dcm4che2.net.TransferCapability;
 import org.dcm4che2.util.CloseUtils;
 import org.dcm4che2.util.StringUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Executor;
 
 import edu.mayo.qia.pacs.Notion;
 

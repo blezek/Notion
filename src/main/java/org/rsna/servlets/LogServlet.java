@@ -7,12 +7,13 @@
 
 package org.rsna.servlets;
 
-import java.io.*;
+import org.rsna.server.HttpRequest;
+import org.rsna.server.HttpResponse;
 import org.rsna.util.FileUtil;
 import org.rsna.util.HtmlUtil;
 import org.rsna.util.StringUtil;
-import org.rsna.server.HttpRequest;
-import org.rsna.server.HttpResponse;
+
+import java.io.File;
 
 /**
  * The LogServlet.

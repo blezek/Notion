@@ -1,5 +1,8 @@
 package org.rsna.ctp.stdstages.anonymizer.dicom;
 
+import org.dcm4che.data.Dataset;
+import org.dcm4che.dict.Tags;
+
 import java.awt.color.ColorSpace;
 import java.awt.image.BandedSampleModel;
 import java.awt.image.BufferedImage;
@@ -10,9 +13,6 @@ import java.awt.image.PixelInterleavedSampleModel;
 import java.awt.image.Raster;
 import java.awt.image.SampleModel;
 import java.awt.image.WritableRaster;
-
-import org.dcm4che.data.Dataset;
-import org.dcm4che.dict.Tags;
 
 /**
  * @author Gunter.Zeilinger@tiani.com

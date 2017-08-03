@@ -7,12 +7,9 @@
 
 package org.rsna.ctp.stdstages.anonymizer.dicom;
 
-import java.util.Properties;
-import org.dcm4che.data.Dataset;
 import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.stdstages.anonymizer.IntegerTable;
+
 import java.util.LinkedList;
-import org.dcm4che.dict.Tags;
 
 /**
  * Encapsulate one function call, providing the parsing for the

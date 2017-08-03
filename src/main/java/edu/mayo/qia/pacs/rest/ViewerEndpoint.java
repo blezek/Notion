@@ -1,40 +1,11 @@
 package edu.mayo.qia.pacs.rest;
 
-import org.apache.log4j.Logger;
-
-import io.dropwizard.hibernate.UnitOfWork;
-
-import java.io.File;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.apache.log4j.Logger;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.subject.Subject;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.secnod.shiro.jaxrs.Auth;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
-import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,17 +13,22 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sun.jersey.api.client.ClientResponse.Status;
 
-import edu.mayo.qia.pacs.components.Group;
-import edu.mayo.qia.pacs.components.GroupRole;
-import edu.mayo.qia.pacs.components.MoveRequest;
-import edu.mayo.qia.pacs.components.Pool;
+import org.apache.log4j.Logger;
+import org.apache.shiro.subject.Subject;
+import org.secnod.shiro.jaxrs.Auth;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.stereotype.Component;
+
+import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Iterator;
+
 import edu.mayo.qia.pacs.components.PoolContainer;
 import edu.mayo.qia.pacs.components.PoolManager;
-import edu.mayo.qia.pacs.components.Script;
-import edu.mayo.qia.pacs.components.User;
-import edu.mayo.qia.pacs.db.GroupDAO;
-import edu.mayo.qia.pacs.db.GroupRoleDAO;
-import edu.mayo.qia.pacs.db.UserDAO;
 
 @Component
 @Scope("singleton")
@@ -107,11 +83,6 @@ public class ViewerEndpoint extends Endpoint {
         study.put("modality", "unknown");
         study.put("studyDescription", rs.getString("StudyDescription"));
         study.put("studyId", rs.getString("StudyKey"));
-        // int studyKey = rs.getInt("StudyKey");
-        // Integer numberOfImages =
-        // template.queryForObject("select count(INSTANCE.InstanceKey) from INSTANCE, SERIES, STUDY where INSTANCE.SeriesKey = SERIES.SeriesKey and SERIES.StudyKey = ?",
-        // new Object[] { studyKey }, Integer.class);
-        // study.put("numImages", numberOfImages);
       }
     });
     return Response.ok(json).build();
@@ -166,7 +137,9 @@ public class ViewerEndpoint extends Endpoint {
         json.put("studyId", rs.getString("StudyKey"));
         // int studyKey = rs.getInt("StudyKey");
         // Integer numberOfImages =
-        // template.queryForObject("select count(INSTANCE.InstanceKey) from INSTANCE, SERIES where INSTANCE.SeriesKey = SERIES.SeriesKey and SERIES.StudyKey = ?",
+        // template.queryForObject("select count(INSTANCE.InstanceKey) from
+        // INSTANCE, SERIES where INSTANCE.SeriesKey = SERIES.SeriesKey and
+        // SERIES.StudyKey = ?",
         // new Object[] { studyKey }, Integer.class);
         // json.put("numImages", numberOfImages);
 
@@ -198,7 +171,9 @@ public class ViewerEndpoint extends Endpoint {
         @Override
         public void processRow(ResultSet rs) throws SQLException {
           ObjectNode instance = instances.addObject();
-          instance.put("imageId", "image/" + rs.getString("FilePath"));
+          String imageID = "image/" + rs.getString("FilePath");
+          instance.put("imageId", imageID);
+          instance.put("uri", "dicomweb:/rest/pool/" + poolKey + "/viewer/" + imageID);
         }
       });
     }

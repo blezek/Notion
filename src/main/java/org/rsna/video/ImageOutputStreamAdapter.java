@@ -10,10 +10,10 @@
  */
 package org.rsna.video;
 
-import java.io.FilterOutputStream;
+import javax.imageio.stream.ImageOutputStream;
+
 import java.io.IOException;
 import java.io.OutputStream;
-import javax.imageio.stream.ImageOutputStream;
 
 /**
  * Adapts an {@code ImageOutputStream} for classes requiring an

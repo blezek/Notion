@@ -7,8 +7,6 @@
 
 package org.rsna.servlets;
 
-import java.io.File;
-import java.util.*;
 import org.apache.log4j.Logger;
 import org.rsna.server.Authenticator;
 import org.rsna.server.HttpRequest;
@@ -17,6 +15,9 @@ import org.rsna.server.User;
 import org.rsna.server.Users;
 import org.rsna.util.FileUtil;
 import org.rsna.util.StringUtil;
+
+import java.io.File;
+import java.util.Properties;
 
 /**
  * The LoginServlet.

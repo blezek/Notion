@@ -1,13 +1,5 @@
 package edu.mayo.qia.pacs.dicom;
 
-//package org.dcm4che2.tool.dcmmover;
-
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.concurrent.Executor;
-
 import org.dcm4che2.data.BasicDicomObject;
 import org.dcm4che2.data.DicomObject;
 import org.dcm4che2.data.Tag;
@@ -29,6 +21,14 @@ import org.dcm4che2.net.TransferCapability;
 import org.dcm4che2.net.UserIdentity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+//package org.dcm4che2.tool.dcmmover;
+
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.concurrent.Executor;
 
 import edu.mayo.qia.pacs.Notion;
 

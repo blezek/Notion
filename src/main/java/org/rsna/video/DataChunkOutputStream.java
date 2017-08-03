@@ -10,7 +10,10 @@
  */
 package org.rsna.video;
 
-import java.io.*;
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * This output stream filter supports common data types used inside

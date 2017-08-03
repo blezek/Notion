@@ -7,16 +7,17 @@
 
 package org.rsna.util;
 
-import java.io.File;
+import org.apache.log4j.Logger;
+
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Properties;
+
 import jdbm.RecordManager;
 import jdbm.RecordManagerFactory;
 import jdbm.RecordManagerOptions;
 import jdbm.btree.BTree;
 import jdbm.htree.HTree;
-import org.apache.log4j.Logger;
 
 /**
  * Encapsulates helper methods for using JDBM.

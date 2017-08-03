@@ -4,9 +4,9 @@
 
 package org.rsna.multipart; //repackage to RSNA util
 
-import java.io.OutputStream;
 import java.io.FilterOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * A <code>MacBinaryDecoderOutput</code> filters MacBinary files to normal

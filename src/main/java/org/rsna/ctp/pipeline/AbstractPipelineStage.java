@@ -7,12 +7,16 @@
 
 package org.rsna.ctp.pipeline;
 
-import java.io.File;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NamedNodeMap;
+import org.rsna.ctp.objects.DicomObject;
+import org.rsna.ctp.objects.FileObject;
+import org.rsna.ctp.objects.XmlObject;
+import org.rsna.ctp.objects.ZipObject;
 import org.rsna.util.StringUtil;
-import org.rsna.ctp.objects.*;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
+import java.io.File;
 
 /**
  * An abstract class implementing the PipelineStage interface.

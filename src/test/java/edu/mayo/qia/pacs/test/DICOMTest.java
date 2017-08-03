@@ -1,7 +1,5 @@
 package edu.mayo.qia.pacs.test;
 
-import java.io.IOException;
-
 import org.dcm4che2.data.UID;
 import org.dcm4che2.net.Association;
 import org.dcm4che2.net.ConfigurationException;
@@ -13,6 +11,8 @@ import org.dcm4che2.net.TransferCapability;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.io.IOException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DICOMTest extends PACSTest {

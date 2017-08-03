@@ -1,8 +1,5 @@
 package edu.mayo.qia.pacs.components;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -15,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "GROUPS")

@@ -7,14 +7,7 @@
 
 package org.rsna.ctp.stdstages.anonymizer.dicom;
 
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.apache.log4j.Logger;
 import org.dcm4che.data.Dataset;
 import org.dcm4che.data.DcmElement;
 import org.dcm4che.data.SpecificCharacterSet;
@@ -24,7 +17,14 @@ import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.stdstages.anonymizer.IntegerTable;
 import org.rsna.util.StringUtil;
 
-import org.apache.log4j.Logger;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Encapsulate the context of the anonymizer, including

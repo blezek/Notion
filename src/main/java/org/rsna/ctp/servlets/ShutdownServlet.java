@@ -7,15 +7,14 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
-import java.util.*;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
 import org.rsna.server.User;
 import org.rsna.servlets.Servlet;
-import org.rsna.util.IPUtil;
+
+import java.io.File;
 
 /**
  * The ShutdownServlet.

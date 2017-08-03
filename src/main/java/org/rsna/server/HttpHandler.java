@@ -7,10 +7,12 @@
 
 package org.rsna.server;
 
-import java.io.*;
-import java.net.Socket;
 import org.apache.log4j.Logger;
 import org.rsna.servlets.Servlet;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.Socket;
 
 /**
  * The thread that handles an individual HTTP connection.

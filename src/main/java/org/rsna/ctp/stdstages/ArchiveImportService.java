@@ -7,26 +7,22 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.*;
-import java.util.Iterator;
-import java.util.List;
-import org.apache.commons.compress.archivers.*;
-import org.apache.commons.compress.archivers.tar.*;
+import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
+import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.ImportService;
-import org.rsna.ctp.pipeline.Pipeline;
-import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.stdstages.archive.FileSource;
 import org.rsna.util.FileUtil;
 import org.rsna.util.SerializerUtil;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 /**
  * An ImportService that copies files from a directory tree. This is

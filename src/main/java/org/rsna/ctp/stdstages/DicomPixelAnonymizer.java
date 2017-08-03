@@ -7,8 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.util.List;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
@@ -21,6 +19,8 @@ import org.rsna.ctp.stdstages.anonymizer.dicom.Regions;
 import org.rsna.ctp.stdstages.anonymizer.dicom.Signature;
 import org.rsna.util.FileUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * The DicomPixelAnonymizer pipeline stage class.

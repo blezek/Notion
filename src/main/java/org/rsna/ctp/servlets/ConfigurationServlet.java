@@ -7,8 +7,6 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
-import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.pipeline.Pipeline;
@@ -17,6 +15,9 @@ import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
 import org.rsna.servlets.Servlet;
 import org.rsna.util.HtmlUtil;
+
+import java.io.File;
+import java.util.Iterator;
 
 /**
  * The ConfigurationServlet. This implementation simply returns the

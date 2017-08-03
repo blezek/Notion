@@ -7,9 +7,6 @@
 
 package org.rsna.util;
 
-import java.util.*;
-import javax.swing.*;
-
 /**
  * Static methods for creating HTML elements.
  */

@@ -7,12 +7,11 @@
 
 package org.rsna.ctp.plugin;
 
-import java.io.File;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NamedNodeMap;
-import org.rsna.util.StringUtil;
-import org.rsna.ctp.objects.*;
+import org.w3c.dom.Node;
+
+import java.io.File;
 
 /**
  * An abstract class implementing the Plugin interface.

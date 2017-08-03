@@ -7,10 +7,7 @@
 
 package org.rsna.ctp.stdstages.anonymizer.dicom;
 
-import java.io.File;
-import java.nio.ByteBuffer;
-import java.util.Iterator;
-
+import org.apache.log4j.Logger;
 import org.dcm4che.data.Dataset;
 import org.dcm4che.data.DcmElement;
 import org.dcm4che.data.DcmObjectFactory;
@@ -18,13 +15,13 @@ import org.dcm4che.data.SpecificCharacterSet;
 import org.dcm4che.dict.DictionaryFactory;
 import org.dcm4che.dict.TagDictionary;
 import org.dcm4che.dict.Tags;
-import org.dcm4che.dict.UIDs;
 import org.dcm4che.dict.VRs;
-
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.stdstages.anonymizer.AnonymizerStatus;
 
-import org.apache.log4j.Logger;
+import java.io.File;
+import java.nio.ByteBuffer;
+import java.util.Iterator;
 
 /**
  * The MIRC DICOM corrector. The corrector fixes certain errors

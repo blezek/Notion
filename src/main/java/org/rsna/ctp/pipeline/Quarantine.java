@@ -7,11 +7,12 @@
 
 package org.rsna.ctp.pipeline;
 
+import org.rsna.ctp.objects.FileObject;
+import org.rsna.util.FileUtil;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;
-import org.rsna.ctp.objects.FileObject;
-import org.rsna.util.FileUtil;
 
 /**
  * A class representing a quarantine directory and providing

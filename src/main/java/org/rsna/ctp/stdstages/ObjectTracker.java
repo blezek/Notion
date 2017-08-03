@@ -7,22 +7,20 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.util.HashSet;
-import java.util.Properties;
-import jdbm.RecordManager;
-import jdbm.htree.HTree;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
-import org.rsna.ctp.pipeline.Pipeline;
-import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.pipeline.Processor;
 import org.rsna.util.JdbmUtil;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
+import java.util.HashSet;
+
+import jdbm.RecordManager;
+import jdbm.htree.HTree;
 
 /**
  * An indexing stage for objects which have been processed, providing a web interface.

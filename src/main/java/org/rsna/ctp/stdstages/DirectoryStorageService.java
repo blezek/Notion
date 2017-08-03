@@ -7,10 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.util.LinkedList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
@@ -20,11 +16,14 @@ import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.pipeline.StorageService;
-import org.rsna.ctp.stdstages.ObjectCache;
 import org.rsna.util.FileUtil;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
 import java.io.FileFilter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A class to store objects in a directory system with no index.

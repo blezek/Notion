@@ -7,8 +7,6 @@
 
 package org.rsna.servlets;
 
-import java.io.File;
-import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
@@ -18,6 +16,8 @@ import org.rsna.server.UsersXmlFileImpl;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * The UserServlet. This servlet is intended for use by Ajax

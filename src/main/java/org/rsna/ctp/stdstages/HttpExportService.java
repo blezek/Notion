@@ -7,13 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.security.SecureRandom;
-import java.util.LinkedList;
-import java.util.Properties;
-import javax.net.ssl.HttpsURLConnection;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.FileObject;
 import org.rsna.ctp.pipeline.AbstractExportService;
@@ -23,6 +16,12 @@ import org.rsna.util.Base64;
 import org.rsna.util.FileUtil;
 import org.rsna.util.HttpUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.LinkedList;
 
 /**
  * An ExportService that exports files via the HTTP or HTTPS protocols.

@@ -7,7 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
@@ -17,6 +16,8 @@ import org.rsna.ctp.stdstages.anonymizer.AnonymizerStatus;
 import org.rsna.ctp.stdstages.anonymizer.dicom.DICOMCorrector;
 import org.rsna.util.FileUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * The DicomCorrector pipeline stage class.

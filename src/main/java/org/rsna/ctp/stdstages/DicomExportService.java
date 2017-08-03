@@ -7,17 +7,15 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.*;
-import java.util.LinkedList;
 import org.apache.log4j.Logger;
+import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.pipeline.AbstractExportService;
 import org.rsna.ctp.pipeline.Status;
 import org.rsna.ctp.stdstages.dicom.DicomStorageSCU;
-import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.pipeline.Status;
 import org.rsna.util.StringUtil;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * An ExportService that exports files via the DICOM protocol.

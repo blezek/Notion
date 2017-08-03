@@ -7,30 +7,25 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
-import jdbm.RecordManager;
-import jdbm.htree.HTree;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.StorageService;
 import org.rsna.ctp.stdstages.storage.ImageQualifiers;
-import org.rsna.util.FileUtil;
 import org.rsna.util.JdbmUtil;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
+import jdbm.RecordManager;
+import jdbm.htree.HTree;
 
 /**
  * A class to store objects in a file system.

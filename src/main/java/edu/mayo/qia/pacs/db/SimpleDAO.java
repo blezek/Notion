@@ -1,12 +1,12 @@
 package edu.mayo.qia.pacs.db;
 
-import io.dropwizard.hibernate.AbstractDAO;
-
-import java.util.List;
+import com.google.common.base.Optional;
 
 import org.hibernate.SessionFactory;
 
-import com.google.common.base.Optional;
+import java.util.List;
+
+import io.dropwizard.hibernate.AbstractDAO;
 
 public class SimpleDAO<T> extends AbstractDAO<T> {
 

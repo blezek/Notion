@@ -1,6 +1,10 @@
 package org.secnod.shiro.jersey;
 
-import java.lang.annotation.Annotation;
+import com.sun.jersey.api.container.MappableContainerException;
+import com.sun.jersey.spi.container.ContainerRequest;
+import com.sun.jersey.spi.container.ContainerRequestFilter;
+import com.sun.jersey.spi.container.ContainerResponseFilter;
+import com.sun.jersey.spi.container.ResourceFilter;
 
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -15,11 +19,7 @@ import org.apache.shiro.authz.aop.PermissionAnnotationHandler;
 import org.apache.shiro.authz.aop.RoleAnnotationHandler;
 import org.apache.shiro.authz.aop.UserAnnotationHandler;
 
-import com.sun.jersey.api.container.MappableContainerException;
-import com.sun.jersey.spi.container.ContainerRequest;
-import com.sun.jersey.spi.container.ContainerRequestFilter;
-import com.sun.jersey.spi.container.ContainerResponseFilter;
-import com.sun.jersey.spi.container.ResourceFilter;
+import java.lang.annotation.Annotation;
 
 /**
  * A filter that grants or denies access to a JAX-RS resource based on the Shiro annotations on it.

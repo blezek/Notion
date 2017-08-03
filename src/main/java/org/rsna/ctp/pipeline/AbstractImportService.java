@@ -7,16 +7,12 @@
 
 package org.rsna.ctp.pipeline;
 
+import org.apache.log4j.Logger;
+import org.rsna.ctp.objects.FileObject;
+import org.w3c.dom.Element;
+
 import java.io.File;
 import java.util.LinkedList;
-import org.apache.log4j.Logger;
-import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
-import org.rsna.util.FileUtil;
-import org.rsna.util.StringUtil;
-import org.w3c.dom.Element;
 
 /**
  * An abstract class implementing the ImportService interface.

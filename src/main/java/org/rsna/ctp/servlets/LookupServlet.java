@@ -7,6 +7,19 @@
 
 package org.rsna.ctp.servlets;
 
+import org.apache.log4j.Logger;
+import org.rsna.ctp.Configuration;
+import org.rsna.ctp.pipeline.Pipeline;
+import org.rsna.ctp.pipeline.PipelineStage;
+import org.rsna.ctp.stdstages.DicomAnonymizer;
+import org.rsna.ctp.stdstages.ScriptableDicom;
+import org.rsna.ctp.stdstages.anonymizer.dicom.DAScript;
+import org.rsna.multipart.UploadedFile;
+import org.rsna.server.HttpRequest;
+import org.rsna.server.HttpResponse;
+import org.rsna.servlets.Servlet;
+import org.rsna.util.FileUtil;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,25 +30,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Set;
-import org.apache.log4j.Logger;
-import org.rsna.ctp.Configuration;
-import org.rsna.ctp.pipeline.Pipeline;
-import org.rsna.ctp.pipeline.PipelineStage;
-import org.rsna.ctp.stdstages.anonymizer.dicom.DAScript;
-import org.rsna.ctp.stdstages.DicomAnonymizer;
-import org.rsna.ctp.stdstages.ScriptableDicom;
-import org.rsna.ctp.stdstages.XmlAnonymizer;
-import org.rsna.multipart.UploadedFile;
-import org.rsna.server.HttpRequest;
-import org.rsna.server.HttpResponse;
-import org.rsna.server.User;
-import org.rsna.servlets.Servlet;
-import org.rsna.util.FileUtil;
-import org.rsna.util.HtmlUtil;
-import org.rsna.util.StringUtil;
 
 /**
  * The Lookup Table Editor servlet.

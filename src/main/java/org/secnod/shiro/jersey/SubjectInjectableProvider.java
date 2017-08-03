@@ -1,9 +1,9 @@
 package org.secnod.shiro.jersey;
 
+import com.sun.jersey.spi.inject.Injectable;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
-
-import com.sun.jersey.spi.inject.Injectable;
 
 public class SubjectInjectableProvider extends AuthInjectableProvider<Subject> {
 

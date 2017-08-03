@@ -7,15 +7,16 @@
 
 package org.rsna.servlets;
 
-import java.io.File;
 import org.apache.log4j.Logger;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
 import org.rsna.server.Path;
 import org.rsna.util.XmlUtil;
-import org.w3c.dom.Document;
 import org.w3c.dom.CDATASection;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * The Web Start Application Server servlet.

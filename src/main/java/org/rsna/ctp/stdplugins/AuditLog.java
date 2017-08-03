@@ -7,22 +7,20 @@
 
 package org.rsna.ctp.stdplugins;
 
-import java.util.LinkedList;
-import java.io.File;
-import jdbm.btree.BTree;
-import jdbm.htree.HTree;
-import jdbm.helper.FastIterator;
-import jdbm.helper.Tuple;
-import jdbm.helper.TupleBrowser;
-import jdbm.RecordManager;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.plugin.AbstractPlugin;
+import org.rsna.ctp.servlets.AuditLogServlet;
 import org.rsna.server.ServletSelector;
 import org.rsna.util.JdbmUtil;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
-import org.rsna.ctp.servlets.AuditLogServlet;
+
+import java.io.File;
+import java.util.LinkedList;
+
+import jdbm.RecordManager;
+import jdbm.htree.HTree;
 
 /**
  * A Plugin to implement an audit log repository that can be

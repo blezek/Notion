@@ -7,9 +7,6 @@
 
 package org.rsna.ctp.objects;
 
-import java.io.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import org.rsna.util.DigestUtil;
 import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
@@ -17,6 +14,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.io.File;
 
 /**
  * A generic XML object for clinical trials metadata, providing

@@ -7,10 +7,12 @@
 
 package org.rsna.ctp.stdstages.archive;
 
-import java.io.*;
-import java.util.Stack;
 import org.apache.log4j.Logger;
 import org.rsna.util.SerializerUtil;
+
+import java.io.File;
+import java.io.Serializable;
+import java.util.Stack;
 
 /**
  * A FileSource that walks a directory tree. It checkpoints its progress,

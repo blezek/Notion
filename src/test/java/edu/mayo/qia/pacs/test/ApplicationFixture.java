@@ -1,5 +1,10 @@
 package edu.mayo.qia.pacs.test;
 
+import com.google.common.collect.ImmutableMap;
+
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
+
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.cli.ServerCommand;
@@ -8,11 +13,6 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.dropwizard.testing.junit.ConfigOverride;
 import net.sourceforge.argparse4j.inf.Namespace;
-
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
-
-import com.google.common.collect.ImmutableMap;
 
 /**
  * A JUnit rule for starting and stopping your application at the start and end

@@ -7,8 +7,6 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
-import java.util.LinkedList;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.plugin.Plugin;
@@ -20,7 +18,9 @@ import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+
+import java.io.File;
+import java.util.LinkedList;
 
 /**
  * A Servlet which provides web access to the indexed data stored by an AudirLog plugin.

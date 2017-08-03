@@ -7,9 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
@@ -22,6 +19,9 @@ import org.rsna.ctp.stdstages.anonymizer.dicom.DAScript;
 import org.rsna.ctp.stdstages.anonymizer.dicom.DICOMAnonymizer;
 import org.rsna.util.FileUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
+import java.util.Properties;
 
 /**
  * The DicomAnonymizer pipeline stage class.

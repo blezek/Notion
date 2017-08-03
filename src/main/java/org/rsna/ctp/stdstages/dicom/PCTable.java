@@ -7,12 +7,12 @@
 
 package org.rsna.ctp.stdstages.dicom;
 
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.StringTokenizer;
 import org.apache.log4j.Logger;
 import org.dcm4che.dict.UIDs;
+
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.StringTokenizer;
 
 public class PCTable extends Hashtable<String,LinkedList<String>> {
 
