@@ -1,5 +1,11 @@
 
 
+// Init the Clipboard module
+$( document ).ready(function() {
+  new Clipboard('.clipboard');
+})
+
+
 
 // Connect the AJAX error function
 $( document ).ajaxError(function( event, jqxhr, settings, thrownError ) {

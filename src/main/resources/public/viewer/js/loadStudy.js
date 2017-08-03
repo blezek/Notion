@@ -1,10 +1,6 @@
 
 // Load JSON study information for each study
-function loadStudy(studyViewer, viewportModel, studyId) {
-
-    // Get the JSON data for the selected studyId
-    $.getJSON('/rest/pool/' + poolKey + '/viewer/study/' + studyId + "/series", function(data) {
-
+function loadStudy(studyViewer, viewportModel, data) {
         var imageViewer = new ImageViewer(studyViewer, viewportModel);
         imageViewer.setLayout('1x1'); // default layout
 
@@ -83,8 +79,9 @@ function loadStudy(studyViewer, viewportModel, studyId) {
                     if (image.imageId.substr(0, 4) !== 'http') {
                         imageId = "dicomweb://cornerstonetech.org/images/ClearCanvas/" + image.imageId;
                     }
-                  imageId = "dicomweb:/rest/pool/" + poolKey + "/viewer/" + image.imageId;
-                    stack.imageIds.push(imageId);
+                  /* imageId = "dicomweb:/rest/pool/" + poolKey + "/viewer/" + image.imageId;*/
+                  imageId = image.uri;
+                  stack.imageIds.push(imageId);
                 });
             }
             // Move to next series
@@ -210,6 +207,4 @@ function loadStudy(studyViewer, viewportModel, studyId) {
         resizeStudyViewer();
         if (imageViewer.isSingle())
             useItemStack(0, 0);
-
-    });
 }
