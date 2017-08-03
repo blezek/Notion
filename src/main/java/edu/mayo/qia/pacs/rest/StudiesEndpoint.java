@@ -1,25 +1,5 @@
 package edu.mayo.qia.pacs.rest;
 
-import io.dropwizard.hibernate.UnitOfWork;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -37,11 +17,18 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sun.jersey.spi.resource.PerRequest;
+
 import org.apache.log4j.Logger;
 import org.apache.shiro.subject.Subject;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.joda.time.DateTime;
 import org.secnod.shiro.jaxrs.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -49,11 +36,25 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.sun.jersey.spi.resource.PerRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import edu.mayo.qia.pacs.Audit;
 import edu.mayo.qia.pacs.components.Instance;
@@ -61,6 +62,7 @@ import edu.mayo.qia.pacs.components.Pool;
 import edu.mayo.qia.pacs.components.PoolManager;
 import edu.mayo.qia.pacs.components.Series;
 import edu.mayo.qia.pacs.components.Study;
+import io.dropwizard.hibernate.UnitOfWork;
 
 @Scope("prototype")
 @Component
@@ -153,6 +155,25 @@ public class StudiesEndpoint {
       }
     });
 
+    return Response.ok(json).build();
+  }
+
+  @GET
+  @Path("/{id: [1-9][0-9]*}/hash")
+  @UnitOfWork
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getHash(final @Auth Subject subject, @PathParam("id") final int id) throws Exception {
+    // Create a hash value that expires in 30 days
+
+    String hash = UUID.randomUUID().toString();
+    DateTime dt = new DateTime().plusDays(30);
+    template.update("insert into VIEWERHASH ( StudyKey, PoolKey, Hash, Expires ) values ( ?, ?, ?, ? )", id, poolKey, hash, new Timestamp(dt.getMillis()));
+
+    ObjectNode json = new ObjectMapper().createObjectNode();
+    json.put("Result", "OK");
+    json.put("Hash", hash);
+    json.put("Expires", dt.toString());
     return Response.ok(json).build();
   }
 
