@@ -1,16 +1,16 @@
 package org.rsna.util;
 
-import java.net.URLConnection;
-import java.net.URL;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.io.File;
-import java.io.InputStream;
-import java.util.Random;
-import java.io.OutputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Client HTTP Request class to send HTTP POST requests with cookies, parameters, and files.
@@ -163,7 +163,7 @@ public class ClientHttpRequest {
     write('"');
     newline();
     write("Content-Type: ");
-    String type = connection.guessContentTypeFromName(filename);
+    String type = URLConnection.guessContentTypeFromName(filename);
     if (type == null) type = "application/octet-stream";
     writeln(type);
     newline();

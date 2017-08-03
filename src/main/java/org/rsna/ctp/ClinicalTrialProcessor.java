@@ -7,37 +7,41 @@
 
 package org.rsna.ctp;
 
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.StringWriter;
-import java.io.InputStreamReader;
-import java.util.Iterator;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import javax.net.ssl.HttpsURLConnection;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.rsna.ctp.pipeline.Pipeline;
-import org.rsna.ctp.plugin.Plugin;
-import org.rsna.ctp.servlets.*;
+import org.rsna.ctp.servlets.ConfigurationServlet;
+import org.rsna.ctp.servlets.DBVerifierServlet;
+import org.rsna.ctp.servlets.DecipherServlet;
+import org.rsna.ctp.servlets.DicomAnonymizerServlet;
+import org.rsna.ctp.servlets.IDMapServlet;
+import org.rsna.ctp.servlets.LookupServlet;
+import org.rsna.ctp.servlets.ObjectTrackerServlet;
+import org.rsna.ctp.servlets.QuarantineServlet;
+import org.rsna.ctp.servlets.ScriptServlet;
+import org.rsna.ctp.servlets.ServerServlet;
+import org.rsna.ctp.servlets.ShutdownServlet;
+import org.rsna.ctp.servlets.StatusServlet;
+import org.rsna.ctp.servlets.SummaryServlet;
 import org.rsna.server.Authenticator;
 import org.rsna.server.HttpServer;
 import org.rsna.server.ServletSelector;
 import org.rsna.server.Users;
-import org.rsna.servlets.*;
-import org.rsna.util.AcceptAllHostnameVerifier;
+import org.rsna.servlets.ApplicationServer;
+import org.rsna.servlets.EnvironmentServlet;
+import org.rsna.servlets.LogServlet;
+import org.rsna.servlets.LoggerLevelServlet;
+import org.rsna.servlets.LoginServlet;
+import org.rsna.servlets.SysPropsServlet;
+import org.rsna.servlets.UserManagerServlet;
+import org.rsna.servlets.UserServlet;
 import org.rsna.util.Cache;
 import org.rsna.util.ClasspathUtil;
 import org.rsna.util.FileUtil;
 import org.rsna.util.HttpUtil;
-import org.rsna.util.JarClassLoader;
-import org.rsna.util.ProxyServer;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import java.io.File;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * The ClinicalTrialProcessor program.

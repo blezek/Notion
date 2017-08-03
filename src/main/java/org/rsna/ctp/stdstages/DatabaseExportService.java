@@ -7,12 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import javax.net.ServerSocketFactory;
-import javax.net.ssl.SSLServerSocketFactory;
-import java.util.*;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
@@ -24,17 +18,21 @@ import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.pipeline.QueueManager;
 import org.rsna.ctp.pipeline.Status;
 import org.rsna.ctp.pipeline.StorageService;
-import org.rsna.server.HttpRequest;
-import org.rsna.server.HttpResponse;
-import org.rsna.servlets.Servlet;
-import org.rsna.server.User;
-import org.rsna.service.HttpService;
-import org.rsna.service.Service;
 import org.rsna.ctp.stdstages.database.DatabaseAdapter;
 import org.rsna.ctp.stdstages.database.UIDResult;
 import org.rsna.ctp.stdstages.storage.StoredObject;
+import org.rsna.server.HttpRequest;
+import org.rsna.server.HttpResponse;
+import org.rsna.service.HttpService;
+import org.rsna.service.Service;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * The Thread that exports DicomObjects to a database.
@@ -88,7 +86,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 	/**
 	 * Stop the pipeline stage.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		if (verifierService != null) verifierService.stopServer();
 		stop = true;
 	}
@@ -96,7 +95,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 	/**
 	 * Start the Exporter threads.
 	 */
-	public void start() {
+	@Override
+  public void start() {
 		exporters = new Exporter[poolSize];
 		for (int i=0; i<poolSize; i++) {
 			DatabaseAdapter dba = null;
@@ -129,7 +129,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 	 * stop is set in the AbstractPipelineStage ancestor class.
 	 * @return true if the pipeline has cleanly shut down; false otherwise.
 	 */
-	public boolean isDown() {
+	@Override
+  public boolean isDown() {
 		for (int i=0; i<exporters.length; i++) {
 			if (!exporters[i].getState().equals(Thread.State.TERMINATED)) return false;
 		}
@@ -150,7 +151,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 			dba.setID(id);
 		}
 
-		public void run() {
+		@Override
+    public void run() {
 			logger.info(name+": Exporter["+id+"]: Started");
 			File file = null;
 
@@ -261,7 +263,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 	 * this class is the parent.
 	 * @return HTML text displaying the active status of the stage.
 	 */
-	public synchronized String getStatusHTML(String childUniqueStatus) {
+	@Override
+  public synchronized String getStatusHTML(String childUniqueStatus) {
 		String stageUniqueStatus = "";
 		if (lastElapsedTime >= 0) {
 			long et = lastElapsedTime / 1000000;
@@ -296,7 +299,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 			this.requireAuthentication = requireAuthentication;
 		}
 
-		public void process(HttpRequest req, HttpResponse res) {
+		@Override
+    public void process(HttpRequest req, HttpResponse res) {
 			if (!requireAuthentication || req.userHasRole("import")) {
 				String result = verify(req);
 				if (result != null) {

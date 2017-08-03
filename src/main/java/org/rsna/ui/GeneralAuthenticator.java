@@ -7,12 +7,23 @@
 
 package org.rsna.ui;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.net.*;
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 
 /**
  * An Authenticator that provides a JDialog
@@ -41,7 +52,8 @@ public class GeneralAuthenticator extends Authenticator implements ActionListene
 	 * Get the PasswordAuthentication for this challenge;
 	 * overrides the method in the Authenticator class.
 	 */
-	protected PasswordAuthentication getPasswordAuthentication() {
+	@Override
+  protected PasswordAuthentication getPasswordAuthentication() {
 		dialog = new JDialog (parent, "Username and Password Required", true);
 
 		// Make the UI Components.
@@ -101,7 +113,8 @@ public class GeneralAuthenticator extends Authenticator implements ActionListene
 	/**
 	 * The ActionListener implementation for the buttons.
 	 */
-	public void actionPerformed (ActionEvent e) {
+	@Override
+  public void actionPerformed (ActionEvent e) {
 		Object object = e.getSource();
 		if (object == okButton) {
 			dialog.dispose();

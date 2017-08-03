@@ -7,12 +7,13 @@
 
 package org.rsna.servlets;
 
-import java.io.*;
+import org.rsna.server.HttpRequest;
+import org.rsna.server.HttpResponse;
 import org.rsna.util.FileUtil;
 import org.rsna.util.HtmlUtil;
 import org.rsna.util.StringUtil;
-import org.rsna.server.HttpRequest;
-import org.rsna.server.HttpResponse;
+
+import java.io.File;
 
 /**
  * The LogServlet.
@@ -42,12 +43,13 @@ public class LogServlet extends Servlet {
 	 * @param req The HttpServletRequest provided by the servlet container.
 	 * @param res The HttpServletResponse provided by the servlet container.
 	 */
-	public void doGet( HttpRequest req, HttpResponse res ) {
+	@Override
+  public void doGet( HttpRequest req, HttpResponse res ) {
 		res.disableCaching();
 
 		//Require that the user have the admin role
 		if (!req.userHasRole("admin")) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}

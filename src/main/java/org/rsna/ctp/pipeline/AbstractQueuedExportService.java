@@ -7,16 +7,17 @@
 
 package org.rsna.ctp.pipeline;
 
-import java.io.File;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.objects.FileObject;
 import org.rsna.ctp.objects.DicomObject;
+import org.rsna.ctp.objects.FileObject;
 import org.rsna.ctp.objects.XmlObject;
 import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.stdstages.Scriptable;
 import org.rsna.util.FileUtil;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * An abstract class implementing the ExportService interface.
@@ -68,7 +69,8 @@ public abstract class AbstractQueuedExportService
 	 * Get the script files.
 	 * @return the script files used by this stage.
 	 */
-	public synchronized File[] getScriptFiles() {
+	@Override
+  public synchronized File[] getScriptFiles() {
 		return new File[] { dicomScriptFile, xmlScriptFile, zipScriptFile };
 	}
 
@@ -96,7 +98,8 @@ public abstract class AbstractQueuedExportService
 	 * This method enqueues the object and returns immediately.
 	 * @param fileObject the object to be exported.
 	 */
-	public synchronized void export(FileObject fileObject) {
+	@Override
+  public synchronized void export(FileObject fileObject) {
 		lastFileIn = fileObject.getFile();
 		lastTimeIn = System.currentTimeMillis();
 		if (fileObject instanceof DicomObject) {
@@ -136,7 +139,8 @@ public abstract class AbstractQueuedExportService
 	 * Get the size of the export queue.
 	 * return the size of the export queue, or 0 if no QueueManager exists.
 	 */
-	public synchronized int getQueueSize() {
+	@Override
+  public synchronized int getQueueSize() {
 		if (queueManager != null) return queueManager.size();
 		return 0;
 	}
@@ -189,7 +193,8 @@ public abstract class AbstractQueuedExportService
 	 * this class is the parent.
 	 * @return HTML text displaying the active status of the stage.
 	 */
-	public synchronized String getStatusHTML(String childUniqueStatus) {
+	@Override
+  public synchronized String getStatusHTML(String childUniqueStatus) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<tr><td width=\"20%\">Queue size:</td>");
 		sb.append("<td>" + ((queueManager!=null) ? queueManager.size() : "???") + "</td></tr>");

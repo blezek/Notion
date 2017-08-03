@@ -7,17 +7,24 @@
 
 package org.rsna.ctp.objects;
 
-import java.io.*;
-import java.nio.charset.Charset;
-import java.util.*;
-import java.util.zip.*;
 import org.apache.log4j.Logger;
 import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * A generic Zip object for collections of clinical trials data, providing
@@ -89,7 +96,8 @@ public class ZipObject extends FileObject {
 	 * Get the standard extension for a ZipObject (".zip").
 	 * @return ".zip"
 	 */
-	public String getStandardExtension() {
+	@Override
+  public String getStandardExtension() {
 		return ".zip";
 	}
 
@@ -97,7 +105,8 @@ public class ZipObject extends FileObject {
 	 * Get a prefix for a ZipObject ("ZIP-").
 	 * @return a prefix for a ZipObject.
 	 */
-	public String getTypePrefix() {
+	@Override
+  public String getTypePrefix() {
 		return "ZIP-";
 	}
 
@@ -137,7 +146,8 @@ public class ZipObject extends FileObject {
 	 * "manifest.xml" in the zip file.
 	 * @return the UID or the empty string if the uid cannot be obtained.
 	 */
-	public String getUID() {
+	@Override
+  public String getUID() {
 		if (manifestXML == null) return "";
 		return manifestXML.getDocumentElement().getAttribute("uid").replaceAll("\\s","");
 	}
@@ -150,7 +160,8 @@ public class ZipObject extends FileObject {
 	 * @return the value of the description element in the manifest,
 	 * or the file name if the element cannot be obtained.
 	 */
-	public String getDescription() {
+	@Override
+  public String getDescription() {
 		if (manifestXML == null) return file.getName();
 		Element root = manifestXML.getDocumentElement();
 		String rootName = root.getTagName();
@@ -165,7 +176,8 @@ public class ZipObject extends FileObject {
 	 * "manifest.xml" in the zip file.
 	 * @return the study's unique identifier, if available; otherwise the empty string.
 	 */
-	public String getStudyUID() {
+	@Override
+  public String getStudyUID() {
 		if (manifestXML == null) return "";
 		return manifestXML.getDocumentElement().getAttribute("study-uid");
 	}
@@ -176,7 +188,8 @@ public class ZipObject extends FileObject {
 	 * "manifest.xml" in the zip file.
 	 * @return the patient name, if available; otherwise the empty string.
 	 */
-	public String getPatientName() {
+	@Override
+  public String getPatientName() {
 		if (manifestXML == null) return "";
 		return manifestXML.getDocumentElement().getAttribute("pt-name");
 	}
@@ -187,7 +200,8 @@ public class ZipObject extends FileObject {
 	 * "manifest.xml" in the zip file.
 	 * @return the patient ID, if available; otherwise the empty string.
 	 */
-	public String getPatientID() {
+	@Override
+  public String getPatientID() {
 		if (manifestXML == null) return "";
 		return manifestXML.getDocumentElement().getAttribute("pt-id");
 	}
@@ -209,7 +223,8 @@ public class ZipObject extends FileObject {
 	 * "manifest.xml" in the zip file.
 	 * @return the manifest type identifier, if available; otherwise the empty string.
 	 */
-	public String getType() {
+	@Override
+  public String getType() {
 		if (manifestXML == null) return "";
 		return manifestXML.getDocumentElement().getAttribute("type");
 	}
@@ -220,7 +235,8 @@ public class ZipObject extends FileObject {
 	 * "manifest.xml" in the zip file.
 	 * @return the manifest date, if available; otherwise the empty string.
 	 */
-	public String getStudyDate() {
+	@Override
+  public String getStudyDate() {
 		if (manifestXML == null) return "";
 		return manifestXML.getDocumentElement().getAttribute("date").replaceAll("\\D","");
 	}

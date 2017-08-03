@@ -7,7 +7,6 @@
 
 package org.rsna.util;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**

@@ -7,11 +7,12 @@
 
 package org.rsna.ctp.pipeline;
 
+import org.apache.log4j.Logger;
+import org.rsna.util.FileUtil;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Arrays;
-import org.apache.log4j.Logger;
-import org.rsna.util.FileUtil;
 
 /**
  * A class to manage a queue directory and multiple subdirectories to
@@ -395,7 +396,8 @@ public class QueueManager {
 			this.dirs = dirs;
 			this.files = files;
 		}
-		public boolean accept(File file) {
+		@Override
+    public boolean accept(File file) {
 			if ((files && file.isFile()) || (dirs && file.isDirectory())) {
 				return (file.getName().replaceAll("[\\d\\.]","").length() == 0);
 			}

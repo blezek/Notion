@@ -7,10 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.XmlObject;
 import org.rsna.ctp.pipeline.AbstractExportService;
@@ -21,6 +17,12 @@ import org.rsna.util.HttpUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.io.File;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * An ExportService that exports XmlObjects to an AIM Data Service.
@@ -79,7 +81,8 @@ public class AimExportService extends AbstractExportService {
 	 * @param fileToExport the file to export.
 	 * @return the status of the attempt to export the file.
 	 */
-	public Status export(File fileToExport) {
+	@Override
+  public Status export(File fileToExport) {
 		HttpURLConnection conn;
 		OutputStream svros;
 		OutputStreamWriter writer;

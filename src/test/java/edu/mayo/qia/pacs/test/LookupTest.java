@@ -3,18 +3,18 @@ package edu.mayo.qia.pacs.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.net.URI;
-import java.util.UUID;
-
 import javax.ws.rs.core.UriBuilder;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.representation.Form;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.representation.Form;
+import java.net.URI;
+import java.util.UUID;
 
 import edu.mayo.qia.pacs.components.Pool;
 

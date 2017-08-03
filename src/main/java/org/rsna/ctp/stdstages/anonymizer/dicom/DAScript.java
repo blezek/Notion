@@ -7,6 +7,13 @@
 
 package org.rsna.ctp.stdstages.anonymizer.dicom;
 
+import org.apache.log4j.Logger;
+import org.rsna.util.FileUtil;
+import org.rsna.util.XmlUtil;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -15,12 +22,6 @@ import java.util.Hashtable;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.apache.log4j.Logger;
-import org.rsna.util.FileUtil;
-import org.rsna.util.XmlUtil;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 /**
  * A DICOM Anonymizer script.

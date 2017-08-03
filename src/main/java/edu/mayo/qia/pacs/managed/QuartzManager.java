@@ -1,8 +1,8 @@
 package edu.mayo.qia.pacs.managed;
 
-import io.dropwizard.lifecycle.Managed;
-
 import org.quartz.Scheduler;
+
+import io.dropwizard.lifecycle.Managed;
 
 public class QuartzManager implements Managed {
 

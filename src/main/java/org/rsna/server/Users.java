@@ -7,9 +7,10 @@
 
 package org.rsna.server;
 
-import java.lang.reflect.Constructor;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
+
+import java.lang.reflect.Constructor;
 
 /**
  * A singleton class for managing users.

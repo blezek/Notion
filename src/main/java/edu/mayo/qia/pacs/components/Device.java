@@ -69,6 +69,7 @@ public final class Device {
     this.isAutoforward = update.isAutoforward;
   }
 
+  @Override
   public String toString() {
     StringBuilder b = new StringBuilder();
     b.append(applicationEntityTitle).append("@").append(hostName).append(":").append(port);

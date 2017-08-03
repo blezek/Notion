@@ -7,9 +7,17 @@
 
 package org.rsna.ui;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.BorderFactory;
+import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 
 /**
  * A JTextPane that supports text color and includes thread-safe methods.
@@ -39,7 +47,8 @@ public class ColorPane extends JTextPane {
 	/**
 	 * Set the font and update the line height.
 	 */
-	public void setFont(Font font) {
+	@Override
+  public void setFont(Font font) {
 		FontMetrics fm = getFontMetrics(font);
 		lineHeight = fm.getHeight();
 		super.setFont(font);
@@ -56,7 +65,8 @@ public class ColorPane extends JTextPane {
 	 * Get the flag that indicates whether the pane is to track the width
 	 * of its container.
 	 */
-	public boolean getScrollableTracksViewportWidth() {
+	@Override
+  public boolean getScrollableTracksViewportWidth() {
 		return trackWidth;
 	}
 
@@ -78,7 +88,8 @@ public class ColorPane extends JTextPane {
 		else {
 			final JTextPane jtp = this;
 			Runnable r = new Runnable() {
-				public void run() {
+				@Override
+        public void run() {
 					jtp.setText("");
 				}
 			};
@@ -89,7 +100,8 @@ public class ColorPane extends JTextPane {
 	/**
 	 * Set text with the current color. This method is thread safe.
 	 */
-	public void setText(String s) {
+	@Override
+  public void setText(String s) {
 		clear();
 		print(s);
 	}
@@ -112,7 +124,8 @@ public class ColorPane extends JTextPane {
 		else {
 			final String ss = s;
 			Runnable r = new Runnable() {
-				public void run() {
+				@Override
+        public void run() {
 					append(ss);
 				}
 			};
@@ -131,7 +144,8 @@ public class ColorPane extends JTextPane {
 			final Color cc = c;
 			final String ss = s;
 			Runnable r = new Runnable() {
-				public void run() {
+				@Override
+        public void run() {
 					append(cc, ss);
 				}
 			};

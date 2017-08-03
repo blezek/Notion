@@ -7,10 +7,12 @@
 
 package org.rsna.server;
 
-import java.io.*;
-import java.net.Socket;
 import org.apache.log4j.Logger;
 import org.rsna.servlets.Servlet;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.Socket;
 
 /**
  * The thread that handles an individual HTTP connection.
@@ -36,7 +38,8 @@ public class HttpHandler extends Thread {
 	 * Handle the connection in a separate Thread, getting the streams,
 	 * selecting a Servlet to handle the request, and returning the response.
 	 */
-	public void run() {
+	@Override
+  public void run() {
 		HttpResponse res = null;
 		HttpRequest req = null;
 		try {
@@ -57,7 +60,7 @@ public class HttpHandler extends Thread {
 				servlet.doPost(req,res);
 			}
 			else {
-				res.setResponseCode(res.notimplemented);
+				res.setResponseCode(HttpResponse.notimplemented);
 				res.send();
 				logger.debug("Unimplemented request ("+req.method+") received from "+req.getRemoteAddress());
 			}
@@ -69,7 +72,7 @@ public class HttpHandler extends Thread {
 					StringWriter sw = new StringWriter();
 					ex.printStackTrace(new PrintWriter(sw));
 					res = new HttpResponse(socket);
-					res.setResponseCode(res.ok); //so the browser will display the page
+					res.setResponseCode(HttpResponse.ok); //so the browser will display the page
 					res.write("<html>");
 					res.write("<head><title>ERROR</title></head>");
 					res.write("<body><h1>Internal Server Error (HTTP 500)</h1><pre>"+sw.toString()+"</pre></body>");

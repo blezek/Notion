@@ -3,23 +3,23 @@ package edu.mayo.qia.pacs.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map.Entry;
-import java.util.UUID;
-
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sun.jersey.api.client.ClientResponse;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 import edu.mayo.qia.pacs.components.Device;
 import edu.mayo.qia.pacs.components.Pool;
@@ -73,6 +73,53 @@ public class ViewerTest extends PACSTest {
       assertEquals("comparing " + key, json.get(key).textValue(), study.get(key).textValue());
     }
 
+    // Check length of series list
+    ArrayNode seriesList = json.withArray("seriesList");
+    assertEquals("have series", 2, seriesList.size());
+
+  }
+
+  @Test
+  public void anonymous() throws Exception {
+    UUID uid = UUID.randomUUID();
+    String aet = uid.toString().substring(0, 10);
+    Pool pool = new Pool(aet, aet, aet, false);
+    pool = createPool(pool);
+    Device device = new Device(".*", ".*", 1234, pool);
+    device = createDevice(device);
+
+    sendDICOM(aet, aet, "TOF/*001.dcm");
+    assertEquals("DB", new Integer(1), template.queryForObject("select count(*) from STUDY where PoolKey = " + pool.poolKey, Integer.class));
+    Integer studyKey = template.queryForObject("select StudyKey from STUDY where PoolKey = " + pool.poolKey, Integer.class);
+
+    ClientResponse response = null;
+    URI uri = UriBuilder.fromUri(baseUri).path("/pool/" + pool.poolKey + "/studies/" + studyKey + "/hash").build();
+    ObjectNode json = new ObjectMapper().createObjectNode();
+    response = client.resource(uri).type(MediaType.APPLICATION_JSON).accept(JSON).get(ClientResponse.class);
+    assertEquals("Got result", 200, response.getStatus());
+    json = response.getEntity(ObjectNode.class);
+
+    // did we create a hash?
+    assertTrue("created hash", json.has("Hash"));
+    String hash = json.get("Hash").asText();
+
+    // Get the series
+    uri = UriBuilder.fromUri(baseUri).path("/viewer/" + hash + "/series/").build();
+    json = new ObjectMapper().createObjectNode();
+    response = client.resource(uri).type(MediaType.APPLICATION_JSON).accept(JSON).get(ClientResponse.class);
+    assertEquals("Got result", 200, response.getStatus());
+    json = response.getEntity(ObjectNode.class);
+
+    HashMap<String, String> lookup = new HashMap<String, String>();
+    lookup.put("patientName", "MRA-0068");
+    lookup.put("patientId", "MRA-0068");
+    lookup.put("studyDate", "2008-06-18 00:00:00.0");
+    lookup.put("modality", "unknown");
+    lookup.put("studyDescription", "MRA/v Hd wo");
+
+    for (Entry<String, String> entry : lookup.entrySet()) {
+      assertEquals("looking for " + entry.getKey() + " = " + entry.getValue(), entry.getValue(), json.get(entry.getKey()).textValue());
+    }
     // Check length of series list
     ArrayNode seriesList = json.withArray("seriesList");
     assertEquals("have series", 2, seriesList.size());

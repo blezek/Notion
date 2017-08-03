@@ -4,7 +4,7 @@
 
 package org.rsna.multipart; //repackage to RSNA util
 
-import java.io.*;
+import java.io.File;
 
 /**
  * An interface to provide a pluggable file renaming policy, particularly

@@ -7,8 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.util.LinkedList;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
@@ -18,10 +16,12 @@ import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.pipeline.Processor;
 import org.rsna.ctp.plugin.Plugin;
 import org.rsna.ctp.stdplugins.AuditLog;
-import org.rsna.util.StringUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.io.File;
+import java.util.LinkedList;
 
 /**
  * A Processor stage that logs the differences between two DicomObjects,
@@ -68,7 +68,8 @@ public class DicomAuditLogger extends AbstractPipelineStage implements Processor
 	 * has been instantiated. (Note: The Configuration constructor has
 	 * not finished when the stages are constructed.)
 	 */
-	public void start() {
+	@Override
+  public void start() {
 		Configuration config = Configuration.getInstance();
 		if (!objectCacheID.equals("")) {
 			PipelineStage stage = config.getRegisteredStage(objectCacheID);
@@ -93,7 +94,8 @@ public class DicomAuditLogger extends AbstractPipelineStage implements Processor
 	 * @param fileObject the object to log.
 	 * @return the same FileObject.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
 

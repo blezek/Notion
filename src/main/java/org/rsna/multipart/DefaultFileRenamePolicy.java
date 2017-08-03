@@ -4,7 +4,8 @@
 
 package org.rsna.multipart; //repackage to RSNA util
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Implements a renaming policy that adds increasing integers to the body of
@@ -24,6 +25,7 @@ public class DefaultFileRenamePolicy implements FileRenamePolicy {
 
   // This method does not need to be synchronized because createNewFile()
   // is atomic and used here to mark when a file name is chosen
+  @Override
   public File rename(File f) {
     if (createNewFile(f)) {
       return f;

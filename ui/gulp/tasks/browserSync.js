@@ -9,5 +9,10 @@ gulp.task('browserSync', ['build'], function() {
     // Make all browsers independant!
     ghostMode: false
   };
-  browserSync ( config);
+  /* browserSync ( );*/
+  browserSync.init ( {
+    files: ['public/**', 'public/js/*.js'],
+    serveStatic: ['public'],
+    proxy: "localhost:8080",
+  });
 });

@@ -7,28 +7,28 @@
 
 package org.rsna.util;
 
-import java.io.*;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.Stack;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-//import org.apache.log4j.Logger;
-import org.w3c.dom.Attr;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+
+import java.io.File;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.Stack;
 
 /**
  * Encapsulates static methods for working with XML objects.
@@ -762,7 +762,8 @@ public class XmlUtil {
 			int x = ops.indexOf(c);
 			return (x > 0);
 		}
-		public boolean isOperator() {
+		@Override
+    public boolean isOperator() {
 			return (p != -1);
 		}
 		public boolean isSentinel() {

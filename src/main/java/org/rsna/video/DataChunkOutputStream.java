@@ -10,7 +10,10 @@
  */
 package org.rsna.video;
 
-import java.io.*;
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * This output stream filter supports common data types used inside
@@ -146,8 +149,8 @@ public class DataChunkOutputStream extends FilterOutputStream {
      * @throws java.io.IOException
      */
     public void writeShort(int v) throws IOException {
-        out.write((int) ((v >>> 0) & 0xff));
-        out.write((int) ((v >> 8) & 0xff));
+        out.write((v >>> 0) & 0xff);
+        out.write((v >> 8) & 0xff);
         incCount(2);
     }
 
@@ -164,8 +167,8 @@ public class DataChunkOutputStream extends FilterOutputStream {
     }
 
     public void writeUShort(int v) throws IOException {
-        out.write((int) ((v >>> 0) & 0xff));
-        out.write((int) ((v >> 8) & 0xff));
+        out.write((v >>> 0) & 0xff);
+        out.write((v >> 8) & 0xff);
         incCount(2);
     }
 

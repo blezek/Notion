@@ -7,21 +7,16 @@
 
 package org.rsna.ctp.stdstages.anonymizer.xml;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.StringReader;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.stdstages.anonymizer.AnonymizerStatus;
 import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
+
+import java.io.File;
+import java.util.Hashtable;
 
 /**
  * The MIRC XML anonymizer. This anonymizer provides de-identification and
@@ -78,7 +73,7 @@ public class XMLAnonymizer {
 			XmlCommand cmd = null;
 			String value = null;
 			while ((cmd=ch.getNextCommand()) != null) {
-				if (cmd.type == cmd.ASSIGN) {
+				if (cmd.type == XmlCommand.ASSIGN) {
 					value = (new XmlScript(xmlDocument,store,cmd.right)).getValue("");
 					//Trap print commands
 					if (cmd.left.equals("$print"))
@@ -86,7 +81,7 @@ public class XMLAnonymizer {
 					else
 						store.put(cmd.left,value);
 				}
-				else if (cmd.type == cmd.PATH) {
+				else if (cmd.type == XmlCommand.PATH) {
 					processPath(
 						xmlDocument,
 						cmd.left,

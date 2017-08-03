@@ -8,10 +8,8 @@
 package org.rsna.util;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Enumeration;
 import java.util.LinkedList;
 
 /**
@@ -66,7 +64,8 @@ public class JarClassLoader extends URLClassLoader {
 		super(urls, parent);
 	}
 
-	protected synchronized Class loadClass(String classname, boolean resolve)
+	@Override
+  protected synchronized Class loadClass(String classname, boolean resolve)
 			throws ClassNotFoundException {
 
 		Class theClass = findLoadedClass(classname);

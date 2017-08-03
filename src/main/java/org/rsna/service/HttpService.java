@@ -7,16 +7,15 @@
 
 package org.rsna.service;
 
-import java.net.ServerSocket;
-import java.net.Socket;
 import javax.net.ServerSocketFactory;
 import javax.net.ssl.SSLServerSocketFactory;
+
 import org.apache.log4j.Logger;
-import org.rsna.server.Authenticator;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
-import org.rsna.server.User;
-import org.rsna.server.Users;
+
+import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * A Thread that implements a single HTTP Service.
@@ -47,7 +46,8 @@ public class HttpService extends Thread {
 	}
 
 	// Start the HttpService and accept connections.
-	public void run() {
+	@Override
+  public void run() {
 		logger.info("HttpService open on port "+port + ((name!=null)?" ("+name+")":"") );
 		while (!this.isInterrupted()) {
 			try {
@@ -81,7 +81,8 @@ public class HttpService extends Thread {
 			this.socket = socket;
 		}
 
-		public void run() {
+		@Override
+    public void run() {
 			HttpResponse res = null;
 			HttpRequest req = null;
 			try {

@@ -7,11 +7,7 @@
 
 package org.rsna.server;
 
-import java.util.Properties;
 import org.apache.log4j.Logger;
-import org.rsna.util.LdapUtil;
-import org.rsna.util.StringUtil;
-import org.rsna.util.XmlUtil;
 import org.w3c.dom.Element;
 
 /**
@@ -34,7 +30,8 @@ public class UsersTestLdapFileImpl extends UsersLdapFileImpl {
 	 * Accept any user whose username exists in the users.xml file,
 	 * regardless of the password.
 	 */
-	public User authenticate(String username, String password) {
+	@Override
+  public User authenticate(String username, String password) {
 		return getUser(username);
 	}
 

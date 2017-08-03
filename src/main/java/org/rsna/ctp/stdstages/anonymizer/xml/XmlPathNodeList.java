@@ -7,9 +7,10 @@
 
 package org.rsna.ctp.stdstages.anonymizer.xml;
 
-import java.util.LinkedList;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.util.LinkedList;
 
 /**
  * A class to assist in walking down an XML path, with support for wildcards.
@@ -31,7 +32,8 @@ class XmlPathNodeList extends LinkedList<Node> implements NodeList {
 	 * Get the size of the NodeList.
 	 * @return the size of the NodeList.
 	 */
-	public int getLength() {
+	@Override
+  public int getLength() {
 		return this.size();
 	}
 
@@ -39,9 +41,10 @@ class XmlPathNodeList extends LinkedList<Node> implements NodeList {
 	 * Get a node from the list.
 	 * @return the next node in the NodeList.
 	 */
-	public Node item(int index) {
+	@Override
+  public Node item(int index) {
 		if (index >= this.size()) return null;
-		return (Node)this.get(index);
+		return this.get(index);
 	}
 }
 

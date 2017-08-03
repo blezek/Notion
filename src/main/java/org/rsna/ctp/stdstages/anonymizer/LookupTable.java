@@ -7,12 +7,13 @@
 
 package org.rsna.ctp.stdstages.anonymizer;
 
+import org.apache.log4j.Logger;
+import org.rsna.util.FileUtil;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Hashtable;
 import java.util.Properties;
-import org.apache.log4j.Logger;
-import org.rsna.util.FileUtil;
 
 /**
  * An anonymizer lookup table.

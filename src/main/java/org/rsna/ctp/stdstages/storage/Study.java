@@ -7,10 +7,6 @@
 
 package org.rsna.ctp.stdstages.storage;
 
-import java.io.File;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
@@ -19,6 +15,10 @@ import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A class to manage the FileObjects in a single study.
@@ -125,7 +125,8 @@ public class Study implements Comparable {
 	 * @return the order of this Study compared to the supplied Study, in reverse
 	 * date order.
 	 */
-	public int compareTo(Object otherObject) {
+	@Override
+  public int compareTo(Object otherObject) {
 		if (otherObject instanceof Study) {
 			Study otherStudy = (Study)otherObject;
 			String otherDate = otherStudy.getStudyDate();

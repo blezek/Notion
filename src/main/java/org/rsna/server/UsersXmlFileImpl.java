@@ -7,21 +7,18 @@
 
 package org.rsna.server;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.rsna.util.DigestUtil;
 import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Hashtable;
 
 /**
  * A class to extend the org.rsna.server.Users abstract class
@@ -101,7 +98,8 @@ public class UsersXmlFileImpl extends Users {
 	 * Get all the usernames in an alphabetized array.
 	 * @return the array of usernames or a zero-length array if unable.
 	 */
-	public synchronized String[] getUsernames() {
+	@Override
+  public synchronized String[] getUsernames() {
 		if (users == null) return new String[0];
 		String[] usernames = new String[users.size()];
 		usernames = users.keySet().toArray(usernames);
@@ -114,7 +112,8 @@ public class UsersXmlFileImpl extends Users {
 	 * @param password the password in plaintext
 	 * @return the converted password.
 	 */
-	public String convertPassword(String password) {
+	@Override
+  public String convertPassword(String password) {
 		return DigestUtil.hash(password);
 	}
 
@@ -122,7 +121,8 @@ public class UsersXmlFileImpl extends Users {
 	 * Add a role name.
 	 * @param role the role name.
 	 */
-	public synchronized void addRole(String role) {
+	@Override
+  public synchronized void addRole(String role) {
 		roles.add(role);
 	}
 
@@ -167,7 +167,8 @@ public class UsersXmlFileImpl extends Users {
 	 * @param username the username
 	 * @return the user or null if unable.
 	 */
-	public synchronized User getUser(String username) {
+	@Override
+  public synchronized User getUser(String username) {
 		return users.get(username);
 	}
 
@@ -189,7 +190,8 @@ public class UsersXmlFileImpl extends Users {
 	 * @param password the password in plaintext.
 	 * @return true if the credentials match a user; false otherwise.
 	 */
-	public User authenticate(String username, String password) {
+	@Override
+  public User authenticate(String username, String password) {
 		User user = getUser(username);
 		if (user != null) {
 			String pw = convertPassword(password);

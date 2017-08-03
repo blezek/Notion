@@ -7,15 +7,14 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
-import java.util.*;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
 import org.rsna.server.User;
 import org.rsna.servlets.Servlet;
-import org.rsna.util.IPUtil;
+
+import java.io.File;
 
 /**
  * The ShutdownServlet.
@@ -39,7 +38,8 @@ public class ShutdownServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		res.disableCaching();
 		res.setContentType("html");
 
@@ -75,7 +75,8 @@ public class ShutdownServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doPost(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doPost(HttpRequest req, HttpResponse res) {
 		doGet(req, res);
 	}
 

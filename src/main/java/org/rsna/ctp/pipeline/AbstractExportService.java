@@ -7,20 +7,18 @@
 
 package org.rsna.ctp.pipeline;
 
-import java.io.File;
-import java.util.LinkedList;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.stdplugins.AuditLog;
-import org.rsna.util.FileUtil;
 import org.rsna.util.StringUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.io.File;
+import java.util.LinkedList;
 
 /**
  * An abstract class implementing the ExportService interface.
@@ -86,7 +84,8 @@ public abstract class AbstractExportService extends AbstractQueuedExportService 
 	 * Start the export thread. This method is called by the subclass
 	 * that does the actual exporting after it has had time to set up.
 	 */
-	public void start() {
+	@Override
+  public void start() {
 
 		//Get the AuditLog plugin, if there is one.
 		auditLog = (AuditLog)Configuration.getInstance().getRegisteredPlugin(auditLogID);
@@ -97,7 +96,8 @@ public abstract class AbstractExportService extends AbstractQueuedExportService 
 	/**
 	 * Determine whether the pipeline stage has shut down.
 	 */
-	public synchronized boolean isDown() {
+	@Override
+  public synchronized boolean isDown() {
 		if (enableExport
 				&& (exporter != null)
 						&& !exporter.getState().equals(Thread.State.TERMINATED))
@@ -140,7 +140,8 @@ public abstract class AbstractExportService extends AbstractQueuedExportService 
 		public Exporter() {
 			super(name + " Exporter");
 		}
-		public void run() {
+		@Override
+    public void run() {
 			logger.info(name+": Exporter Thread: Started");
 			File file = null;
 			while (!stop && !interrupted()) {
@@ -265,7 +266,8 @@ public abstract class AbstractExportService extends AbstractQueuedExportService 
 	 * this class is the parent.
 	 * @return HTML text displaying the active status of the stage.
 	 */
-	public synchronized String getStatusHTML(String childUniqueStatus) {
+	@Override
+  public synchronized String getStatusHTML(String childUniqueStatus) {
 		String stageUniqueStatus = "";
 		if (lastElapsedTime >= 0) {
 			long et = lastElapsedTime / 1000000;

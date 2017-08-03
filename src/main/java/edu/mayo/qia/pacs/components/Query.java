@@ -1,18 +1,5 @@
 package edu.mayo.qia.pacs.components;
 
-import java.io.InputStream;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,6 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.codahale.metrics.Counter;
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Timer;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -44,13 +39,18 @@ import org.dcm4che2.net.DimseRSP;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 
-import com.codahale.metrics.Counter;
-import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.Timer;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.JsonNode;
+import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 import edu.mayo.qia.pacs.Notion;
 import edu.mayo.qia.pacs.ctp.Anonymizer;
@@ -209,6 +209,7 @@ public class Query {
     }
     ExecutorService executor = Notion.context.getBean("executor", ExecutorService.class);
     queryFuture = executor.submit(new Callable<String>() {
+      @Override
       public String call() {
         Thread.currentThread().setName("Query " + device);
         queryCounter.inc();
@@ -328,6 +329,7 @@ public class Query {
     template.update("update QUERY set Status = ? where QueryKey = ?", "fetch pending", queryKey);
 
     fetchFuture = Notion.context.getBean("executor", ExecutorService.class).submit(new Callable<String>() {
+      @Override
       public String call() {
         final JdbcTemplate template = Notion.context.getBean(JdbcTemplate.class);
         Timer.Context context = fetchTimer.time();

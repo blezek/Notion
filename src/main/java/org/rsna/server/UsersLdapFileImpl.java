@@ -7,12 +7,13 @@
 
 package org.rsna.server;
 
-import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.rsna.util.LdapUtil;
 import org.rsna.util.StringUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Element;
+
+import java.util.Properties;
 
 /**
  * A class to extend the org.rsna.server.UsersXmlFileImpl class
@@ -62,7 +63,8 @@ public class UsersLdapFileImpl extends UsersXmlFileImpl {
 	 * <b>and</b> the user's credentials must be accepted by the LDAP server.
 	 * @return true if the credentials match a user; false otherwise.
 	 */
-	public User authenticate(String username, String password) {
+	@Override
+  public User authenticate(String username, String password) {
 
 		User user = getUser(username);
 		if (user != null) {

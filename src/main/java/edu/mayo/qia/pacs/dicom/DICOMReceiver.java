@@ -1,16 +1,8 @@
 package edu.mayo.qia.pacs.dicom;
 
-import io.dropwizard.lifecycle.Managed;
-
-import java.io.File;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executor;
-import java.util.regex.Pattern;
+import com.codahale.metrics.Counter;
+import com.codahale.metrics.Gauge;
+import com.codahale.metrics.MetricRegistry;
 
 import org.dcm4che2.data.UID;
 import org.dcm4che2.net.Association;
@@ -30,9 +22,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Component;
 
-import com.codahale.metrics.Counter;
-import com.codahale.metrics.Gauge;
-import com.codahale.metrics.MetricRegistry;
+import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executor;
+import java.util.regex.Pattern;
 
 import edu.mayo.qia.pacs.Audit;
 import edu.mayo.qia.pacs.Notion;
@@ -40,6 +38,7 @@ import edu.mayo.qia.pacs.NotionConfiguration;
 import edu.mayo.qia.pacs.components.PoolContainer;
 import edu.mayo.qia.pacs.components.PoolManager;
 import edu.mayo.qia.pacs.components.ProcessCache;
+import io.dropwizard.lifecycle.Managed;
 
 /**
  * Provides a stand-alone DICOM receiver rather than the heavyweight

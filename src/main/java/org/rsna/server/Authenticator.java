@@ -7,11 +7,10 @@
 
 package org.rsna.server;
 
-import java.util.Arrays;
-import java.util.Hashtable;
 import org.apache.log4j.Logger;
 import org.rsna.util.Base64;
-import org.rsna.util.FileUtil;
+
+import java.util.Hashtable;
 
 /**
  * The standard authenticator singleton class for the server.

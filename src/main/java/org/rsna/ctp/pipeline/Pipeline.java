@@ -7,16 +7,16 @@
 
 package org.rsna.ctp.pipeline;
 
+import org.apache.log4j.Logger;
+import org.rsna.ctp.objects.FileObject;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.log4j.Logger;
-import org.rsna.ctp.Configuration;
-import org.rsna.ctp.objects.FileObject;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 /**
  * The class that represents a single pipeline.
@@ -127,7 +127,8 @@ public class Pipeline extends Thread {
 	/**
 	 * Run the thread.
 	 */
-	public void run() {
+	@Override
+  public void run() {
 		//Only run if there are stages in the pipeline.
 		if (stages.size() > 0) {
 			//Start the stages

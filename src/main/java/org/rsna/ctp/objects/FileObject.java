@@ -7,11 +7,12 @@
 
 package org.rsna.ctp.objects;
 
-import java.io.*;
 import org.apache.log4j.Logger;
 import org.rsna.util.DigestUtil;
 import org.rsna.util.FileUtil;
 import org.rsna.util.StringUtil;
+
+import java.io.File;
 
 /**
  * A generic file object providing methods for moving, renaming, and copying a file.

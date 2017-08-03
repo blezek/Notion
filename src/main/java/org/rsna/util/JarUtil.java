@@ -10,7 +10,9 @@ package org.rsna.util;
 import java.io.File;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.jar.*;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 
 /**
  * A class encapsulating methods to access a JAR file.

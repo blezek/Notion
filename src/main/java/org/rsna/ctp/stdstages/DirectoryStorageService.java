@@ -7,10 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.util.LinkedList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
@@ -20,11 +16,14 @@ import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.pipeline.StorageService;
-import org.rsna.ctp.stdstages.ObjectCache;
 import org.rsna.util.FileUtil;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
 import java.io.FileFilter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A class to store objects in a directory system with no index.
@@ -96,7 +95,8 @@ public class DirectoryStorageService extends AbstractPipelineStage implements St
 	 * Get the script files.
 	 * @return the script files used by this stage.
 	 */
-	public File[] getScriptFiles() {
+	@Override
+  public File[] getScriptFiles() {
 		return new File[] { dicomScriptFile, xmlScriptFile, zipScriptFile };
 	}
 
@@ -112,7 +112,8 @@ public class DirectoryStorageService extends AbstractPipelineStage implements St
 	 * @return either the original FileObject or the stored FileObject, or null
 	 * if the object could not be stored.
 	 */
-	public FileObject store(FileObject fileObject) {
+	@Override
+  public FileObject store(FileObject fileObject) {
 
 		logger.debug("File received for storage: "+fileObject.getFile());
 
@@ -263,7 +264,8 @@ public class DirectoryStorageService extends AbstractPipelineStage implements St
 		public NameFilter(String name) {
 			this.name = name;
 		}
-		public boolean accept(File file) {
+		@Override
+    public boolean accept(File file) {
 			if (file.isFile()) {
 				String fn = file.getName();
 				return fn.startsWith(name);
@@ -326,7 +328,8 @@ public class DirectoryStorageService extends AbstractPipelineStage implements St
 	 * Get HTML text displaying the current status of the stage.
 	 * @return HTML text displaying the current status of the stage.
 	 */
-	public String getStatusHTML() {
+	@Override
+  public String getStatusHTML() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<h3>"+name+"</h3>");
 		sb.append("<table border=\"1\" width=\"100%\">");

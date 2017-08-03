@@ -70,12 +70,34 @@ notionApp.controller ( 'StudyController', function($scope,$http,$timeout,$stateP
     $scope.reload();
   };
 
-  $scope.deleteStudy = function(study) {
-    $scope.study = study;
-    $modal.open ({
-      templateUrl: 'partials/modal.html',
-      scope: $scope,
-      controller: function($scope, $modalInstance) {
+  // Generate a link to the study for the viewer
+  $scope.getLink = function (study) {
+    $http.get('/rest/pool/' + $scope.pool.get('poolKey') + '/studies/' + study.StudyKey + "/hash")
+         .success(function(data,status,headers) {
+           console.log ( data );
+           /* var url = /viewer/index.html?poolKey={{pool.get('poolKey')}}&studyKey={{study.StudyKey}}*/
+           $modal.open ({
+             templateUrl: 'partials/viewerLink.html',
+             scope: $scope,
+             controller: function($scope, $modalInstance) {
+               $scope.title = "Viewer link";
+               $scope.message = "This link is valid for 30 days and is used for anonymous viewing of this study."
+               var full = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+               $scope.url = full + "/viewer/index.html?hash=" + data.Hash;
+               $scope.hash = data.Hash;
+               $scope.ok = function() { $modalInstance.dismiss(); };
+             }
+           });
+         });
+  }
+
+    
+    $scope.deleteStudy = function(study) {
+      $scope.study = study;
+      $modal.open ({
+        templateUrl: 'partials/modal.html',
+        scope: $scope,
+        controller: function($scope, $modalInstance) {
         $scope.title = "Delete study?";
         $scope.message = "Delete study " + study.StudyDescription + " for " + study.PatientName + " / " + study.PatientID + " / " + study.AccessionNumber;
         $scope.ok = function(){

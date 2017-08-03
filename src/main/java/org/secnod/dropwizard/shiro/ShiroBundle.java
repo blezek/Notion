@@ -1,16 +1,10 @@
 package org.secnod.dropwizard.shiro;
 
-import io.dropwizard.ConfiguredBundle;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.List;
-
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
+
+import com.sun.jersey.api.core.ResourceConfig;
+import com.sun.jersey.spi.container.ResourceFilterFactory;
 
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.env.IniWebEnvironment;
@@ -20,8 +14,14 @@ import org.apache.shiro.web.servlet.AbstractShiroFilter;
 import org.secnod.shiro.jersey.ShiroResourceFilterFactory;
 import org.secnod.shiro.jersey.SubjectInjectableProvider;
 
-import com.sun.jersey.api.core.ResourceConfig;
-import com.sun.jersey.spi.container.ResourceFilterFactory;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.List;
+
+import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
 
 /**
  * A Dropwizard bundle for Apache Shiro.

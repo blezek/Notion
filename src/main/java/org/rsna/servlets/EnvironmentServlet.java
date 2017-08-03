@@ -7,12 +7,14 @@
 
 package org.rsna.servlets;
 
-import java.io.File;
-import java.util.*;
 import org.apache.log4j.Logger;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
 import org.rsna.util.HtmlUtil;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Map;
 
 /**
  * The EnvironmentServlet.
@@ -40,7 +42,8 @@ public class EnvironmentServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		res.disableCaching();
 		boolean admin = req.userHasRole("admin");
 		if (req.hasParameter("suppress")) home = "";

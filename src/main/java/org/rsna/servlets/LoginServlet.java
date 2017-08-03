@@ -7,8 +7,6 @@
 
 package org.rsna.servlets;
 
-import java.io.File;
-import java.util.*;
 import org.apache.log4j.Logger;
 import org.rsna.server.Authenticator;
 import org.rsna.server.HttpRequest;
@@ -17,6 +15,9 @@ import org.rsna.server.User;
 import org.rsna.server.Users;
 import org.rsna.util.FileUtil;
 import org.rsna.util.StringUtil;
+
+import java.io.File;
+import java.util.Properties;
 
 /**
  * The LoginServlet.
@@ -50,7 +51,8 @@ public class LoginServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		//Get the possible query parameters.
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
@@ -116,7 +118,8 @@ public class LoginServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doPost(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doPost(HttpRequest req, HttpResponse res) {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		login(req, res, username, password);

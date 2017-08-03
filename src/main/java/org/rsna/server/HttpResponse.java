@@ -7,17 +7,27 @@
 
 package org.rsna.server;
 
-import java.io.*;
-import java.net.Socket;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.*;
 import org.apache.log4j.Logger;
 import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * A simple HTTP text response in UTF-8.

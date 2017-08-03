@@ -7,7 +7,6 @@
 
 package org.rsna.util;
 
-import java.io.File;
 import org.w3c.dom.Element;
 
 /**

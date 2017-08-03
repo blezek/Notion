@@ -7,11 +7,12 @@
 
 package org.rsna.ctp.pipeline;
 
+import org.rsna.ctp.objects.FileObject;
+import org.rsna.util.FileUtil;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;
-import org.rsna.ctp.objects.FileObject;
-import org.rsna.util.FileUtil;
 
 /**
  * A class representing a quarantine directory and providing
@@ -159,7 +160,8 @@ public class Quarantine {
 		/**
 		 * Compare.
 		 */
-		public int compare(Object o1, Object o2) {
+		@Override
+    public int compare(Object o1, Object o2) {
 			if ( (o1 instanceof File) && (o2 instanceof File)) {
 				long d1 = ((File)o1).lastModified();
 				long d2 = ((File)o2).lastModified();

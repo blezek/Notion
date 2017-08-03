@@ -40,6 +40,7 @@
         <td/>
         <td/>
         <td/>
+        <td/>
       </tr>
     </thead>
     <tbody>
@@ -49,8 +50,9 @@
         <td>{{study.AccessionNumber}}</td>
         <td>{{study.StudyDescription}}</td>
         <td><i class="fa fa-times-circle" ng-click="deleteStudy(study)"></i></td>
-        <td><a ng-href="/viewer/index.html?poolKey={{pool.get('poolKey')}}&studyKey={{study.StudyKey}}" target="_blank"><i class="fa fa-eye"></i></a>
-        <td><a ng-href="/rest/pool/{{pool.get('poolKey')}}/studies/{{study.StudyKey}}/zip"><i class="fa fa-download"></i></a>
+        <td><a ng-href="/viewer/index.html?poolKey={{pool.get('poolKey')}}&studyKey={{study.StudyKey}}" target="_blank"><i class="fa fa-eye"></i></a></td>
+        <td><i class="fa fa-link" ng-click="getLink(study)"></i></td>
+        <td><a ng-href="/rest/pool/{{pool.get('poolKey')}}/studies/{{study.StudyKey}}/zip"><i class="fa fa-download"></i></a></td>
       </tr>
     </tbody>
   </table>

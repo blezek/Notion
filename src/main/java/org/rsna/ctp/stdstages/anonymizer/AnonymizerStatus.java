@@ -68,7 +68,8 @@ public class AnonymizerStatus {
 	 * Get the status as a string.
 	 * @return the status message.
 	 */
-	public String toString() {
+	@Override
+  public String toString() {
 		return "("+status+","+file+",\""+message+"\")";
 	}
 

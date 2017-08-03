@@ -7,6 +7,14 @@
 
 package org.rsna.ctp.stdstages;
 
+import org.apache.log4j.Logger;
+import org.rsna.ctp.objects.FileObject;
+import org.rsna.ctp.pipeline.AbstractPipelineStage;
+import org.rsna.ctp.pipeline.ImportService;
+import org.rsna.util.FileUtil;
+import org.rsna.util.StringUtil;
+import org.w3c.dom.Element;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,17 +22,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.URL;
-import org.apache.log4j.Logger;
-import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
-import org.rsna.ctp.pipeline.AbstractPipelineStage;
-import org.rsna.ctp.pipeline.ImportService;
-import org.rsna.ctp.pipeline.Quarantine;
-import org.rsna.util.FileUtil;
-import org.rsna.util.StringUtil;
-import org.w3c.dom.Element;
 
 /**
  * An ImportService that polls a PolledHttpExportService to obtain files on request.
@@ -67,7 +64,8 @@ public class PollingHttpImportService extends AbstractPipelineStage implements I
 	 * contract of the ImportService interface, we just return zero.
 	 * return zero.
 	 */
-	public synchronized int getQueueSize() {
+	@Override
+  public synchronized int getQueueSize() {
 		return 0;
 	}
 
@@ -75,7 +73,8 @@ public class PollingHttpImportService extends AbstractPipelineStage implements I
 	 * Get the next object available for processing.
 	 * @return the next object available, or null if no object is available.
 	 */
-	public synchronized FileObject getNextObject() {
+	@Override
+  public synchronized FileObject getNextObject() {
 		long time = System.currentTimeMillis();
 		if (success || ((time - lastPollTime) > interval)) {
 			lastPollTime = time;
@@ -113,7 +112,8 @@ public class PollingHttpImportService extends AbstractPipelineStage implements I
 	 * @param file the file to be released, which must be the original file
 	 * supplied by the ImportService.
 	 */
-	public void release(File file) {
+	@Override
+  public void release(File file) {
 		if ((file != null)
 				&& file.exists()
 					&& file.getParentFile().getAbsolutePath().equals(queuePath)) {
@@ -125,7 +125,8 @@ public class PollingHttpImportService extends AbstractPipelineStage implements I
 	 * Get HTML text displaying the current status of the stage.
 	 * @return HTML text displaying the current status of the stage.
 	 */
-	public String getStatusHTML() {
+	@Override
+  public String getStatusHTML() {
 		String stageUniqueStatus =
 			"<tr><td width=\"20%\">Queue size:</td>"
 			+ "<td>"+FileUtil.getFileCount(queue)+"</td></tr>";

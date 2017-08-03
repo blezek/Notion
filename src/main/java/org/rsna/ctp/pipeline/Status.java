@@ -24,7 +24,8 @@ public class Status {
 	 * Get the text string name of the status class.
 	 * @return a text string describing the status instance (OK, FAIL, RETRY).
 	 */
-	public String toString() { return status; }
+	@Override
+  public String toString() { return status; }
 
 	/**
 	 * Status value indicating that an operation completed successfully.

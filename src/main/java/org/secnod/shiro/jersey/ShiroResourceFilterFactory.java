@@ -1,10 +1,8 @@
 package org.secnod.shiro.jersey;
 
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import com.sun.jersey.api.model.AbstractMethod;
+import com.sun.jersey.spi.container.ResourceFilter;
+import com.sun.jersey.spi.container.ResourceFilterFactory;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
@@ -12,9 +10,11 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.authz.annotation.RequiresUser;
 
-import com.sun.jersey.api.model.AbstractMethod;
-import com.sun.jersey.spi.container.ResourceFilter;
-import com.sun.jersey.spi.container.ResourceFilterFactory;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ShiroResourceFilterFactory implements ResourceFilterFactory {
 

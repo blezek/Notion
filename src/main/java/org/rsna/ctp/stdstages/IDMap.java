@@ -7,13 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.net.HttpURLConnection;
-import java.util.List;
-import java.util.Properties;
-import jdbm.RecordManager;
-import jdbm.htree.HTree;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
@@ -22,22 +15,20 @@ import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.Pipeline;
 import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.pipeline.Processor;
-import org.rsna.ctp.stdstages.DicomAnonymizer;
-import org.rsna.ctp.stdstages.XmlAnonymizer;
-import org.rsna.ctp.stdstages.ZipAnonymizer;
 import org.rsna.ctp.stdstages.anonymizer.IntegerTable;
 import org.rsna.ctp.stdstages.anonymizer.LookupTable;
 import org.rsna.ctp.stdstages.anonymizer.dicom.DAScript;
 import org.rsna.ctp.stdstages.anonymizer.dicom.DICOMAnonymizer;
 import org.rsna.ctp.stdstages.anonymizer.dicom.DICOMAnonymizerContext;
-import org.rsna.util.FileUtil;
-import org.rsna.util.HttpUtil;
 import org.rsna.util.JdbmUtil;
-import org.rsna.util.StringUtil;
-import org.rsna.util.XmlUtil;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+
+import java.io.File;
+import java.util.List;
+import java.util.Properties;
+
+import jdbm.RecordManager;
+import jdbm.htree.HTree;
 
 
 /**
@@ -83,7 +74,8 @@ public class IDMap extends AbstractPipelineStage implements Processor {
 	/**
 	 * Stop the stage.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		//Commit and close the database
 		if (recman != null) {
 			try {
@@ -118,7 +110,8 @@ public class IDMap extends AbstractPipelineStage implements Processor {
 	 * @param fileObject the object to process.
 	 * @return the same FileObject if the result is true; otherwise null.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		String cmd;
 
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());

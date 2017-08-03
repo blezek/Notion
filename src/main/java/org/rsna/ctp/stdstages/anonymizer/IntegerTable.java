@@ -7,12 +7,13 @@
 
 package org.rsna.ctp.stdstages.anonymizer;
 
-import java.io.File;
-import java.util.Properties;
-import jdbm.RecordManager;
-import jdbm.htree.HTree;
 import org.apache.log4j.Logger;
 import org.rsna.util.JdbmUtil;
+
+import java.io.File;
+
+import jdbm.RecordManager;
+import jdbm.htree.HTree;
 
 /**
  * A database for tracking assigned integer replacements for text strings.

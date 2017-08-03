@@ -7,12 +7,12 @@
 
 package org.rsna.server;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.util.Hashtable;
 import org.apache.log4j.Logger;
 import org.rsna.servlets.LoginServlet;
 import org.rsna.servlets.Servlet;
+
+import java.io.File;
+import java.util.Hashtable;
 
 /**
  * A class to select a servlet to process a request..

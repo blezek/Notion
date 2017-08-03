@@ -1,12 +1,12 @@
 package org.secnod.shiro.jersey;
 
-import org.secnod.shiro.jaxrs.Auth;
-
 import com.sun.jersey.api.model.Parameter;
 import com.sun.jersey.core.spi.component.ComponentContext;
 import com.sun.jersey.core.spi.component.ComponentScope;
 import com.sun.jersey.spi.inject.Injectable;
 import com.sun.jersey.spi.inject.InjectableProvider;
+
+import org.secnod.shiro.jaxrs.Auth;
 
 public abstract class AuthInjectableProvider<T> implements InjectableProvider<Auth, Parameter> {
 

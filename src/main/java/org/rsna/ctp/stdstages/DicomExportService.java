@@ -7,17 +7,15 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.*;
-import java.util.LinkedList;
 import org.apache.log4j.Logger;
+import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.pipeline.AbstractExportService;
 import org.rsna.ctp.pipeline.Status;
 import org.rsna.ctp.stdstages.dicom.DicomStorageSCU;
-import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.pipeline.Status;
 import org.rsna.util.StringUtil;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * An ExportService that exports files via the DICOM protocol.
@@ -70,7 +68,8 @@ public class DicomExportService extends AbstractExportService {
 	 * @param fileToExport the file to export.
 	 * @return the status of the attempt to export the file.
 	 */
-	public Status export(File fileToExport) {
+	@Override
+  public Status export(File fileToExport) {
 		DicomObject dicomObject = null;
 
 		//Get a DicomObject for the file.
@@ -91,7 +90,8 @@ public class DicomExportService extends AbstractExportService {
 	/**
 	 * Stop the pipeline stage.
 	 */
-	public synchronized void shutdown() {
+	@Override
+  public synchronized void shutdown() {
 		if (dicomSender != null) dicomSender.interrupt();
 		super.shutdown();
 	}

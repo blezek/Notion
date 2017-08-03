@@ -7,7 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
@@ -15,8 +14,9 @@ import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.Processor;
 import org.rsna.ctp.stdstages.anonymizer.AnonymizerStatus;
 import org.rsna.ctp.stdstages.anonymizer.dicom.DICOMMammoPixelAnonymizer;
-import org.rsna.util.FileUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * The DicomMammoPixelAnonymizer pipeline stage class. This stage attempts to find
@@ -46,7 +46,8 @@ public class DicomMammoPixelAnonymizer extends AbstractPipelineStage implements 
 	 * @param fileObject the object to process.
 	 * @return the processed FileObject.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
 		if (fileObject instanceof DicomObject) {

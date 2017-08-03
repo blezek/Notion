@@ -7,20 +7,7 @@
 
 package org.rsna.ctp;
 
-import java.io.File;
-import java.lang.reflect.Constructor;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.jar.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.pipeline.ExportService;
-import org.rsna.ctp.pipeline.ImportService;
 import org.rsna.ctp.pipeline.Pipeline;
 import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.plugin.Plugin;
@@ -37,6 +24,12 @@ import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.File;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
 /**
  * The class that encapsulates the configuration of the system.

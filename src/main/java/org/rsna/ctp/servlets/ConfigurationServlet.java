@@ -7,8 +7,6 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
-import java.util.Iterator;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.pipeline.Pipeline;
@@ -17,6 +15,9 @@ import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
 import org.rsna.servlets.Servlet;
 import org.rsna.util.HtmlUtil;
+
+import java.io.File;
+import java.util.Iterator;
 
 /**
  * The ConfigurationServlet. This implementation simply returns the
@@ -41,12 +42,13 @@ public class ConfigurationServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		boolean admin = req.isFromLocalHost() || req.userHasRole("admin");
 
 		//Require that the user be an admin or be local
 		if (!admin) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}

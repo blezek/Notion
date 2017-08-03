@@ -7,17 +7,10 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.util.Calendar;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.List;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.StorageService;
 import org.rsna.ctp.servlets.DecipherServlet;
@@ -36,12 +29,15 @@ import org.rsna.server.User;
 import org.rsna.server.Users;
 import org.rsna.server.UsersXmlFileImpl;
 import org.rsna.servlets.LoginServlet;
-import org.rsna.servlets.Servlet;
 import org.rsna.servlets.UserServlet;
 import org.rsna.util.FileUtil;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A class to store objects in a file system.
@@ -121,7 +117,8 @@ public class FileStorageService extends AbstractPipelineStage implements Storage
 	 * Start the pipeline stage. This method is called by the
 	 * Pipeline after all the stages have been constructed.
 	 */
-	public synchronized void start() {
+	@Override
+  public synchronized void start() {
 		startServer();
 		startStorageMonitor();
 	}
@@ -129,7 +126,8 @@ public class FileStorageService extends AbstractPipelineStage implements Storage
 	/**
 	 * Stop the pipeline stage.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		if (httpServer != null) httpServer.shutdown();
 		stop = true;
 	}
@@ -202,7 +200,8 @@ public class FileStorageService extends AbstractPipelineStage implements Storage
 	 * @return either the original FileObject or the stored FileObject, or null
 	 * if the object could not be stored.
 	 */
-	public FileObject store(FileObject fileObject) {
+	@Override
+  public FileObject store(FileObject fileObject) {
 
 		//See if the StorageService is configured to accept the object type.
 		if (!acceptable(fileObject)) return fileObject;
@@ -260,7 +259,8 @@ public class FileStorageService extends AbstractPipelineStage implements Storage
 	 * Get HTML text displaying the current status of the stage.
 	 * @return HTML text displaying the current status of the stage.
 	 */
-	public String getStatusHTML() {
+	@Override
+  public String getStatusHTML() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<h3>"+name+"</h3>");
 		sb.append("<table border=\"1\" width=\"100%\">");

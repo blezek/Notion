@@ -7,11 +7,6 @@
 
 package org.rsna.ctp.stdstages.storage;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Hashtable;
-import java.util.List;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.FileObject;
 import org.rsna.server.User;
@@ -21,6 +16,12 @@ import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Hashtable;
+import java.util.List;
 
 /**
  * A class to encapsulate Study objects in a single FileSystem.

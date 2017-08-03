@@ -7,17 +7,10 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.StringReader;
-import java.util.List;
-import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.pipeline.Pipeline;
 import org.rsna.ctp.pipeline.PipelineStage;
-import org.rsna.ctp.stdstages.DicomAnonymizer;
 import org.rsna.ctp.stdstages.ScriptableDicom;
 import org.rsna.ctp.stdstages.anonymizer.dicom.DAScript;
 import org.rsna.server.HttpRequest;
@@ -25,8 +18,11 @@ import org.rsna.server.HttpResponse;
 import org.rsna.server.Path;
 import org.rsna.servlets.Servlet;
 import org.rsna.util.FileUtil;
-import org.rsna.util.HtmlUtil;
 import org.rsna.util.StringUtil;
+
+import java.io.File;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * The Anonymizer Configurator servlet.
@@ -58,13 +54,14 @@ public class DicomAnonymizerServlet extends Servlet {
 	 * @param req The HttpServletRequest provided by the servlet container.
 	 * @param res The HttpServletResponse provided by the servlet container.
 	 */
-	public void doGet(
+	@Override
+  public void doGet(
 			HttpRequest req,
 			HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin")) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -120,7 +117,7 @@ public class DicomAnonymizerServlet extends Servlet {
 			res.write(getScriptXML(file));
 		}
 
-		else res.setResponseCode(res.notfound);
+		else res.setResponseCode(HttpResponse.notfound);
 		res.send();
 	}
 
@@ -138,13 +135,14 @@ public class DicomAnonymizerServlet extends Servlet {
 	 * @param req The HttpRequest provided by the servlet container.
 	 * @param res The HttpResponse provided by the servlet container.
 	 */
-	public void doPost(
+	@Override
+  public void doPost(
 			HttpRequest req,
 			HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin") || !req.isReferredFrom(context)) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -199,7 +197,7 @@ public class DicomAnonymizerServlet extends Servlet {
 			}
 		}
 
-		else res.setResponseCode(res.notimplemented);
+		else res.setResponseCode(HttpResponse.notimplemented);
 		res.send();
 	}
 

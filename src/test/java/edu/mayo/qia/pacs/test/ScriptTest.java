@@ -1,9 +1,9 @@
 package edu.mayo.qia.pacs.test;
 
-import static org.junit.Assert.*;
-
-import java.net.URI;
-import java.util.UUID;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import javax.script.Bindings;
 import javax.script.ScriptEngine;
@@ -12,6 +12,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sun.jersey.api.client.ClientResponse;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mozilla.javascript.Context;
@@ -19,8 +22,8 @@ import org.mozilla.javascript.NativeObject;
 import org.mozilla.javascript.ScriptableObject;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.sun.jersey.api.client.ClientResponse;
+import java.net.URI;
+import java.util.UUID;
 
 import edu.mayo.qia.pacs.components.Pool;
 import edu.mayo.qia.pacs.components.Script;

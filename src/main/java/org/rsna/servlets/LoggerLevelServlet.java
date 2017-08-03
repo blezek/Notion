@@ -7,19 +7,16 @@
 
 package org.rsna.servlets;
 
-import java.io.File;
-import java.io.InputStream;
-import org.rsna.server.HttpRequest;
-import org.rsna.server.HttpResponse;
-
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.rsna.server.HttpRequest;
+import org.rsna.server.HttpResponse;
 import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
-
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+
+import java.io.File;
+import java.io.InputStream;
 
 /**
  * The Logger Level Servlet.
@@ -47,11 +44,12 @@ public class LoggerLevelServlet extends Servlet {
 	 * @param req the request object.
 	 * @param res the response object.
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) throws Exception {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) throws Exception {
 
 		//Require that the user have the admin role
 		if (!req.userHasRole("admin")) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}
@@ -78,11 +76,12 @@ public class LoggerLevelServlet extends Servlet {
 	 * @param req the request object.
 	 * @param res the response object.
 	 */
-	public void doPost(HttpRequest req, HttpResponse res) throws Exception {
+	@Override
+  public void doPost(HttpRequest req, HttpResponse res) throws Exception {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin") || !req.isReferredFrom(context)) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}

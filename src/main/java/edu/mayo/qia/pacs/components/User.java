@@ -1,9 +1,5 @@
 package edu.mayo.qia.pacs.components;
 
-import java.security.SecureRandom;
-import java.util.Random;
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.apache.shiro.util.ByteSource;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.security.SecureRandom;
+import java.util.Random;
+import java.util.UUID;
 
 @Entity
 @Table(name = "USERS")

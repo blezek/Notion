@@ -7,17 +7,7 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.net.HttpURLConnection;
-import java.util.HashSet;
-import java.util.Properties;
-import jdbm.RecordManager;
-import jdbm.helper.Tuple;
-import jdbm.helper.TupleBrowser;
-import jdbm.btree.BTree;
-import jdbm.htree.HTree;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.Configuration;
 import org.rsna.ctp.objects.FileObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.Processor;
@@ -31,6 +21,16 @@ import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.File;
+import java.net.HttpURLConnection;
+import java.util.HashSet;
+
+import jdbm.RecordManager;
+import jdbm.btree.BTree;
+import jdbm.helper.Tuple;
+import jdbm.helper.TupleBrowser;
+import jdbm.htree.HTree;
 
 
 /**
@@ -92,7 +92,8 @@ public class DatabaseVerifier extends AbstractPipelineStage implements Processor
 	/**
 	 * Stop the stage.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		//Commit and close the database
 		if (recman != null) {
 			try {
@@ -129,7 +130,8 @@ public class DatabaseVerifier extends AbstractPipelineStage implements Processor
 	 * @param fileObject the object to process.
 	 * @return the same FileObject if the result is true; otherwise null.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
@@ -219,7 +221,8 @@ public class DatabaseVerifier extends AbstractPipelineStage implements Processor
 
 		public Verifier() { super(); }
 
-		public void run() {
+		@Override
+    public void run() {
 			logger.info(name+" started");
 			String lastKey = "0";
 			Tuple tuple = new Tuple();

@@ -7,8 +7,9 @@
 
 package org.rsna.util;
 
-import java.util.Properties;
 import org.w3c.dom.Element;
+
+import java.util.Properties;
 
 /**
  * A singleton class encapsulating a proxy server.

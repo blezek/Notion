@@ -1,25 +1,19 @@
 package edu.mayo.qia.pacs;
 
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
+import static org.quartz.TriggerBuilder.newTrigger;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+
 import com.bazaarvoice.dropwizard.assets.ConfiguredAssetsBundle;
 import com.codahale.metrics.json.MetricsModule;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.sun.jersey.api.core.ResourceConfig;
 import com.sun.jersey.spi.container.ResourceFilterFactory;
-import edu.mayo.qia.pacs.components.*;
-import edu.mayo.qia.pacs.db.GroupDAO;
-import edu.mayo.qia.pacs.db.GroupRoleDAO;
-import edu.mayo.qia.pacs.db.UserDAO;
-import edu.mayo.qia.pacs.dicom.DICOMReceiver;
-import edu.mayo.qia.pacs.job.AutoForwarder;
-import edu.mayo.qia.pacs.managed.DBWebServer;
-import edu.mayo.qia.pacs.managed.QuartzManager;
-import edu.mayo.qia.pacs.rest.*;
-import io.dropwizard.Application;
-import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.hibernate.HibernateBundle;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.shiro.web.env.IniWebEnvironment;
 import org.apache.shiro.web.filter.authc.UserFilter;
@@ -41,15 +35,46 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.servlet.DispatcherType;
-import javax.servlet.Filter;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import static org.quartz.JobBuilder.newJob;
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
-import static org.quartz.TriggerBuilder.newTrigger;
+import edu.mayo.qia.pacs.components.AnonymizationMapProcessor;
+import edu.mayo.qia.pacs.components.Connector;
+import edu.mayo.qia.pacs.components.Device;
+import edu.mayo.qia.pacs.components.Group;
+import edu.mayo.qia.pacs.components.GroupRole;
+import edu.mayo.qia.pacs.components.Instance;
+import edu.mayo.qia.pacs.components.Item;
+import edu.mayo.qia.pacs.components.MoveRequest;
+import edu.mayo.qia.pacs.components.Pool;
+import edu.mayo.qia.pacs.components.PoolContainer;
+import edu.mayo.qia.pacs.components.PoolManager;
+import edu.mayo.qia.pacs.components.Query;
+import edu.mayo.qia.pacs.components.Result;
+import edu.mayo.qia.pacs.components.Script;
+import edu.mayo.qia.pacs.components.Series;
+import edu.mayo.qia.pacs.components.Study;
+import edu.mayo.qia.pacs.components.User;
+import edu.mayo.qia.pacs.db.GroupDAO;
+import edu.mayo.qia.pacs.db.GroupRoleDAO;
+import edu.mayo.qia.pacs.db.UserDAO;
+import edu.mayo.qia.pacs.dicom.DICOMReceiver;
+import edu.mayo.qia.pacs.job.AutoForwarder;
+import edu.mayo.qia.pacs.job.HashCleaner;
+import edu.mayo.qia.pacs.managed.DBWebServer;
+import edu.mayo.qia.pacs.managed.QuartzManager;
+import edu.mayo.qia.pacs.rest.AnonymousViewer;
+import edu.mayo.qia.pacs.rest.AuthorizationEndpoint;
+import edu.mayo.qia.pacs.rest.ConnectorEndpoint;
+import edu.mayo.qia.pacs.rest.MetricsEndpoint;
+import edu.mayo.qia.pacs.rest.PoolEndpoint;
+import edu.mayo.qia.pacs.rest.UserEndpoint;
+import io.dropwizard.Application;
+import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
 
 public class NotionApplication extends Application<NotionConfiguration> {
   static Logger logger = LoggerFactory.getLogger(NotionApplication.class);
@@ -183,6 +208,7 @@ public class NotionApplication extends Application<NotionConfiguration> {
     environment.jersey().register(context.getBean(PoolEndpoint.class));
     environment.jersey().register(context.getBean(ConnectorEndpoint.class));
     environment.jersey().register(context.getBean(UserEndpoint.class));
+    environment.jersey().register(context.getBean(AnonymousViewer.class));
     environment.jersey().register(context.getBean(AuthorizationEndpoint.class));
     environment.jersey().register(context.getBean(MetricsEndpoint.class));
 
@@ -202,7 +228,12 @@ public class NotionApplication extends Application<NotionConfiguration> {
     trigger = newTrigger().startNow().withSchedule(simpleSchedule().withIntervalInMinutes(1).repeatForever()).build();
     scheduler.scheduleJob(job, trigger);
 
-    logger.info("\n\n=====\nStarted Notion Test:\nImageDirectory: \n" + configuration.notion.imageDirectory + "\nDBWeb:\nhttp://localhost:" + configuration.dbWeb + "\n\nDICOMPort: " + configuration.notion.dicomPort + "\n=====\n\n");
+    job = newJob(HashCleaner.class).build();
+    trigger = newTrigger().startNow().withSchedule(simpleSchedule().withIntervalInHours(1).repeatForever()).build();
+    scheduler.scheduleJob(job, trigger);
+
+    logger.info("\n\n=====\nStarted Notion Test:\nImageDirectory: \n" + configuration.notion.imageDirectory + "\nDB URL: \n" + configuration.getDataSourceFactory().getUrl() + "\nDBWeb:\nhttp://localhost:" + configuration.dbWeb + "\n\nDICOMPort: "
+        + configuration.notion.dicomPort + "\n=====\n\n");
 
   }
 }

@@ -1,19 +1,5 @@
 package edu.mayo.qia.pacs.ctp;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.dcm4che.dict.Tags;
@@ -37,6 +23,20 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.lang.reflect.Field;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
 
 import edu.mayo.qia.pacs.Notion;
 import edu.mayo.qia.pacs.components.Pool;
@@ -88,7 +88,7 @@ public class Anonymizer {
       String tagName = fieldMap.get(element.tag());
       try {
         if (!element.hasItems()) {
-          tagObject.defineProperty(tagName, element.getString(cs, false), NativeObject.READONLY);
+          tagObject.defineProperty(tagName, element.getString(cs, false), ScriptableObject.READONLY);
         }
       } catch (UnsupportedOperationException e) {
         logger.warn("Could not process tag: " + tagName + " unable to convert to a string: " + e.getMessage());
@@ -215,10 +215,10 @@ public class Anonymizer {
   public static Map<String, String> unwrapResult(NativeObject no) {
     Map<String, String> map = new HashMap<String, String>();
 
-    for (Object id : NativeObject.getPropertyIds(no)) {
+    for (Object id : ScriptableObject.getPropertyIds(no)) {
       String key = id.toString();
 
-      Object o = NativeObject.getProperty(no, key);
+      Object o = ScriptableObject.getProperty(no, key);
       String value = o.toString();
       if (o instanceof NativeJavaObject) {
         value = ((NativeJavaObject) o).unwrap().toString();
@@ -280,7 +280,7 @@ public class Anonymizer {
         for (String tagName : map.keySet()) {
           String value = map.get(tagName);
           try {
-            dcm.putString(Tag.toTag(tagName), null, (String) value);
+            dcm.putString(Tag.toTag(tagName), null, value);
           } catch (Exception e) {
             logger.error("Could not put the value (" + result + ") back into the DICOM image for tag: " + tagName, e);
             throw new Exception("Could not put the value (" + result + ") back into the DICOM image for tag: " + tagName + " error: " + e.getMessage());

@@ -7,17 +7,14 @@
 
 package org.rsna.ctp.stdstages.database;
 
-import java.io.File;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.objects.FileObject;
-import org.rsna.ctp.objects.XmlObject;
-import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.Status;
+
+import java.io.File;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * An adapter for testing the DatabaseAdapter query mechanism.
@@ -46,7 +43,8 @@ public class TestDatabaseAdapter extends DatabaseAdapter {
 	 * FileStorageService, or null if the object has not been stored.
 	 * @param url The URL pointing to the stored object or null if no URL is available.
 	 */
-	public Status process(DicomObject dicomObject, File storedFile, String url) {
+	@Override
+  public Status process(DicomObject dicomObject, File storedFile, String url) {
 		objectCount++;
 		String uid = dicomObject.getUID();
 		String digest = dicomObject.getDigest();
@@ -69,7 +67,8 @@ public class TestDatabaseAdapter extends DatabaseAdapter {
 	 * values indicating whether the referenced object has been processed. If the
 	 * database does not support queries for object presence or absence, return null.
 	 */
-	public Map<String, UIDResult> uidQuery(Set<String> uidSet) {
+	@Override
+  public Map<String, UIDResult> uidQuery(Set<String> uidSet) {
 		Hashtable<String, UIDResult> map = new Hashtable<String, UIDResult>();
 		int count = 0;
 		int present = 0;

@@ -1,7 +1,5 @@
 package edu.mayo.qia.pacs.rest;
 
-import io.dropwizard.hibernate.UnitOfWork;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -19,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import edu.mayo.qia.pacs.components.User;
 import edu.mayo.qia.pacs.db.UserDAO;
-import edu.mayo.qia.pacs.rest.Endpoint;
+import io.dropwizard.hibernate.UnitOfWork;
 
 @Path("authorization")
 @Scope("singleton")

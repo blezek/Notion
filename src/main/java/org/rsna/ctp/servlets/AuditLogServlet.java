@@ -7,8 +7,6 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
-import java.util.LinkedList;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.plugin.Plugin;
@@ -20,7 +18,9 @@ import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+
+import java.io.File;
+import java.util.LinkedList;
 
 /**
  * A Servlet which provides web access to the indexed data stored by an AudirLog plugin.
@@ -50,11 +50,12 @@ public class AuditLogServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) throws Exception {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) throws Exception {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin")) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -83,7 +84,7 @@ public class AuditLogServlet extends Servlet {
 		else {
 			//Since the servlet was installed by the AuditLog, this should never happen.
 			//Protect against it anyway in case somebody does something funny with the ID.
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 		}
 
 		//Return the page
@@ -100,7 +101,8 @@ public class AuditLogServlet extends Servlet {
 	 * @param req The HttpRequest provided by the servlet container.
 	 * @param res The HttpResponse provided by the servlet container.
 	 */
-	public void doPost(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doPost(HttpRequest req, HttpResponse res) {
 
 		//Set up the response
 		res.setContentType("xml");

@@ -7,14 +7,14 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.Processor;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * A Processor stage that monitors heap space and provides garbage collection and logging.
@@ -51,7 +51,8 @@ public class MemoryMonitor extends AbstractPipelineStage implements Processor {
 	 * @param fileObject the object.
 	 * @return the same FileObject.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
 
@@ -77,7 +78,8 @@ public class MemoryMonitor extends AbstractPipelineStage implements Processor {
 	 * Get HTML text displaying the current status of the stage.
 	 * @return HTML text displaying the current status of the stage.
 	 */
-	public String getStatusHTML() {
+	@Override
+  public String getStatusHTML() {
 		String stageUniqueStatus =
 			"<tr><td width=\"20%\">Files processed:</td>"
 			+ "<td>" + count + "</td></tr>";

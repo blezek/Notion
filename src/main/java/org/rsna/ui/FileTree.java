@@ -7,9 +7,10 @@
 
 package org.rsna.ui;
 
-import java.io.File;
 import javax.swing.JTree;
 import javax.swing.tree.TreeSelectionModel;
+
+import java.io.File;
 
 /**
  * A JTree that displays a directory tree with filenames.
@@ -37,7 +38,8 @@ public class FileTree extends JTree {
 	 * @param hasFocus - true if the node has the focus
 	 * @return the String representation of the node's value
 	 */
-	public String convertValueToText(
+	@Override
+  public String convertValueToText(
 					Object value,
 					boolean selected,
 					boolean expanded,

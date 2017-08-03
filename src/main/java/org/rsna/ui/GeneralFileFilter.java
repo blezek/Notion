@@ -7,8 +7,10 @@
 
 package org.rsna.ui;
 
-import java.io.*;
-import java.util.regex.*;
+import java.io.File;
+import java.io.FileFilter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * An implementation of java.io.FileFilter that matches all directories
@@ -117,7 +119,8 @@ public class GeneralFileFilter implements FileFilter {
 	 * @param file the file to test for a match
 	 * @return whether the file matches the filter.
 	 */
-	public boolean accept(File file) {
+	@Override
+  public boolean accept(File file) {
 		if (maxCount == 0) return false;
 		String name = file.getName();
 		if (file.isDirectory()) {

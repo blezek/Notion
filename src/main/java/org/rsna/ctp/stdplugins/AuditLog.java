@@ -7,22 +7,20 @@
 
 package org.rsna.ctp.stdplugins;
 
-import java.util.LinkedList;
-import java.io.File;
-import jdbm.btree.BTree;
-import jdbm.htree.HTree;
-import jdbm.helper.FastIterator;
-import jdbm.helper.Tuple;
-import jdbm.helper.TupleBrowser;
-import jdbm.RecordManager;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
 import org.rsna.ctp.plugin.AbstractPlugin;
+import org.rsna.ctp.servlets.AuditLogServlet;
 import org.rsna.server.ServletSelector;
 import org.rsna.util.JdbmUtil;
 import org.rsna.util.StringUtil;
 import org.w3c.dom.Element;
-import org.rsna.ctp.servlets.AuditLogServlet;
+
+import java.io.File;
+import java.util.LinkedList;
+
+import jdbm.RecordManager;
+import jdbm.htree.HTree;
 
 /**
  * A Plugin to implement an audit log repository that can be
@@ -81,7 +79,8 @@ public class AuditLog extends AbstractPlugin {
 	/**
 	 * Start the plugin.
 	 */
-	public void start() {
+	@Override
+  public void start() {
 		//Install the servlet
 		Configuration config = Configuration.getInstance();
 		ServletSelector selector = config.getServer().getServletSelector();
@@ -92,7 +91,8 @@ public class AuditLog extends AbstractPlugin {
 	/**
 	 * Stop the plugin.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		if (recman != null) {
 			try { recman.commit(); recman.close(); recman = null; }
 			catch (Exception ignore) { }
@@ -105,7 +105,8 @@ public class AuditLog extends AbstractPlugin {
 	 * Get HTML text displaying the current status of the plugin.
 	 * @return HTML text displaying the current status of the plugin.
 	 */
-	public synchronized String getStatusHTML() {
+	@Override
+  public synchronized String getStatusHTML() {
 		int size;
 		try { size = ((Integer)count.get(lastIDName)).intValue(); }
 		catch (Exception mustBeZero) { size = 0; }

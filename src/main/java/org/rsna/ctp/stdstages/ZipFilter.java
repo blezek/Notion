@@ -7,14 +7,15 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.objects.FileObject;
+import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.AbstractPipelineStage;
 import org.rsna.ctp.pipeline.Processor;
 import org.rsna.util.FileUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * A script-based filter for ZipObjects.
@@ -41,7 +42,8 @@ public class ZipFilter extends AbstractPipelineStage implements Processor, Scrip
 	 * @param fileObject the object to process.
 	 * @return the same FileObject if the result is true; otherwise null.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
 
@@ -63,7 +65,8 @@ public class ZipFilter extends AbstractPipelineStage implements Processor, Scrip
 	 * Get the script file.
 	 * @return the script file used by this stage.
 	 */
-	public File[] getScriptFiles() {
+	@Override
+  public File[] getScriptFiles() {
 		return new File[] {scriptFile};
 	}
 }

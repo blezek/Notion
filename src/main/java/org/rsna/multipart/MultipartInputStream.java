@@ -8,8 +8,8 @@
 package org.rsna.multipart;
 
 import java.io.FilterInputStream;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * FilterInputStream that limits the bytes read to the content length
@@ -30,7 +30,8 @@ public class MultipartInputStream extends FilterInputStream  {
 	 * stream to turn off <code>mark</code> and <code>reset</code>.
 	 * @return <code>false</code>.
 	 */
-	public boolean markSupported() {
+	@Override
+  public boolean markSupported() {
 		return false;
 	}
 
@@ -41,7 +42,8 @@ public class MultipartInputStream extends FilterInputStream  {
 	 * stream is reached or the content is exhausted.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
-	public int read() throws IOException {
+	@Override
+  public int read() throws IOException {
 		if (bytesLeft > 0) {
 			int b = super.read();
 			bytesLeft--;
@@ -59,7 +61,8 @@ public class MultipartInputStream extends FilterInputStream  {
 	 * @param b the byte buffer into which the data is read.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
-	public int read(byte[] b) throws IOException {
+	@Override
+  public int read(byte[] b) throws IOException {
 		if (bytesLeft > 0) {
 			int n = Math.min( bytesLeft, b.length );
 			n = read( b, 0, n );
@@ -77,7 +80,8 @@ public class MultipartInputStream extends FilterInputStream  {
 	 * content is exhausted.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
-	public int read(byte[] b, int off, int len) throws IOException {
+	@Override
+  public int read(byte[] b, int off, int len) throws IOException {
 		if (bytesLeft > 0) {
 			int n = Math.min( bytesLeft, b.length - off );
 			n = Math.min( n, len );
@@ -96,9 +100,10 @@ public class MultipartInputStream extends FilterInputStream  {
 	 * is reached or the content is exhausted.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
-	public long skip(long n) throws IOException {
+	@Override
+  public long skip(long n) throws IOException {
 		if (bytesLeft > 0) {
-			n = Math.min( (long)bytesLeft, n );
+			n = Math.min( bytesLeft, n );
 			n = super.skip(n);
 			return n;
 		}

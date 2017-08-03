@@ -7,9 +7,6 @@
 
 package org.rsna.ctp.stdstages;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.FileObject;
 import org.rsna.ctp.objects.XmlObject;
@@ -19,6 +16,8 @@ import org.rsna.ctp.stdstages.anonymizer.AnonymizerStatus;
 import org.rsna.ctp.stdstages.anonymizer.xml.XMLAnonymizer;
 import org.rsna.util.FileUtil;
 import org.w3c.dom.Element;
+
+import java.io.File;
 
 /**
  * The XmlAnonymizer pipeline stage class.
@@ -46,7 +45,8 @@ public class XmlAnonymizer extends AbstractPipelineStage implements Processor, S
 	 * @param fileObject the object to process.
 	 * @return the processed FileObject.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
 
@@ -74,7 +74,8 @@ public class XmlAnonymizer extends AbstractPipelineStage implements Processor, S
 	 * Get the script file.
 	 * @return the script file used by this stage.
 	 */
-	public File[] getScriptFiles() {
+	@Override
+  public File[] getScriptFiles() {
 		return new File[] {scriptFile};
 	}
 }

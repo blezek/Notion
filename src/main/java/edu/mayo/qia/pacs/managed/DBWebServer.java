@@ -1,8 +1,8 @@
 package edu.mayo.qia.pacs.managed;
 
-import io.dropwizard.lifecycle.Managed;
-
 import org.h2.tools.Server;
+
+import io.dropwizard.lifecycle.Managed;
 
 public class DBWebServer implements Managed {
   String port;

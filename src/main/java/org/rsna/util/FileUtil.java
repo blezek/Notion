@@ -8,7 +8,6 @@
 package org.rsna.util;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -16,7 +15,6 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -24,12 +22,15 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.*;
-import java.util.jar.*;
-import java.util.zip.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Enumeration;
+import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
 /**
  * Encapsulates static methods for working with files and directories.
@@ -867,7 +868,8 @@ public class FileUtil {
 		if (!dir.isDirectory()) return new File[0];
 		File[] files = dir.listFiles(
 			new FileFilter() {
-				public boolean accept(File file) {
+				@Override
+        public boolean accept(File file) {
 					return file.isFile() && file.canRead() && file.canWrite();
 				}
 			}
@@ -875,7 +877,8 @@ public class FileUtil {
 		Arrays.sort(
 			files,
 			new Comparator<File>() {
-				public int compare(File f1, File f2) {
+				@Override
+        public int compare(File f1, File f2) {
 					//compute the difference in reverse order
 					long diff = f1.lastModified() - f2.lastModified();
 					return (diff > 0) ? 1 : ((diff < 0) ? -1 : 0);
@@ -895,7 +898,8 @@ public class FileUtil {
 		if (!dir.isDirectory()) return null;
 		File[] files = dir.listFiles(
 			new FileFilter() {
-				public boolean accept(File file) {
+				@Override
+        public boolean accept(File file) {
 					return file.isFile() && file.canRead() && file.canWrite();
 				}
 			}

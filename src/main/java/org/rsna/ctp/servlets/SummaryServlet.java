@@ -7,26 +7,23 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
-import org.rsna.ctp.plugin.Plugin;
-import org.rsna.ctp.pipeline.Pipeline;
-import org.rsna.ctp.pipeline.ImportService;
 import org.rsna.ctp.pipeline.ExportService;
+import org.rsna.ctp.pipeline.ImportService;
+import org.rsna.ctp.pipeline.Pipeline;
 import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.pipeline.Quarantine;
+import org.rsna.ctp.plugin.Plugin;
 import org.rsna.ctp.stdplugins.AuditLog;
 import org.rsna.ctp.stdstages.FileStorageService;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
-import org.rsna.server.User;
 import org.rsna.servlets.Servlet;
-import org.rsna.util.FileUtil;
-import org.rsna.util.HtmlUtil;
 import org.rsna.util.StringUtil;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * The Summary servlet.
@@ -56,7 +53,8 @@ public class SummaryServlet extends Servlet {
 	 * @param req The HttpServletRequest provided by the servlet container.
 	 * @param res The HttpServletResponse provided by the servlet container.
 	 */
-	public void doGet(
+	@Override
+  public void doGet(
 			HttpRequest req,
 			HttpResponse res) {
 

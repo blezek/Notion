@@ -52,7 +52,8 @@ public class Redirector extends AbstractPlugin {
 	/**
 	 * Start the plugin.
 	 */
-	public void start() {
+	@Override
+  public void start() {
 		if (monitor != null) {
 			monitor.start();
 			logger.info("Redirector Plugin started on port "+httpPort+"; target port: "+httpsPort);
@@ -62,7 +63,8 @@ public class Redirector extends AbstractPlugin {
 	/**
 	 * Stop the plugin.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		stop = true;
 		if (monitor != null) {
 			monitor.stopServer();
@@ -74,7 +76,8 @@ public class Redirector extends AbstractPlugin {
 
 		public RedirectionHandler() { }
 
-		public void process(HttpRequest req, HttpResponse res) {
+		@Override
+    public void process(HttpRequest req, HttpResponse res) {
 			String host = httpsHost;
 			if (host.equals("")) {
 				req.getHost();

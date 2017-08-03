@@ -1,12 +1,5 @@
 package edu.mayo.qia.pacs.components;
 
-import io.dropwizard.lifecycle.Managed;
-
-import java.io.File;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
 import org.apache.log4j.Logger;
 import org.dcm4che2.net.Association;
 import org.hibernate.Session;
@@ -16,8 +9,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 import edu.mayo.qia.pacs.Notion;
 import edu.mayo.qia.pacs.dicom.DICOMReceiver;
+import io.dropwizard.lifecycle.Managed;
 
 /**
  * Manages the pools, starting them up, shutdown, etc.

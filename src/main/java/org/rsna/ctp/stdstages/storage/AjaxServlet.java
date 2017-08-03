@@ -7,21 +7,19 @@
 
 package org.rsna.ctp.stdstages.storage;
 
-import java.io.File;
-import java.util.Iterator;
-import java.util.List;
 import org.apache.log4j.Logger;
-import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.objects.FileObject;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
 import org.rsna.server.Path;
 import org.rsna.servlets.Servlet;
-import org.rsna.util.FileUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.File;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * A Servlet which provides web access to the index data in a FileStorageService.
@@ -44,7 +42,8 @@ public class AjaxServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 
 		//Get the FileSystemManager.
 		FileSystemManager fsm = FileSystemManager.getInstance(root);

@@ -1,12 +1,5 @@
 package edu.mayo.qia.pacs.rest;
 
-import io.dropwizard.hibernate.UnitOfWork;
-
-import java.security.SecureRandom;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.UUID;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -17,6 +10,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -32,13 +29,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.security.SecureRandom;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.UUID;
 
 import edu.mayo.qia.pacs.NotionConfiguration;
 import edu.mayo.qia.pacs.components.User;
 import edu.mayo.qia.pacs.db.UserDAO;
+import io.dropwizard.hibernate.UnitOfWork;
 
 @Path("/user")
 @Component

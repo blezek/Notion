@@ -4,12 +4,12 @@
 
 package org.rsna.multipart; //repackage to RSNA util
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * A <code>FilePart</code> is an upload part which represents a
@@ -214,6 +214,7 @@ public class FilePart extends Part {
    *
    * @return true.
    */
+  @Override
   public boolean isFile() {
     return true;
   }

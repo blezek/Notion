@@ -1,12 +1,12 @@
 package edu.mayo.qia.pacs;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import com.codahale.metrics.MetricRegistry;
 
 import org.slf4j.Logger;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.codahale.metrics.MetricRegistry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Notion {
 

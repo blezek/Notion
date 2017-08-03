@@ -7,32 +7,15 @@
 
 package org.rsna.ctp.stdstages.dicom;
 
-import java.io.BufferedInputStream;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.security.GeneralSecurityException;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.StringTokenizer;
-
 import org.apache.log4j.Logger;
 import org.dcm4che.data.Command;
 import org.dcm4che.data.Dataset;
 import org.dcm4che.data.DcmDecodeParam;
-import org.dcm4che.data.DcmElement;
 import org.dcm4che.data.DcmEncodeParam;
 import org.dcm4che.data.DcmObjectFactory;
 import org.dcm4che.data.DcmParseException;
 import org.dcm4che.data.DcmParser;
 import org.dcm4che.data.DcmParserFactory;
-import org.dcm4che.data.FileFormat;
 import org.dcm4che.dict.DictionaryFactory;
 import org.dcm4che.dict.Tags;
 import org.dcm4che.dict.UIDDictionary;
@@ -48,9 +31,18 @@ import org.dcm4che.net.Dimse;
 import org.dcm4che.net.PDU;
 import org.dcm4che.net.PresContext;
 import org.dcm4che.util.DcmURL;
-
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.pipeline.Status;
+
+import java.io.EOFException;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.security.GeneralSecurityException;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
   * Class to make DICOM associations and transmit instances over them.
@@ -316,9 +308,10 @@ public class DicomStorageSCU {
             this.ds = ds;
             this.buffer = buffer;
         }
+        @Override
         public void writeTo(OutputStream out, String tsUID) throws IOException {
             DcmEncodeParam netParam =
-                (DcmEncodeParam) DcmDecodeParam.valueOf(tsUID);
+                DcmDecodeParam.valueOf(tsUID);
 			ds.writeDataset(out, netParam);
 			DcmDecodeParam fileParam = parser.getDcmDecodeParam();
             if (parser.getReadTag() == Tags.PixelData) {
@@ -516,7 +509,8 @@ public class DicomStorageSCU {
 			setName("DicomStorageSCU AssociationCloser");
 			logger.info("AssociationCloser instantiated with "+(associationTimeout/1000)+" second timeout");
 		}
-		public void run() {
+		@Override
+    public void run() {
 			if (associationTimeout > 0) {
 				while (!interrupted()) {
 					try {

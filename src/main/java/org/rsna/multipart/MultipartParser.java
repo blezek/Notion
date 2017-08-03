@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import org.rsna.server.HttpRequest; //user RSNA servlet spec
-
 /**
  * A utility class to handle <code>multipart/form-data</code> requests.
  */

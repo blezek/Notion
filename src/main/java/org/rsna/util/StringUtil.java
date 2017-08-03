@@ -7,9 +7,10 @@
 
 package org.rsna.util;
 
-import java.io.*;
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Calendar;
-import java.util.Map;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -302,7 +303,7 @@ public class StringUtil {
 				String repl = null;
 				if (table != null) repl = table.getProperty(key);
 				if ((repl == null) && includeEnvironmentVariables) repl = System.getenv(key);
-				if (repl == null) repl = matcher.quoteReplacement(group);
+				if (repl == null) repl = Matcher.quoteReplacement(group);
 				matcher.appendReplacement(sb, repl);
 			}
 			matcher.appendTail(sb);

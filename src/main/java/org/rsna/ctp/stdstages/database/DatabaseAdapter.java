@@ -7,9 +7,6 @@
 
 package org.rsna.ctp.stdstages.database;
 
-import java.io.File;
-import java.util.Map;
-import java.util.Set;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.objects.DicomObject;
 import org.rsna.ctp.objects.FileObject;
@@ -17,6 +14,10 @@ import org.rsna.ctp.objects.XmlObject;
 import org.rsna.ctp.objects.ZipObject;
 import org.rsna.ctp.pipeline.Status;
 import org.w3c.dom.Element;
+
+import java.io.File;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * An adapter for accessing an external database.

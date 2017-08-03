@@ -1,35 +1,20 @@
 package edu.mayo.qia.pacs.components;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import com.codahale.metrics.Timer;
+import com.codahale.metrics.CachedGauge;
 import com.codahale.metrics.Counter;
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.Metric;
-import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.MetricFilter;
-import com.codahale.metrics.CachedGauge;
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Timer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.common.io.Files;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -55,9 +40,24 @@ import org.trimou.engine.MustacheEngineBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.io.Files;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import edu.mayo.qia.pacs.Audit;
 import edu.mayo.qia.pacs.Notion;
@@ -281,8 +281,8 @@ public class PoolContainer {
       final Set<File> directories = new HashSet<File>();
 
       // Collect all the files to delete
-      List<String> filePaths = template.queryForList("select FilePath from INSTANCE, SERIES, STUDY where INSTANCE.SeriesKey = SERIES.SeriesKey and SERIES.StudyKey = STUDY.StudyKey and STUDY.PoolKey = ? and STUDY.StudyKey = ?", new Object[] { pool.poolKey,
-          studyKey }, String.class);
+      List<String> filePaths = template.queryForList("select FilePath from INSTANCE, SERIES, STUDY where INSTANCE.SeriesKey = SERIES.SeriesKey and SERIES.StudyKey = STUDY.StudyKey and STUDY.PoolKey = ? and STUDY.StudyKey = ?",
+          new Object[] { pool.poolKey, studyKey }, String.class);
       // Delete, should cascade!
       template.update("delete from STUDY where PoolKey = ? and StudyKey = ?", pool.poolKey, studyKey);
 
@@ -361,8 +361,10 @@ public class PoolContainer {
       outFile.getParentFile().mkdirs();
 
       // Start a transaction
-      /* to debug: select * from syscs_diag.lock_table; select * from
-       * syscs_diag.transaction_table; */
+      /*
+       * to debug: select * from syscs_diag.lock_table; select * from
+       * syscs_diag.transaction_table;
+       */
       Session session = sessionFactory.openSession();
       session.beginTransaction();
 
@@ -455,11 +457,10 @@ public class PoolContainer {
         if (pool.anonymize) {
 
           // Save the association info for later
-          template
-              .update(
-                  "insert into ANONYMIZATIONMAPTEMP ( PoolKey, OriginalPatientName, AnonymizedPatientName, OriginalPatientID, AnonymizedPatientID, OriginalAccessionNumber, AnonymizedAccessionNumber, OriginalPatientBirthDate, AnonymizedPatientBirthDate ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ? )",
-                  pool.poolKey, noNulls(originalTags.getString(Tag.PatientName)), noNulls(tags.getString(Tag.PatientName)), noNulls(originalTags.getString(Tag.PatientID)), noNulls(tags.getString(Tag.PatientID)),
-                  noNulls(originalTags.getString(Tag.AccessionNumber)), noNulls(tags.getString(Tag.AccessionNumber)), noNulls(originalTags.getString(Tag.PatientBirthDate)), noNulls(tags.getString(Tag.PatientBirthDate)));
+          template.update(
+              "insert into ANONYMIZATIONMAPTEMP ( PoolKey, OriginalPatientName, AnonymizedPatientName, OriginalPatientID, AnonymizedPatientID, OriginalAccessionNumber, AnonymizedAccessionNumber, OriginalPatientBirthDate, AnonymizedPatientBirthDate ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ? )",
+              pool.poolKey, noNulls(originalTags.getString(Tag.PatientName)), noNulls(tags.getString(Tag.PatientName)), noNulls(originalTags.getString(Tag.PatientID)), noNulls(tags.getString(Tag.PatientID)),
+              noNulls(originalTags.getString(Tag.AccessionNumber)), noNulls(tags.getString(Tag.AccessionNumber)), noNulls(originalTags.getString(Tag.PatientBirthDate)), noNulls(tags.getString(Tag.PatientBirthDate)));
         }
       } catch (Exception e) {
         logger.error("Caught exception", e);
@@ -477,18 +478,18 @@ public class PoolContainer {
     // Stop all the stages
     ctpAnonymizer.shutdown();
 
-    // Remove all Matching metrics - otherwise, user will not be able to re-create the just-deleted pool:
+    // Remove all Matching metrics - otherwise, user will not be able to
+    // re-create the just-deleted pool:
     Notion.metrics.removeMatching(new MetricFilter() {
-        @Override
-        public boolean matches(String name, Metric metric) {
-          if(name.startsWith( "Pool." + pool.applicationEntityTitle )) {
-            return true;
-          } else {
-            return false;
-          }
+      @Override
+      public boolean matches(String name, Metric metric) {
+        if (name.startsWith("Pool." + pool.applicationEntityTitle)) {
+          return true;
+        } else {
+          return false;
         }
       }
-    );
+    });
   }
 
   public File getPoolDirectory() {
@@ -547,27 +548,27 @@ public class PoolContainer {
         new Object[] { this.pool.poolKey, studyInstanceUID }, Long.class);
     moveCounter.inc(numberToMove);
     poolMoveCounter.inc(numberToMove);
-    template.query("select INSTANCE.FilePath from INSTANCE, STUDY, SERIES where STUDY.PoolKey = ? AND INSTANCE.SeriesKey = SERIES.SeriesKey and SERIES.StudyKey = STUDY.StudyKey and STUDY.StudyInstanceUID = ?", new Object[] { this.pool.poolKey,
-        studyInstanceUID }, new RowCallbackHandler() {
+    template.query("select INSTANCE.FilePath from INSTANCE, STUDY, SERIES where STUDY.PoolKey = ? AND INSTANCE.SeriesKey = SERIES.SeriesKey and SERIES.StudyKey = STUDY.StudyKey and STUDY.StudyInstanceUID = ?",
+        new Object[] { this.pool.poolKey, studyInstanceUID }, new RowCallbackHandler() {
 
-      @Override
-      public void processRow(ResultSet rs) throws SQLException {
-        File f = new File(getPoolDirectory(), rs.getString("FilePath"));
-        File tempDir = new File(getPoolDirectory(), "incoming");
-        tempDir.mkdirs();
-        File tmpFile = new File(tempDir, UUID.randomUUID().toString() + ".dcm");
-        try {
-          Files.copy(f, tmpFile);
-          destination.process(tmpFile, status);
-        } catch (Exception e) {
-          successful.set(false);
-          logger.error("Error processing file: " + f + " into pool " + pool, e);
-        }
-        imagesMovedPerSecond.mark();
-        moveCounter.dec();
-        poolMoveCounter.dec();
-      }
-    });
+          @Override
+          public void processRow(ResultSet rs) throws SQLException {
+            File f = new File(getPoolDirectory(), rs.getString("FilePath"));
+            File tempDir = new File(getPoolDirectory(), "incoming");
+            tempDir.mkdirs();
+            File tmpFile = new File(tempDir, UUID.randomUUID().toString() + ".dcm");
+            try {
+              Files.copy(f, tmpFile);
+              destination.process(tmpFile, status);
+            } catch (Exception e) {
+              successful.set(false);
+              logger.error("Error processing file: " + f + " into pool " + pool, e);
+            }
+            imagesMovedPerSecond.mark();
+            moveCounter.dec();
+            poolMoveCounter.dec();
+          }
+        });
     destination.processAnonymizationMap();
     return successful.get();
   }
@@ -581,53 +582,49 @@ public class PoolContainer {
           template.query("select distinct OriginalPatientName, AnonymizedPatientName, OriginalPatientID, AnonymizedPatientID, OriginalAccessionNumber, AnonymizedAccessionNumber, OriginalPatientBirthDate, AnonymizedPatientBirthDate"
               + " from ANONYMIZATIONMAPTEMP where PoolKey = ?", new Object[] { pool.poolKey }, new RowCallbackHandler() {
 
-            @Override
-            public void processRow(ResultSet rs) throws SQLException {
-              String opn, apn, opi, api, oan, aan, opbd, apbd;
-              opn = rs.getString(1);
-              apn = rs.getString(2);
-              opi = rs.getString(3);
-              api = rs.getString(4);
-              oan = rs.getString(5);
-              aan = rs.getString(6);
-              opbd = rs.getString(7);
-              apbd = rs.getString(8);
+                @Override
+                public void processRow(ResultSet rs) throws SQLException {
+                  String opn, apn, opi, api, oan, aan, opbd, apbd;
+                  opn = rs.getString(1);
+                  apn = rs.getString(2);
+                  opi = rs.getString(3);
+                  api = rs.getString(4);
+                  oan = rs.getString(5);
+                  aan = rs.getString(6);
+                  opbd = rs.getString(7);
+                  apbd = rs.getString(8);
 
-              ObjectNode node = objectMapper.createObjectNode();
-              node.put("OriginalPatientName", opn);
-              node.put("AnonymizedPatientName", apn);
-              node.put("OriginalPatientID", opi);
-              node.put("AnonymizedPatientID", api);
-              node.put("OriginalAccessionNumber", oan);
-              node.put("AnonymizedAccessionNumber", aan);
-              node.put("OriginalPatientBirthDate", opbd);
-              node.put("AnonymizedPatientBirthDate", apbd);
-              Audit.log(pool.toString(), "anonymization", node);
+                  ObjectNode node = objectMapper.createObjectNode();
+                  node.put("OriginalPatientName", opn);
+                  node.put("AnonymizedPatientName", apn);
+                  node.put("OriginalPatientID", opi);
+                  node.put("AnonymizedPatientID", api);
+                  node.put("OriginalAccessionNumber", oan);
+                  node.put("AnonymizedAccessionNumber", aan);
+                  node.put("OriginalPatientBirthDate", opbd);
+                  node.put("AnonymizedPatientBirthDate", apbd);
+                  Audit.log(pool.toString(), "anonymization", node);
 
-              int count = template
-                  .queryForObject(
+                  int count = template.queryForObject(
                       "select count(*) from ANONYMIZATIONMAP where PoolKey = ? and OriginalPatientName = ? and AnonymizedPatientName = ? and OriginalPatientID = ? and AnonymizedPatientID = ? and OriginalAccessionNumber = ? and AnonymizedAccessionNumber = ? and OriginalPatientBirthDate = ? and AnonymizedPatientBirthDate = ?",
                       new Object[] { pool.poolKey, opn, apn, opi, api, oan, aan, opbd, apbd }, Integer.class);
 
-              if (count == 0) {
-                template
-                    .update(
+                  if (count == 0) {
+                    template.update(
                         "insert into ANONYMIZATIONMAP ( PoolKey, OriginalPatientName, AnonymizedPatientName, OriginalPatientID, AnonymizedPatientID, OriginalAccessionNumber, AnonymizedAccessionNumber, OriginalPatientBirthDate, AnonymizedPatientBirthDate ) values ( ?, ?, ?, ?, ?, ?, ?, ?, ? )",
                         new Object[] { pool.poolKey, opn, apn, opi, api, oan, aan, opbd, apbd });
-              } else {
-                template
-                    .update(
+                  } else {
+                    template.update(
                         "update ANONYMIZATIONMAP set UpdatedTimestamp = current_timestamp where PoolKey = ? and OriginalPatientName = ? and AnonymizedPatientName = ? and OriginalPatientID = ? and AnonymizedPatientID = ? and OriginalAccessionNumber = ? and AnonymizedAccessionNumber = ? and OriginalPatientBirthDate = ? and AnonymizedPatientBirthDate = ?",
                         new Object[] { pool.poolKey, opn, apn, opi, api, oan, aan, opbd, apbd });
 
-              }
-              template
-                  .update(
+                  }
+                  template.update(
                       "delete from ANONYMIZATIONMAPTEMP where PoolKey = ? and OriginalPatientName = ? and AnonymizedPatientName = ? and OriginalPatientID = ? and AnonymizedPatientID = ? and OriginalAccessionNumber = ? and AnonymizedAccessionNumber = ? and OriginalPatientBirthDate = ? and AnonymizedPatientBirthDate = ?",
                       new Object[] { pool.poolKey, opn, apn, opi, api, oan, aan, opbd, apbd });
 
-            }
-          });
+                }
+              });
         }
       }
     });
@@ -648,6 +645,9 @@ public class PoolContainer {
     Session session = sessionFactory.openSession();
 
     Pool localPool = (Pool) session.byId(Pool.class).load(this.pool.poolKey);
+    if (localPool == null) {
+      return;
+    }
     // Force load
     localPool.getDevices().size();
 

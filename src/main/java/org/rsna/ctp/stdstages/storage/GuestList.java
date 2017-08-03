@@ -7,9 +7,6 @@
 
 package org.rsna.ctp.stdstages.storage;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashSet;
 import org.apache.log4j.Logger;
 import org.rsna.server.User;
 import org.rsna.util.FileUtil;
@@ -17,6 +14,10 @@ import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * A class to encapsulate a set of users who have been invited to access a FileSystem.

@@ -7,10 +7,15 @@
 
 package org.rsna.ui;
 
-import java.awt.*;
-import java.util.LinkedList;
-import java.util.Hashtable;
 import javax.swing.JComponent;
+
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.LayoutManager2;
+import java.util.Hashtable;
+import java.util.LinkedList;
 
 /**
  * A LayoutManager2 that puts components in rows and columns.
@@ -86,32 +91,42 @@ public class RowLayout implements LayoutManager2 {
 		return (c instanceof CRLF);
 	}
 
-	public void invalidateLayout(Container target) { }
-	public void removeLayoutComponent(Component component) { spans.remove(component); }
-	public float getLayoutAlignmentX(Container target) { return layoutAlignmentX; }
-	public float getLayoutAlignmentY(Container target) { return layoutAlignmentY; }
+	@Override
+  public void invalidateLayout(Container target) { }
+	@Override
+  public void removeLayoutComponent(Component component) { spans.remove(component); }
+	@Override
+  public float getLayoutAlignmentX(Container target) { return layoutAlignmentX; }
+	@Override
+  public float getLayoutAlignmentY(Container target) { return layoutAlignmentY; }
 
-	public void addLayoutComponent(String name, Component component) { }
+	@Override
+  public void addLayoutComponent(String name, Component component) { }
 
-	public void addLayoutComponent(Component component, Object span) {
+	@Override
+  public void addLayoutComponent(Component component, Object span) {
 		if ((span != null) && (span instanceof Integer)) {
 			spans.put(component, (Integer)span);
 		}
 	}
 
-	public Dimension preferredLayoutSize(Container parent) {
+	@Override
+  public Dimension preferredLayoutSize(Container parent) {
 		return getLayoutSize(parent, horizontalGap, verticalGap, false);
 	}
 
-	public Dimension maximumLayoutSize(Container parent) {
+	@Override
+  public Dimension maximumLayoutSize(Container parent) {
 		return preferredLayoutSize(parent);
 	}
 
-	public Dimension minimumLayoutSize(Container parent) {
+	@Override
+  public Dimension minimumLayoutSize(Container parent) {
 		return preferredLayoutSize(parent);
 	}
 
-	public void layoutContainer(Container parent) {
+	@Override
+  public void layoutContainer(Container parent) {
 		getLayoutSize(parent, horizontalGap, verticalGap, true);
 	}
 

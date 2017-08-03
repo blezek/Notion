@@ -7,8 +7,9 @@
 
 package org.rsna.ctp.stdstages.storage;
 
-import java.io.File;
 import org.apache.log4j.Logger;
+
+import java.io.File;
 
 /**
  * A class to encapsulate the File and URL of a stored object.

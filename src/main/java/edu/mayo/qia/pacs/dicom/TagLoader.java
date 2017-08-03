@@ -1,14 +1,14 @@
 package edu.mayo.qia.pacs.dicom;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.dcm4che2.data.DicomObject;
 import org.dcm4che2.data.Tag;
 import org.dcm4che2.io.DicomInputStream;
 import org.dcm4che2.io.StopTagInputHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Provides a class to load tags from a file.

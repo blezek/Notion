@@ -7,32 +7,29 @@
 
 package org.rsna.ctp.servlets;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import jdbm.helper.FastIterator;
-import jdbm.htree.HTree;
 import org.apache.log4j.Logger;
 import org.rsna.ctp.Configuration;
-import org.rsna.ctp.objects.DicomObject;
-import org.rsna.ctp.objects.FileObject;
 import org.rsna.ctp.pipeline.Pipeline;
 import org.rsna.ctp.pipeline.PipelineStage;
 import org.rsna.ctp.stdstages.ObjectTracker;
 import org.rsna.server.HttpRequest;
 import org.rsna.server.HttpResponse;
-import org.rsna.server.User;
 import org.rsna.servlets.Servlet;
-import org.rsna.util.FileUtil;
 import org.rsna.util.HtmlUtil;
 import org.rsna.util.XmlUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+
+import jdbm.helper.FastIterator;
+import jdbm.htree.HTree;
 
 /**
  * A Servlet that provides web access to the indexed data stored by an ObjectTracker pipeline stage.
@@ -57,11 +54,12 @@ public class ObjectTrackerServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin")) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -104,13 +102,14 @@ public class ObjectTrackerServlet extends Servlet {
 	 * @param req The HttpRequest provided by the servlet container.
 	 * @param res The HttpResponse provided by the servlet container.
 	 */
-	public void doPost(
+	@Override
+  public void doPost(
 			HttpRequest req,
 			HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin") || !req.isReferredFrom(context)) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -140,7 +139,7 @@ public class ObjectTrackerServlet extends Servlet {
 			return;
 		}
 		if (tracker == null) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.setContentType("html");
 			res.disableCaching();
 			res.send();
@@ -150,7 +149,7 @@ public class ObjectTrackerServlet extends Servlet {
 		//Get the selected data
 		Document data = getData(tracker, keyType, keys);
 		if (data == null) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.setContentType("html");
 			res.disableCaching();
 			res.send();

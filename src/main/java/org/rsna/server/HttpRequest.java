@@ -7,26 +7,37 @@
 
 package org.rsna.server;
 
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.net.InetSocketAddress;
+import org.apache.log4j.Logger;
+import org.rsna.multipart.DefaultFileRenamePolicy;
+import org.rsna.multipart.FilePart;
+import org.rsna.multipart.FileRenamePolicy;
+import org.rsna.multipart.MultipartInputStream;
+import org.rsna.multipart.MultipartParser;
+import org.rsna.multipart.ParamPart;
+import org.rsna.multipart.Part;
+import org.rsna.multipart.UploadedFile;
+import org.rsna.util.FileUtil;
+import org.rsna.util.IPUtil;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
-import java.net.NetworkInterface;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import org.apache.log4j.Logger;
-import org.rsna.util.FileUtil;
-import org.rsna.util.IPUtil;
-import org.rsna.multipart.*;
 
 /**
  * A simple HTTP request parser.
@@ -636,7 +647,8 @@ public class HttpRequest {
 	 * Get a String representation of this HttpRequest
 	 * @return the text value of the request, including the method, path, and query or content.
 	 */
-	public String toString() {
+	@Override
+  public String toString() {
 		return method + " " + path
 				+ (query.equals("") ? "" : "?" + query)
 				+ ( (method.equals("POST") && (content != null) && (content.length() > 0)) ? "\n" + content : "");
