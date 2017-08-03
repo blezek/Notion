@@ -1,0 +1,83 @@
+
+
+dbWeb: 8084
+
+# Database connection info
+database:
+  driverClass: org.apache.derby.jdbc.EmbeddedDriver
+  url: jdbc:derby:directory:../Working/LocalPACS/DB;create=true
+  validationQuery: "VALUES 1"
+  user:
+  password:
+  autoCommitByDefault: true
+
+# Shiro
+shiro:
+  filterUrlPattern: "/*" # The URL pattern for the Shiro servlet filter
+  iniConfigs: ["classpath:shiro.ini"]
+
+
+# How to serve our assets
+# In production, assets are bundled in the Jar
+assets:
+  overrides:
+    /: ui/public
+
+
+server:
+  type: simple
+  applicationContextPath: /  # Default value*
+  connector:
+    type: http
+    port: 11118
+
+
+# Email configuration
+email:
+  from:
+  smtpHostname:
+  port:
+  username:
+  password:
+  ssl:
+
+
+notion:
+  host: myst.mayo.edu
+  dicomPort: 11117
+  imageDirectory: ../Working/LocalPACS/Images
+  allowRegistration: true
+
+logging:
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+  # Logger-specific levels.
+  loggers:
+    edu.mayo.qia.notion.audit: ALL
+  
+    # Set this logger to debug if you would like to see the SQL hibernate generates
+    org.hibernate.SQL: DEBUG
+    org.hibernate.engine: ERROR
+    org.dcm4che2: ERROR
+    
+    # Suppress hibernate statistics
+    org.hibernate.engine.internal.StatisticalLoggingSessionEventListener: ERROR
+
+    # Suppress Shiro info messages
+    org.apache.shiro.realm.AuthorizingRealm: ERROR
+
+  appenders:
+    - type: console
+    - type: file
+      currentLogFilename: notion.log
+
+      # When the log file rotates, the archived log will be renamed to this and gzipped. The
+      # %d is replaced with the previous day (yyyy-MM-dd). Custom rolling windows can be created
+      # by passing a SimpleDateFormat-compatible format as an argument: "%d{yyyy-MM-dd-hh}".
+      archivedLogFilenamePattern: ./logs/notion-%d.log.gz
+
+      # The number of archived files to keep.
+      archivedFileCount: 5
+
+      # The timezone used to format dates. HINT: USE THE DEFAULT, UTC.
+      timeZone: UTC
