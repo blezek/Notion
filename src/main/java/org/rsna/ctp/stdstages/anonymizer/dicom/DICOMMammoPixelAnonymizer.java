@@ -108,7 +108,7 @@ public class DICOMMammoPixelAnonymizer {
         	String prefEncodingUID = UIDs.ExplicitVRLittleEndian;
 			FileMetaInfo fmi = dataset.getFileMetaInfo();
             if (fmi != null) prefEncodingUID = fmi.getTransferSyntaxUID();
-			DcmEncodeParam encoding = (DcmEncodeParam)DcmDecodeParam.valueOf(prefEncodingUID);
+			DcmEncodeParam encoding = DcmDecodeParam.valueOf(prefEncodingUID);
 			boolean swap = fileParam.byteOrder != encoding.byteOrder;
 
 			//Save the dataset to a temporary file, and rename at the end.
@@ -199,7 +199,7 @@ public class DICOMMammoPixelAnonymizer {
 		for (int r=rStart; r<rEnd; r++) {
 			int rIndex = r*columns;
 			for (int k=0; k<columns; k++) {
-				sum[k] += 0xFFFF & (int)sb.get(rIndex + k);
+				sum[k] += 0xFFFF & sb.get(rIndex + k);
 			}
 		}
 

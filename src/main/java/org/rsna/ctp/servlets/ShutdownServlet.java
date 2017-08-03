@@ -38,7 +38,8 @@ public class ShutdownServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		res.disableCaching();
 		res.setContentType("html");
 
@@ -74,7 +75,8 @@ public class ShutdownServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doPost(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doPost(HttpRequest req, HttpResponse res) {
 		doGet(req, res);
 	}
 

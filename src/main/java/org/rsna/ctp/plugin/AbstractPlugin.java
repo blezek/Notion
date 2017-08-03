@@ -55,20 +55,23 @@ public abstract class AbstractPlugin implements Plugin {
 	 * This method is called by the Configuration after the pipelines, plugins, and
 	 * the HttpServer have been constructed.
 	 */
-	public void start() {
+	@Override
+  public void start() {
 	}
 
 	/**
 	 * Stop the plugin.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		stop = true;
 	}
 
 	/**
 	 * Determine whether the plugin has shut down.
 	 */
-	public boolean isDown() {
+	@Override
+  public boolean isDown() {
 		return stop;
 	}
 
@@ -77,7 +80,8 @@ public abstract class AbstractPlugin implements Plugin {
 	 * configuration element.
 	 * @return the name of the plugin.
 	 */
-	public String getName() {
+	@Override
+  public String getName() {
 		return name;
 	}
 
@@ -94,7 +98,8 @@ public abstract class AbstractPlugin implements Plugin {
 	 * configuration element.
 	 * @return the ID of the plugin.
 	 */
-	public String getID() {
+	@Override
+  public String getID() {
 		return id;
 	}
 
@@ -115,7 +120,8 @@ public abstract class AbstractPlugin implements Plugin {
 	 * the values of username and password attributes.
 	 * @return HTML text describing the configuration of the stage.
 	 */
-	public String getConfigHTML(boolean admin) {
+	@Override
+  public String getConfigHTML(boolean admin) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<h3>"+name+"</h3>");
 		sb.append("<table border=\"1\" width=\"100%\">");
@@ -168,7 +174,8 @@ public abstract class AbstractPlugin implements Plugin {
 	 * This method must be overridden in real Plugin implementations.
 	 * @return HTML text displaying the current status of the plugin.
 	 */
-	public String getStatusHTML() {
+	@Override
+  public String getStatusHTML() {
 		return getStatusHTML("");
 	}
 

@@ -23,7 +23,7 @@ public class Cache {
 	 * @param dir the base directory of the cache.
 	 */
 	protected Cache(File dir) {
-		this.dir = dir;
+		Cache.dir = dir;
 	}
 
 	/**

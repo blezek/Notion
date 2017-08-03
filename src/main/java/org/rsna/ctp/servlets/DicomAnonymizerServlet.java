@@ -54,13 +54,14 @@ public class DicomAnonymizerServlet extends Servlet {
 	 * @param req The HttpServletRequest provided by the servlet container.
 	 * @param res The HttpServletResponse provided by the servlet container.
 	 */
-	public void doGet(
+	@Override
+  public void doGet(
 			HttpRequest req,
 			HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin")) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -116,7 +117,7 @@ public class DicomAnonymizerServlet extends Servlet {
 			res.write(getScriptXML(file));
 		}
 
-		else res.setResponseCode(res.notfound);
+		else res.setResponseCode(HttpResponse.notfound);
 		res.send();
 	}
 
@@ -134,13 +135,14 @@ public class DicomAnonymizerServlet extends Servlet {
 	 * @param req The HttpRequest provided by the servlet container.
 	 * @param res The HttpResponse provided by the servlet container.
 	 */
-	public void doPost(
+	@Override
+  public void doPost(
 			HttpRequest req,
 			HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin") || !req.isReferredFrom(context)) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -195,7 +197,7 @@ public class DicomAnonymizerServlet extends Servlet {
 			}
 		}
 
-		else res.setResponseCode(res.notimplemented);
+		else res.setResponseCode(HttpResponse.notimplemented);
 		res.send();
 	}
 

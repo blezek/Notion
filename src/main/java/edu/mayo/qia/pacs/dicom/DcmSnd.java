@@ -360,6 +360,7 @@ public class DcmSnd {
       this.info = info;
     }
 
+    @Override
     public void writeTo(PDVOutputStream out, String tsuid) throws IOException {
       if (coerceAttrs != null || suffixUID != null) {
         DicomObject attrs;

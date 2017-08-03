@@ -3,6 +3,7 @@ package org.rsna.ctp.stdstages.anonymizer.dicom;
 import org.dcm4che.data.Dataset;
 import org.dcm4che.dict.Tags;
 
+import java.awt.Transparency;
 import java.awt.color.ColorSpace;
 import java.awt.image.BandedSampleModel;
 import java.awt.image.BufferedImage;
@@ -132,11 +133,11 @@ class PixelDataParam {
         if (samplesPerPixel == 3) {
             return new ComponentColorModel(ColorSpace
                     .getInstance(ColorSpace.CS_sRGB), new int[] { bits, bits,
-                    bits}, false, false, ColorModel.OPAQUE, dataType);
+                    bits}, false, false, Transparency.OPAQUE, dataType);
         } else {
             return new ComponentColorModel(ColorSpace
                     .getInstance(ColorSpace.CS_GRAY), new int[] { bits },
-                    false, false, ColorModel.OPAQUE, dataType);
+                    false, false, Transparency.OPAQUE, dataType);
         }
     }
 
@@ -151,6 +152,7 @@ class PixelDataParam {
                 createRaster(), false, null);
     }
 
+    @Override
     public String toString() {
         return "PixelData[pmi=" + pmi + ", samples=" + samplesPerPixel
                 + ", rows=" + rows + ", columns=" + columns + ", alloc="

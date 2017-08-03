@@ -128,6 +128,7 @@ public class PartInputStream extends FilterInputStream {
    *             stream is reached.
    * @exception  IOException  if an I/O error occurs.
    */
+  @Override
   public int read() throws IOException {
     if (count - pos <= 2) {
       fill();
@@ -151,6 +152,7 @@ public class PartInputStream extends FilterInputStream {
    *             of the stream has been reached.
    * @exception  IOException  if an I/O error occurs.
    */
+  @Override
   public int read(byte b[]) throws IOException {
     return read(b, 0, b.length);
   }
@@ -170,6 +172,7 @@ public class PartInputStream extends FilterInputStream {
    *             of the stream has been reached.
    * @exception  IOException  if an I/O error occurs.
    */
+  @Override
   public int read(byte b[], int off, int len) throws IOException
   {
     int total = 0;
@@ -214,6 +217,7 @@ public class PartInputStream extends FilterInputStream {
    *             without blocking.
    * @exception  IOException  if an I/O error occurs.
    */
+  @Override
   public int available() throws IOException {
     int avail = (count - pos - 2) + in.available();
     // Never return a negative value
@@ -232,6 +236,7 @@ public class PartInputStream extends FilterInputStream {
    *
    * @exception  IOException  if an I/O error occurs.
    */
+  @Override
   public void close() throws IOException {
     if (!eof) {
       while (read(buf, 0, buf.length) != -1)

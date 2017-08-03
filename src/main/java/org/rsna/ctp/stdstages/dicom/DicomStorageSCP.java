@@ -129,6 +129,7 @@ public class DicomStorageSCP extends DcmServiceBase {
   }
 
   // Note: this method does not handle file sets.
+  @Override
   protected void doCStore(ActiveAssociation assoc, Dimse rq, Command rspCmd) throws IOException {
     InputStream in = rq.getDataAsStream();
     try {
@@ -303,6 +304,7 @@ public class DicomStorageSCP extends DcmServiceBase {
       this.time = time;
     }
 
+    @Override
     public void run() {
       file = setAET();
       dicomImportService.fileReceived(file);

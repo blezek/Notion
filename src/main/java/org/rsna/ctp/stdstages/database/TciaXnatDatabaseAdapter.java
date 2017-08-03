@@ -90,7 +90,8 @@ public class TciaXnatDatabaseAdapter extends DatabaseAdapter {
 	 * FileStorageService, or null if the object has not been stored.
 	 * @param url The URL pointing to the stored object or null if no URL is available.
 	 */
-	public Status process(DicomObject dicomObject, File storedFile, String url) {
+	@Override
+  public Status process(DicomObject dicomObject, File storedFile, String url) {
 		try {
 			//Require that the file have been stored.
 			if (storedFile == null) {

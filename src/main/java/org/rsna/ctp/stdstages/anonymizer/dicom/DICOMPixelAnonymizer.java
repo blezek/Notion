@@ -112,7 +112,7 @@ public class DICOMPixelAnonymizer {
         	String prefEncodingUID = UIDs.ImplicitVRLittleEndian;
 			FileMetaInfo fmi = dataset.getFileMetaInfo();
             if (fmi != null) prefEncodingUID = fmi.getTransferSyntaxUID();
-			DcmEncodeParam encoding = (DcmEncodeParam)DcmDecodeParam.valueOf(prefEncodingUID);
+			DcmEncodeParam encoding = DcmDecodeParam.valueOf(prefEncodingUID);
 			boolean swap = fileParam.byteOrder != encoding.byteOrder;
 
 /**/		//While in development, abort on encapsulated pixel data

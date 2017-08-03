@@ -68,7 +68,8 @@ public class DicomAuditLogger extends AbstractPipelineStage implements Processor
 	 * has been instantiated. (Note: The Configuration constructor has
 	 * not finished when the stages are constructed.)
 	 */
-	public void start() {
+	@Override
+  public void start() {
 		Configuration config = Configuration.getInstance();
 		if (!objectCacheID.equals("")) {
 			PipelineStage stage = config.getRegisteredStage(objectCacheID);
@@ -93,7 +94,8 @@ public class DicomAuditLogger extends AbstractPipelineStage implements Processor
 	 * @param fileObject the object to log.
 	 * @return the same FileObject.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
 

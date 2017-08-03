@@ -396,7 +396,8 @@ public class QueueManager {
 			this.dirs = dirs;
 			this.files = files;
 		}
-		public boolean accept(File file) {
+		@Override
+    public boolean accept(File file) {
 			if ((files && file.isFile()) || (dirs && file.isDirectory())) {
 				return (file.getName().replaceAll("[\\d\\.]","").length() == 0);
 			}

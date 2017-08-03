@@ -45,7 +45,8 @@ public class ZipAnonymizer extends AbstractPipelineStage implements Processor, S
 	 * @param fileObject the object to process.
 	 * @return the processed FileObject.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
 
@@ -73,7 +74,8 @@ public class ZipAnonymizer extends AbstractPipelineStage implements Processor, S
 	 * Get the script file.
 	 * @return the script file used by this stage.
 	 */
-	public File[] getScriptFiles() {
+	@Override
+  public File[] getScriptFiles() {
 		return new File[] {scriptFile};
 	}
 }

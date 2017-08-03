@@ -73,7 +73,7 @@ public class XMLAnonymizer {
 			XmlCommand cmd = null;
 			String value = null;
 			while ((cmd=ch.getNextCommand()) != null) {
-				if (cmd.type == cmd.ASSIGN) {
+				if (cmd.type == XmlCommand.ASSIGN) {
 					value = (new XmlScript(xmlDocument,store,cmd.right)).getValue("");
 					//Trap print commands
 					if (cmd.left.equals("$print"))
@@ -81,7 +81,7 @@ public class XMLAnonymizer {
 					else
 						store.put(cmd.left,value);
 				}
-				else if (cmd.type == cmd.PATH) {
+				else if (cmd.type == XmlCommand.PATH) {
 					processPath(
 						xmlDocument,
 						cmd.left,

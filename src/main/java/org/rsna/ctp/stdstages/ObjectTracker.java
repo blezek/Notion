@@ -52,7 +52,8 @@ public class ObjectTracker extends AbstractPipelineStage implements Processor {
 	/**
 	 * Stop the stage.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		//Commit and close the database
 		if (recman != null) {
 			try {
@@ -84,7 +85,8 @@ public class ObjectTracker extends AbstractPipelineStage implements Processor {
 	 * @param fileObject the object to process.
 	 * @return the same FileObject if the result is true; otherwise null.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();

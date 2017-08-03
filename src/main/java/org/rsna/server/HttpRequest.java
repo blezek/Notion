@@ -647,7 +647,8 @@ public class HttpRequest {
 	 * Get a String representation of this HttpRequest
 	 * @return the text value of the request, including the method, path, and query or content.
 	 */
-	public String toString() {
+	@Override
+  public String toString() {
 		return method + " " + path
 				+ (query.equals("") ? "" : "?" + query)
 				+ ( (method.equals("POST") && (content != null) && (content.length() > 0)) ? "\n" + content : "");

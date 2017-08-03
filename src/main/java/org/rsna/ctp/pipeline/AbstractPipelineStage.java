@@ -72,20 +72,23 @@ public abstract class AbstractPipelineStage implements PipelineStage {
 	 * This method is called by the Pipeline after all the stages have been
 	 * constructed.
 	 */
-	public synchronized void start() {
+	@Override
+  public synchronized void start() {
 	}
 
 	/**
 	 * Stop the pipeline stage.
 	 */
-	public synchronized void shutdown() {
+	@Override
+  public synchronized void shutdown() {
 		stop = true;
 	}
 
 	/**
 	 * Determine whether the pipeline stage has shut down.
 	 */
-	public synchronized boolean isDown() {
+	@Override
+  public synchronized boolean isDown() {
 		return stop;
 	}
 
@@ -94,7 +97,8 @@ public abstract class AbstractPipelineStage implements PipelineStage {
 	 * configuration element for the stage.
 	 * @return the name of the pipeline stage.
 	 */
-	public synchronized String getName() {
+	@Override
+  public synchronized String getName() {
 		return name;
 	}
 
@@ -102,7 +106,8 @@ public abstract class AbstractPipelineStage implements PipelineStage {
 	 * Get the root directory of this pipeline stage.
 	 * @return the root directory of the pipeline stage.
 	 */
-	public synchronized File getRoot() {
+	@Override
+  public synchronized File getRoot() {
 		return root;
 	}
 
@@ -111,7 +116,8 @@ public abstract class AbstractPipelineStage implements PipelineStage {
 	 * configuration element for the stage.
 	 * @return the ID of the pipeline stage.
 	 */
-	public synchronized String getID() {
+	@Override
+  public synchronized String getID() {
 		return id;
 	}
 
@@ -120,7 +126,8 @@ public abstract class AbstractPipelineStage implements PipelineStage {
 	 * configuration element for the stage.
 	 * @return the Quarantine, or null if no quarantine was specified.
 	 */
-	public synchronized Quarantine getQuarantine() {
+	@Override
+  public synchronized Quarantine getQuarantine() {
 		return quarantine;
 	}
 
@@ -140,7 +147,8 @@ public abstract class AbstractPipelineStage implements PipelineStage {
 	 * Get the last time the stage supplied a file.
 	 * @return the last time the stage supplied a file to the pipeline.
 	 */
-	public synchronized long getLastFileOutTime() {
+	@Override
+  public synchronized long getLastFileOutTime() {
 		return lastTimeOut;
 	}
 
@@ -153,7 +161,8 @@ public abstract class AbstractPipelineStage implements PipelineStage {
 	 * the values of username and password attributes.
 	 * @return HTML text describing the configuration of the stage.
 	 */
-	public synchronized String getConfigHTML(boolean admin) {
+	@Override
+  public synchronized String getConfigHTML(boolean admin) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<h3>"+name+"</h3>");
 		sb.append("<table border=\"1\" width=\"100%\">");
@@ -205,7 +214,8 @@ public abstract class AbstractPipelineStage implements PipelineStage {
 	 * Get HTML text displaying the current status of the stage.
 	 * @return HTML text displaying the current status of the stage.
 	 */
-	public String getStatusHTML() {
+	@Override
+  public String getStatusHTML() {
 		return getStatusHTML("");
 	}
 

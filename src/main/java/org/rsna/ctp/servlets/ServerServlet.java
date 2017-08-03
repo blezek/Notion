@@ -44,7 +44,8 @@ public class ServerServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		res.setContentType("xml");
 		res.disableCaching();
 		Configuration config = Configuration.getInstance();

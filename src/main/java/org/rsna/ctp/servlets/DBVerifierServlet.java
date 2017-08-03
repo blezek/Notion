@@ -52,11 +52,12 @@ public class DBVerifierServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin")) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}

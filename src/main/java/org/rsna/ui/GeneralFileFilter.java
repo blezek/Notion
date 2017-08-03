@@ -119,7 +119,8 @@ public class GeneralFileFilter implements FileFilter {
 	 * @param file the file to test for a match
 	 * @return whether the file matches the filter.
 	 */
-	public boolean accept(File file) {
+	@Override
+  public boolean accept(File file) {
 		if (maxCount == 0) return false;
 		String name = file.getName();
 		if (file.isDirectory()) {

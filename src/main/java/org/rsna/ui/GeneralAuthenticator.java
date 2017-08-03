@@ -52,7 +52,8 @@ public class GeneralAuthenticator extends Authenticator implements ActionListene
 	 * Get the PasswordAuthentication for this challenge;
 	 * overrides the method in the Authenticator class.
 	 */
-	protected PasswordAuthentication getPasswordAuthentication() {
+	@Override
+  protected PasswordAuthentication getPasswordAuthentication() {
 		dialog = new JDialog (parent, "Username and Password Required", true);
 
 		// Make the UI Components.
@@ -112,7 +113,8 @@ public class GeneralAuthenticator extends Authenticator implements ActionListene
 	/**
 	 * The ActionListener implementation for the buttons.
 	 */
-	public void actionPerformed (ActionEvent e) {
+	@Override
+  public void actionPerformed (ActionEvent e) {
 		Object object = e.getSource();
 		if (object == okButton) {
 			dialog.dispose();

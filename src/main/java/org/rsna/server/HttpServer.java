@@ -54,7 +54,8 @@ public class HttpServer extends Thread {
 	/**
 	 * Start the HttpServer and accept connections.
 	 */
-	public void run() {
+	@Override
+  public void run() {
 		logger.info((ssl?"SSL ":"")+"HttpServer started on port "+port);
 		while (!this.isInterrupted()) {
 			try {

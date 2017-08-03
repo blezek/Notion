@@ -308,9 +308,10 @@ public class DicomStorageSCU {
             this.ds = ds;
             this.buffer = buffer;
         }
+        @Override
         public void writeTo(OutputStream out, String tsUID) throws IOException {
             DcmEncodeParam netParam =
-                (DcmEncodeParam) DcmDecodeParam.valueOf(tsUID);
+                DcmDecodeParam.valueOf(tsUID);
 			ds.writeDataset(out, netParam);
 			DcmDecodeParam fileParam = parser.getDcmDecodeParam();
             if (parser.getReadTag() == Tags.PixelData) {
@@ -508,7 +509,8 @@ public class DicomStorageSCU {
 			setName("DicomStorageSCU AssociationCloser");
 			logger.info("AssociationCloser instantiated with "+(associationTimeout/1000)+" second timeout");
 		}
-		public void run() {
+		@Override
+    public void run() {
 			if (associationTimeout > 0) {
 				while (!interrupted()) {
 					try {

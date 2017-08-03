@@ -157,7 +157,7 @@ public class DICOMAnonymizer {
             if ((fmi != null) && (fileParam.encapsulated || !forceIVRLE)) {
             	prefEncodingUID = fmi.getTransferSyntaxUID();
 			}
-			DcmEncodeParam encoding = (DcmEncodeParam)DcmDecodeParam.valueOf(prefEncodingUID);
+			DcmEncodeParam encoding = DcmDecodeParam.valueOf(prefEncodingUID);
 			boolean swap = fileParam.byteOrder != encoding.byteOrder;
 
             //Create and write the metainfo for the encoding we are using

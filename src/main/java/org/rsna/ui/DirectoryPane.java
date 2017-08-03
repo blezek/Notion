@@ -175,7 +175,8 @@ public class DirectoryPane extends JScrollPane implements TreeSelectionListener 
 	 * The TreeSelectionEvent listener.
 	 * @param event the event.
 	 */
-	public void valueChanged(TreeSelectionEvent event) {
+	@Override
+  public void valueChanged(TreeSelectionEvent event) {
 		Object object = tree.getLastSelectedPathComponent();
 		if ((object != null) && (object instanceof File)) {
 			File file = (File)object;
@@ -209,7 +210,7 @@ public class DirectoryPane extends JScrollPane implements TreeSelectionListener 
 	public void sendFileEvent(FileEvent event) {
 		EventListener[] listeners = listenerList.getListeners(FileListener.class);
 		for (int i=0; i<listeners.length; i++) {
-			((FileListener)listeners[i]).fileEventOccurred((FileEvent)event);
+			((FileListener)listeners[i]).fileEventOccurred(event);
 		}
 	}
 }

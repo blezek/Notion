@@ -40,7 +40,8 @@ public class ObjectCache extends AbstractPipelineStage implements Processor {
 	 * @param fileObject the object to cache.
 	 * @return the same FileObject.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
 

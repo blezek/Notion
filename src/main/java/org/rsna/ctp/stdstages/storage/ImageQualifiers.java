@@ -70,7 +70,8 @@ public class ImageQualifiers {
 	 * Get a String in the form "[maxWidth; minWidth; quality]"
 	 * with no frame field.
 	 */
-	public String toString() {
+	@Override
+  public String toString() {
 		if ((maxWidthString == null) &&
 			(minWidthString == null) &&
 			(qualityString == null)) return "";

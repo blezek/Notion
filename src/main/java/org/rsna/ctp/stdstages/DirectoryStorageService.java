@@ -95,7 +95,8 @@ public class DirectoryStorageService extends AbstractPipelineStage implements St
 	 * Get the script files.
 	 * @return the script files used by this stage.
 	 */
-	public File[] getScriptFiles() {
+	@Override
+  public File[] getScriptFiles() {
 		return new File[] { dicomScriptFile, xmlScriptFile, zipScriptFile };
 	}
 
@@ -111,7 +112,8 @@ public class DirectoryStorageService extends AbstractPipelineStage implements St
 	 * @return either the original FileObject or the stored FileObject, or null
 	 * if the object could not be stored.
 	 */
-	public FileObject store(FileObject fileObject) {
+	@Override
+  public FileObject store(FileObject fileObject) {
 
 		logger.debug("File received for storage: "+fileObject.getFile());
 
@@ -262,7 +264,8 @@ public class DirectoryStorageService extends AbstractPipelineStage implements St
 		public NameFilter(String name) {
 			this.name = name;
 		}
-		public boolean accept(File file) {
+		@Override
+    public boolean accept(File file) {
 			if (file.isFile()) {
 				String fn = file.getName();
 				return fn.startsWith(name);
@@ -325,7 +328,8 @@ public class DirectoryStorageService extends AbstractPipelineStage implements St
 	 * Get HTML text displaying the current status of the stage.
 	 * @return HTML text displaying the current status of the stage.
 	 */
-	public String getStatusHTML() {
+	@Override
+  public String getStatusHTML() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<h3>"+name+"</h3>");
 		sb.append("<table border=\"1\" width=\"100%\">");

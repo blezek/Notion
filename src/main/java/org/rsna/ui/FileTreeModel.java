@@ -42,25 +42,30 @@ public class FileTreeModel
 		this.listeners = new EventListenerList();
 	}
 
-	public Object getRoot() {
+	@Override
+  public Object getRoot() {
 		return root;
 	}
 
-	public boolean isLeaf(Object node) {
+	@Override
+  public boolean isLeaf(Object node) {
 		return map.get(node) == LEAF;
 	}
 
-	public int getChildCount(Object node) {
+	@Override
+  public int getChildCount(Object node) {
 		List children = children(node);
 		if (children == null) return 0;
 		return children.size();
 	}
 
-	public Object getChild(Object parent, int index) {
+	@Override
+  public Object getChild(Object parent, int index) {
 		return children(parent).get(index);
 	}
 
-	public int getIndexOfChild(Object parent, Object child) {
+	@Override
+  public int getIndexOfChild(Object parent, Object child) {
 		return children(parent).indexOf(child);
 	}
 
@@ -84,17 +89,21 @@ public class FileTreeModel
 		return children;
 	}
 
-	public void valueForPathChanged(TreePath path, Object value) { }
+	@Override
+  public void valueForPathChanged(TreePath path, Object value) { }
 
-	public void addTreeModelListener(TreeModelListener l){
+	@Override
+  public void addTreeModelListener(TreeModelListener l){
 		listeners.add(TreeModelListener.class, l);
 	}
 
-	public void removeTreeModelListener(TreeModelListener l) {
+	@Override
+  public void removeTreeModelListener(TreeModelListener l) {
 		listeners.remove(TreeModelListener.class, l);
 	}
 
-	public Object clone() {
+	@Override
+  public Object clone() {
 		try {
 			FileTreeModel clone = (FileTreeModel)super.clone();
 			clone.listeners = new EventListenerList();

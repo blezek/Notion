@@ -53,7 +53,8 @@ public class SummaryServlet extends Servlet {
 	 * @param req The HttpServletRequest provided by the servlet container.
 	 * @param res The HttpServletResponse provided by the servlet container.
 	 */
-	public void doGet(
+	@Override
+  public void doGet(
 			HttpRequest req,
 			HttpResponse res) {
 

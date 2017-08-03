@@ -170,7 +170,8 @@ public class DicomObject extends FileObject {
 	 * Get the standard extension for this DicomObject (".dcm" of ".DICOMDIR").
 	 * @return ".dcm" or ">DICOMDIR" as appropriate for this object.
 	 */
-	public String getStandardExtension() {
+	@Override
+  public String getStandardExtension() {
 		return isDICOMDIR ? ".DICOMDIR" : ".dcm";
 	}
 
@@ -178,7 +179,8 @@ public class DicomObject extends FileObject {
 	 * Get a prefix for a DicomObject ("DCM-").
 	 * @return a prefix for a DicomObject.
 	 */
-	public String getTypePrefix() {
+	@Override
+  public String getTypePrefix() {
 		return "DCM-";
 	}
 
@@ -231,7 +233,7 @@ public class DicomObject extends FileObject {
 			FileMetaInfo fmi = dataset.getFileMetaInfo();
             if ((fmi != null) && (fileParam.encapsulated || !forceIVRLE))
             	prefEncodingUID = fmi.getTransferSyntaxUID();
-			DcmEncodeParam encoding = (DcmEncodeParam)DcmDecodeParam.valueOf(prefEncodingUID);
+			DcmEncodeParam encoding = DcmDecodeParam.valueOf(prefEncodingUID);
 			boolean swap = fileParam.byteOrder != encoding.byteOrder;
 
             //Create and write the metainfo for the encoding we are using
@@ -385,7 +387,7 @@ public class DicomObject extends FileObject {
 		ImageReader reader = null;
 		try {
 			fiis = new FileImageInputStream(file);
-			reader = (ImageReader)ImageIO.getImageReadersByFormatName("DICOM").next();
+			reader = ImageIO.getImageReadersByFormatName("DICOM").next();
 			reader.setInput(fiis);
 			bufferedImage = reader.read(frame);
 		}
@@ -509,7 +511,7 @@ public class DicomObject extends FileObject {
 			ImageWriteParam iwp = writer.getDefaultWriteParam();
 			if (quality >= 0) {
 				quality = Math.min(quality, 100);
-				float fQuality = ((float)quality) / 100.0F;
+				float fQuality = (quality) / 100.0F;
 				iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
 				iwp.setCompressionQuality(fQuality);
 			}
@@ -581,8 +583,8 @@ public class DicomObject extends FileObject {
 			//To make clear in what domain the arithmetic is being done, we explicitly cast the values:
 			float slope = getFloat("RescaleSlope", 1.0f);
 			float intercept = getFloat("RescaleIntercept", 0.0f);
-			windowLevel = (int)( ( (float)windowLevel - intercept ) / slope );
-			windowWidth = (int)( (float)windowWidth / slope );
+			windowLevel = (int)( ( windowLevel - intercept ) / slope );
+			windowWidth = (int)( windowWidth / slope );
 
 			//Do the window level/width operation, if possible.
 			int bitsStored = getBitsStored();
@@ -599,7 +601,7 @@ public class DicomObject extends FileObject {
 				if (!inverse) {
 					if (bottom > 0) Arrays.fill(rgb, 0, bottom-1, (byte)0);
 					if (top < size-1) Arrays.fill(rgb, top, size-1, (byte)255);
-					double scale = 255.0 / ((double)(top - bottom));
+					double scale = 255.0 / (top - bottom);
 					for (int i=Math.max(bottom, 0); i<Math.min(top, size); i++) {
 						rgb[i] = (byte)(scale * (i - bottom));
 					}
@@ -607,7 +609,7 @@ public class DicomObject extends FileObject {
 				else {
 					if (bottom > 0) Arrays.fill(rgb, 0, bottom-1, (byte)255);
 					if (top < size-1) Arrays.fill(rgb, top, size-1, (byte)0);
-					double scale = 255.0 / ((double)(top - bottom));
+					double scale = 255.0 / (top - bottom);
 					for (int i=Math.max(bottom, 0); i<Math.min(top, size); i++) {
 						rgb[i] = (byte)(255 - (int)(scale * (i - bottom)));
 					}
@@ -644,7 +646,7 @@ public class DicomObject extends FileObject {
 			ImageWriteParam iwp = writer.getDefaultWriteParam();
 			if (quality >= 0) {
 				quality = Math.min(quality,100);
-				float fQuality = ((float)quality) / 100.0F;
+				float fQuality = (quality) / 100.0F;
 				iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
 				iwp.setCompressionQuality(fQuality);
 			}
@@ -1092,7 +1094,8 @@ public class DicomObject extends FileObject {
 	 * @return the text of the element or the empty String if the
 	 * element does not exist.
 	 */
-	public String getPatientName() {
+	@Override
+  public String getPatientName() {
 		return isDICOMDIR ?
 					getElementValueFromSQ(directoryRecordSeq, Tags.PatientName, "")
 							: getElementValue(Tags.PatientName);
@@ -1105,7 +1108,8 @@ public class DicomObject extends FileObject {
 	 * @return the text of the element or the empty String if the
 	 * element does not exist.
 	 */
-	public String getPatientID() {
+	@Override
+  public String getPatientID() {
 		return isDICOMDIR ?
 					getElementValueFromSQ(directoryRecordSeq, Tags.PatientID, "")
 							: getElementValue(Tags.PatientID);
@@ -1118,7 +1122,8 @@ public class DicomObject extends FileObject {
 	 * @return the text of the element or the empty String if the
 	 * element does not exist.
 	 */
-	public String getAccessionNumber() {
+	@Override
+  public String getAccessionNumber() {
 		return isDICOMDIR ?
 					getElementValueFromSQ(directoryRecordSeq, Tags.AccessionNumber, "")
 							: getElementValue(Tags.AccessionNumber);
@@ -1208,7 +1213,8 @@ public class DicomObject extends FileObject {
 	 * MediaStorageSOPInstanceUID are used as the SOPInstanceUID.
 	 * @return the text of the element or null if the element does not exist.
 	 */
-	public String getSOPInstanceUID() {
+	@Override
+  public String getSOPInstanceUID() {
 		return isDICOMDIR ?
 					getMediaStorageSOPInstanceUID()
 							: getElementValue(Tags.SOPInstanceUID, null);
@@ -1227,7 +1233,8 @@ public class DicomObject extends FileObject {
 	 * Included for compatibility with other FileObjects.
 	 * @return the text of the element or null if the element does not exist.
 	 */
-	public String getUID() {
+	@Override
+  public String getUID() {
 		return getSOPInstanceUID();
 	}
 
@@ -1237,7 +1244,8 @@ public class DicomObject extends FileObject {
 	 * is searched for the first StudyDate element.
 	 * @return the text of the element or null if the element does not exist.
 	 */
-	public String getStudyDate() {
+	@Override
+  public String getStudyDate() {
 		return isDICOMDIR ?
 					getElementValueFromSQ(directoryRecordSeq, Tags.StudyDate, null)
 							: getElementValue(Tags.StudyDate, null);
@@ -1261,7 +1269,8 @@ public class DicomObject extends FileObject {
 	 * is searched for the first StudyInstanceUID element.
 	 * @return the text of the element or null if the element does not exist.
 	 */
-	public String getStudyInstanceUID() {
+	@Override
+  public String getStudyInstanceUID() {
 		return isDICOMDIR ?
 					getElementValueFromSQ(directoryRecordSeq, Tags.StudyInstanceUID, null)
 							: getElementValue(Tags.StudyInstanceUID, null);
@@ -1272,7 +1281,8 @@ public class DicomObject extends FileObject {
 	 * Included for compatibility with other FileObjects.
 	 * @return the text of the element or null if the element does not exist.
 	 */
-	public String getStudyUID() {
+	@Override
+  public String getStudyUID() {
 		return getStudyInstanceUID();
 	}
 
@@ -1460,7 +1470,8 @@ public class DicomObject extends FileObject {
 	 * Gets a brief description of this DicomObject.
 	 * @return "TCE Manifest" or SOP Class Name.
 	 */
-	public String getDescription() {
+	@Override
+  public String getDescription() {
 		if (isManifest()) return "TCE Manifest";
 		return getSOPClassName();
 	}
@@ -2101,7 +2112,8 @@ public class DicomObject extends FileObject {
 			int x = ops.indexOf(c);
 			return (x > 0);
 		}
-		public boolean isOperator() {
+		@Override
+    public boolean isOperator() {
 			return (p != -1);
 		}
 		public boolean isSentinel() {
@@ -2119,7 +2131,8 @@ public class DicomObject extends FileObject {
 		public boolean isLowerThan(Operator q) {
 			return (p < q.p);
 		}
-		public String toString() {
+		@Override
+    public String toString() {
 			return "" + c;
 		}
 	}
@@ -2226,7 +2239,8 @@ public class DicomObject extends FileObject {
 		public boolean getValue() {
 			return value;
 		}
-		public String toString() {
+		@Override
+    public String toString() {
 			return value ? "true" : "false";
 		}
 	}
@@ -2300,7 +2314,8 @@ public class DicomObject extends FileObject {
 			else if (type == END) return "END";
 			else return "UNKNOWN";
 		}
-		public String toString() {
+		@Override
+    public String toString() {
 			return getTypeName();
 		}
 	}

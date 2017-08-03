@@ -64,7 +64,8 @@ public class ApplicationProperties extends PropertiesFile {
 	 * @return the previous value of the property, or null if the
 	 * property had no previous value.
 	 */
-	public Object setProperty(String key, String value) {
+	@Override
+  public Object setProperty(String key, String value) {
 		Object object = super.setProperty(key, value);
 		if (notifyOnChange) sendPropertyEvent(this,key, value, (String)object);
 		return object;
@@ -106,7 +107,8 @@ public class ApplicationProperties extends PropertiesFile {
 		final PropertyEvent event = new PropertyEvent(object,key,newValue,oldValue);
 		final EventListener[] listeners = listenerList.getListeners(PropertyListener.class);
 		Runnable fireEvents = new Runnable() {
-			public void run() {
+			@Override
+      public void run() {
 				for (int i=0; i<listeners.length; i++) {
 					((PropertyListener)listeners[i]).propertyChanged(event);
 				}

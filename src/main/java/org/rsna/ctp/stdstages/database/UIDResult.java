@@ -65,7 +65,8 @@ public class UIDResult {
 	 * Get the UIDResult as a string.
 	 * @return the status message.
 	 */
-	public String toString() {
+	@Override
+  public String toString() {
 		return "("+(present?"PRESENT, " + datetime:"MISSING")+")";
 	}
 

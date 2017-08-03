@@ -98,7 +98,8 @@ public class DicomImportService extends AbstractImportService {
 	/**
 	 * Start the SCP.
 	 */
-	public void start() {
+	@Override
+  public void start() {
 		try { dicomStorageSCP.start(); }
 		catch (Exception ex) {
 			logger.warn("Unable to start the DicomStorageSCP on port "+port);
@@ -109,7 +110,8 @@ public class DicomImportService extends AbstractImportService {
 	/**
 	 * Stop the pipeline stage.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		dicomStorageSCP.stop();
 		stop = true;
 	}

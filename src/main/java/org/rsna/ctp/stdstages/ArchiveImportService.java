@@ -85,7 +85,8 @@ public class ArchiveImportService extends AbstractPipelineStage implements Impor
 	 * interface, we just return zero.
 	 * return zero.
 	 */
-	public synchronized int getQueueSize() {
+	@Override
+  public synchronized int getQueueSize() {
 		return 0;
 	}
 
@@ -93,7 +94,8 @@ public class ArchiveImportService extends AbstractPipelineStage implements Impor
 	 * Get the next object available for processing.
 	 * @return the next object available, or null if no object is available.
 	 */
-	public FileObject getNextObject() {
+	@Override
+  public FileObject getNextObject() {
 		File file;
 		long maxLM = System.currentTimeMillis() - age;
 		while ((file = findFile(maxLM)) != null) {
@@ -217,7 +219,8 @@ public class ArchiveImportService extends AbstractPipelineStage implements Impor
 	 * tree under the active directory.
 	 * @param file the file to be released.
 	 */
-	public void release(File file) {
+	@Override
+  public void release(File file) {
 		if ((file != null) && file.exists()) {
 			//Only delete if the path includes the active directory.
 			if (file.getAbsolutePath().startsWith(active.getAbsolutePath())) {
@@ -236,7 +239,8 @@ public class ArchiveImportService extends AbstractPipelineStage implements Impor
 	 * that was received.
 	 * @return HTML text displaying the active status of the stage.
 	 */
-	public String getStatusHTML() {
+	@Override
+  public String getStatusHTML() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<h3>"+name+"</h3>");
 		sb.append("<table border=\"1\" width=\"100%\">");

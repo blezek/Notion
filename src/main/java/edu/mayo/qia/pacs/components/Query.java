@@ -209,6 +209,7 @@ public class Query {
     }
     ExecutorService executor = Notion.context.getBean("executor", ExecutorService.class);
     queryFuture = executor.submit(new Callable<String>() {
+      @Override
       public String call() {
         Thread.currentThread().setName("Query " + device);
         queryCounter.inc();
@@ -328,6 +329,7 @@ public class Query {
     template.update("update QUERY set Status = ? where QueryKey = ?", "fetch pending", queryKey);
 
     fetchFuture = Notion.context.getBean("executor", ExecutorService.class).submit(new Callable<String>() {
+      @Override
       public String call() {
         final JdbcTemplate template = Notion.context.getBean(JdbcTemplate.class);
         Timer.Context context = fetchTimer.time();

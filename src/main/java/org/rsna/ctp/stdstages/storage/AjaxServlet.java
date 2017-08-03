@@ -42,7 +42,8 @@ public class AjaxServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 
 		//Get the FileSystemManager.
 		FileSystemManager fsm = FileSystemManager.getInstance(root);

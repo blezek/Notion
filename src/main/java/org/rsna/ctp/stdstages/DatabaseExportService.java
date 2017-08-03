@@ -86,7 +86,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 	/**
 	 * Stop the pipeline stage.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		if (verifierService != null) verifierService.stopServer();
 		stop = true;
 	}
@@ -94,7 +95,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 	/**
 	 * Start the Exporter threads.
 	 */
-	public void start() {
+	@Override
+  public void start() {
 		exporters = new Exporter[poolSize];
 		for (int i=0; i<poolSize; i++) {
 			DatabaseAdapter dba = null;
@@ -127,7 +129,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 	 * stop is set in the AbstractPipelineStage ancestor class.
 	 * @return true if the pipeline has cleanly shut down; false otherwise.
 	 */
-	public boolean isDown() {
+	@Override
+  public boolean isDown() {
 		for (int i=0; i<exporters.length; i++) {
 			if (!exporters[i].getState().equals(Thread.State.TERMINATED)) return false;
 		}
@@ -148,7 +151,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 			dba.setID(id);
 		}
 
-		public void run() {
+		@Override
+    public void run() {
 			logger.info(name+": Exporter["+id+"]: Started");
 			File file = null;
 
@@ -259,7 +263,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 	 * this class is the parent.
 	 * @return HTML text displaying the active status of the stage.
 	 */
-	public synchronized String getStatusHTML(String childUniqueStatus) {
+	@Override
+  public synchronized String getStatusHTML(String childUniqueStatus) {
 		String stageUniqueStatus = "";
 		if (lastElapsedTime >= 0) {
 			long et = lastElapsedTime / 1000000;
@@ -294,7 +299,8 @@ public class DatabaseExportService extends AbstractQueuedExportService {
 			this.requireAuthentication = requireAuthentication;
 		}
 
-		public void process(HttpRequest req, HttpResponse res) {
+		@Override
+    public void process(HttpRequest req, HttpResponse res) {
 			if (!requireAuthentication || req.userHasRole("import")) {
 				String result = verify(req);
 				if (result != null) {

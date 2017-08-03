@@ -82,7 +82,7 @@ public class TimerUtil {
 	public static String getText(long time, String text) {
 		text = text.trim();
 		if (!text.equals("")) text = ": "+text;
-		double dtime = ((double)time)/1000000.0;
+		double dtime = (time)/1000000.0;
 		return String.format("%10.6f ms%s", dtime, text);
 	}
 

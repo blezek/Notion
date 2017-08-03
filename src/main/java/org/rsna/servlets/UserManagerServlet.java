@@ -47,14 +47,15 @@ public class UserManagerServlet extends Servlet {
 	 * @param req the request object.
 	 * @param res the response object.
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 
 		//Get the Users object.
 		Users users = Users.getInstance();
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin") || !(users instanceof UsersXmlFileImpl)) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -76,7 +77,8 @@ public class UserManagerServlet extends Servlet {
 	 * @param req the request object.
 	 * @param res the response object.
 	 */
-	public void doPost(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doPost(HttpRequest req, HttpResponse res) {
 
 		if (logger.isDebugEnabled()) {
 			String username = null;
@@ -94,7 +96,7 @@ public class UserManagerServlet extends Servlet {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin") || !req.isReferredFrom(context)) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -106,7 +108,7 @@ public class UserManagerServlet extends Servlet {
 
 		//Make sure that this system is using the XML implementation.
 		if (!(users instanceof UsersXmlFileImpl)) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}

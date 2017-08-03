@@ -129,7 +129,8 @@ public class JdbmUtil {
 	static class KeyComparator implements Comparator, Serializable {
 		static final long serialVersionUID = 1L;
 		public KeyComparator() { }
-		public int compare(Object key1, Object key2) {
+		@Override
+    public int compare(Object key1, Object key2) {
 			if ( (key1 instanceof String) && (key2 instanceof String)) {
 				return ((String)key1).compareTo((String)key2);
 			}
@@ -141,7 +142,8 @@ public class JdbmUtil {
 			}
 			else return 0;
 		}
-		public boolean equals(Object obj) {
+		@Override
+    public boolean equals(Object obj) {
 			return this.equals(obj);
 		}
 	}

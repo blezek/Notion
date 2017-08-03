@@ -127,7 +127,8 @@ public class Pipeline extends Thread {
 	/**
 	 * Run the thread.
 	 */
-	public void run() {
+	@Override
+  public void run() {
 		//Only run if there are stages in the pipeline.
 		if (stages.size() > 0) {
 			//Start the stages

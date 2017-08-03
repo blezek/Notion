@@ -41,7 +41,8 @@ public class StatusServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		Configuration config = Configuration.getInstance();
 
 		StringBuffer sb = new StringBuffer();

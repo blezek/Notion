@@ -214,6 +214,7 @@ public class FilePart extends Part {
    *
    * @return true.
    */
+  @Override
   public boolean isFile() {
     return true;
   }

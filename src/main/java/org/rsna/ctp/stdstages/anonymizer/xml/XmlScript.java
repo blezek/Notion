@@ -260,7 +260,7 @@ class XmlScript {
 				else {
 					//it's a variable reference
 					name = script.substring(k,kk);
-					temp = (String)table.get(name);
+					temp = table.get(name);
 					if (temp == null) temp = "null";
 					value += temp;
 					k = kk;

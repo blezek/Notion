@@ -54,7 +54,8 @@ public class PolledHttpExportService extends AbstractQueuedExportService {
 	/**
 	 * Stop the stage.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		stop = true;
 		if (connector != null) connector.interrupt();
 	}
@@ -62,14 +63,16 @@ public class PolledHttpExportService extends AbstractQueuedExportService {
 	/**
 	 * Determine whether the pipeline stage has shut down.
 	 */
-	public boolean isDown() {
+	@Override
+  public boolean isDown() {
 		return stop && !handling;
 	}
 
 	/**
 	 * Start the connector.
 	 */
-	public void start() {
+	@Override
+  public void start() {
 		connector.start();
 	}
 
@@ -87,7 +90,8 @@ public class PolledHttpExportService extends AbstractQueuedExportService {
 		/**
 		 * Start the Connector and accept connections.
 		 */
-		public void run() {
+		@Override
+    public void run() {
 			while (!stop && !isInterrupted()) {
 				try {
 					//Wait for a connection

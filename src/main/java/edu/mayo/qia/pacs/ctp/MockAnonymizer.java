@@ -14,7 +14,7 @@ public class MockAnonymizer extends Anonymizer {
     NativeObject tagObject = new NativeObject();
 
     for (String tagName : fieldMap.values()) {
-      tagObject.defineProperty(tagName, "#" + tagName + "#", NativeObject.READONLY);
+      tagObject.defineProperty(tagName, "#" + tagName + "#", ScriptableObject.READONLY);
     }
     ScriptableObject.putProperty(scope, "tags", tagObject);
     return scope;

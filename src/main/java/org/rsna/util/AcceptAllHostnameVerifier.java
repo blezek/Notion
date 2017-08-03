@@ -15,7 +15,8 @@ import javax.net.ssl.SSLSession;
  */
 public class AcceptAllHostnameVerifier implements HostnameVerifier {
 
-	public boolean verify(String urlHost, SSLSession ssls) {
+	@Override
+  public boolean verify(String urlHost, SSLSession ssls) {
 		return true;
 	}
 

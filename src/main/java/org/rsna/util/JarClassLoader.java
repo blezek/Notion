@@ -64,7 +64,8 @@ public class JarClassLoader extends URLClassLoader {
 		super(urls, parent);
 	}
 
-	protected synchronized Class loadClass(String classname, boolean resolve)
+	@Override
+  protected synchronized Class loadClass(String classname, boolean resolve)
 			throws ClassNotFoundException {
 
 		Class theClass = findLoadedClass(classname);

@@ -38,7 +38,8 @@ public class FileTree extends JTree {
 	 * @param hasFocus - true if the node has the focus
 	 * @return the String representation of the node's value
 	 */
-	public String convertValueToText(
+	@Override
+  public String convertValueToText(
 					Object value,
 					boolean selected,
 					boolean expanded,

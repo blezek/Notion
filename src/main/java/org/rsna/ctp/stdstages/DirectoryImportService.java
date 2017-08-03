@@ -65,7 +65,8 @@ public class DirectoryImportService extends AbstractPipelineStage implements Imp
 	 * @return the number of objects in the import queue, or zero if the
 	 * ImportService is not queued.
 	 */
-	public int getQueueSize() {
+	@Override
+  public int getQueueSize() {
 		return FileUtil.getFileCount(root);
 	}
 
@@ -73,7 +74,8 @@ public class DirectoryImportService extends AbstractPipelineStage implements Imp
 	 * Get the next object available for processing.
 	 * @return the next object available, or null if no object is available.
 	 */
-	public FileObject getNextObject() {
+	@Override
+  public FileObject getNextObject() {
 		File file;
 		long maxLM = System.currentTimeMillis() - age;
 		while ((file = findFile(maxLM)) != null) {
@@ -173,7 +175,8 @@ public class DirectoryImportService extends AbstractPipelineStage implements Imp
 	 * tree under the root directory.
 	 * @param file the file to be released.
 	 */
-	public void release(File file) {
+	@Override
+  public void release(File file) {
 		if ((file != null) && file.exists()) {
 			//Only delete if the path includes the root.
 			if (file.getAbsolutePath().startsWith(root.getAbsolutePath())) {
@@ -189,7 +192,8 @@ public class DirectoryImportService extends AbstractPipelineStage implements Imp
 	 * that was received.
 	 * @return HTML text displaying the active status of the stage.
 	 */
-	public String getStatusHTML() {
+	@Override
+  public String getStatusHTML() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<h3>"+name+"</h3>");
 		sb.append("<table border=\"1\" width=\"100%\">");

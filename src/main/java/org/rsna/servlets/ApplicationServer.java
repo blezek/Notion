@@ -61,7 +61,8 @@ public class ApplicationServer extends Servlet {
 	 * }
 	 * </pre>
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) throws Exception {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) throws Exception {
 
 		logger.debug("Webstart request:\n"+req.toString());
 
@@ -108,7 +109,7 @@ public class ApplicationServer extends Servlet {
 				catch (Exception unable) { }
 			}
 		}
-		res.setResponseCode(res.notfound);
+		res.setResponseCode(HttpResponse.notfound);
 		res.send();
 	}
 

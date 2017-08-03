@@ -87,7 +87,7 @@ public class Servlet {
 			long clientLMDate = req.getConditionalTime();
 			long fileLMDate = file.lastModified();
 			if ((clientLMDate > 0) && (fileLMDate <= clientLMDate)) {
-				res.setResponseCode( res.notmodified );
+				res.setResponseCode( HttpResponse.notmodified );
 				res.setETag(fileLMDate);
 			}
 			else {
@@ -105,13 +105,13 @@ public class Servlet {
 				if (p.startsWith("/")) p = p.substring(1);
 				file = cache.getFile(p);
 				if (file != null) res.write(file);
-				else res.setResponseCode( res.notfound );
+				else res.setResponseCode( HttpResponse.notfound );
 			}
 			else {
 				//There is no cache, see if the file can
 				//be obtained from the classpath.
 				if ((url=getClass().getResource(req.path)) != null)  res.write(url);
-				else res.setResponseCode( res.notfound );
+				else res.setResponseCode( HttpResponse.notfound );
 			}
 		}
 		res.send();
@@ -125,7 +125,7 @@ public class Servlet {
 	 */
 	public void doPost(HttpRequest req, HttpResponse res) throws Exception {
 		res.disableCaching();
-		res.setResponseCode( res.notfound );
+		res.setResponseCode( HttpResponse.notfound );
 		res.send();
 	}
 

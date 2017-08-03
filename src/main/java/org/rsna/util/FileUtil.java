@@ -868,7 +868,8 @@ public class FileUtil {
 		if (!dir.isDirectory()) return new File[0];
 		File[] files = dir.listFiles(
 			new FileFilter() {
-				public boolean accept(File file) {
+				@Override
+        public boolean accept(File file) {
 					return file.isFile() && file.canRead() && file.canWrite();
 				}
 			}
@@ -876,7 +877,8 @@ public class FileUtil {
 		Arrays.sort(
 			files,
 			new Comparator<File>() {
-				public int compare(File f1, File f2) {
+				@Override
+        public int compare(File f1, File f2) {
 					//compute the difference in reverse order
 					long diff = f1.lastModified() - f2.lastModified();
 					return (diff > 0) ? 1 : ((diff < 0) ? -1 : 0);
@@ -896,7 +898,8 @@ public class FileUtil {
 		if (!dir.isDirectory()) return null;
 		File[] files = dir.listFiles(
 			new FileFilter() {
-				public boolean accept(File file) {
+				@Override
+        public boolean accept(File file) {
 					return file.isFile() && file.canRead() && file.canWrite();
 				}
 			}

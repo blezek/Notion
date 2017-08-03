@@ -51,7 +51,8 @@ public class MemoryMonitor extends AbstractPipelineStage implements Processor {
 	 * @param fileObject the object.
 	 * @return the same FileObject.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
 
@@ -77,7 +78,8 @@ public class MemoryMonitor extends AbstractPipelineStage implements Processor {
 	 * Get HTML text displaying the current status of the stage.
 	 * @return HTML text displaying the current status of the stage.
 	 */
-	public String getStatusHTML() {
+	@Override
+  public String getStatusHTML() {
 		String stageUniqueStatus =
 			"<tr><td width=\"20%\">Files processed:</td>"
 			+ "<td>" + count + "</td></tr>";

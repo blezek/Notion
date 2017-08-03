@@ -81,6 +81,7 @@ public final class Pool {
   public Pool() {
   }
 
+  @Override
   public String toString() {
     return this.name + "(" + poolKey + ") " + "description: " + description + " " + applicationEntityTitle + "@" + getHost() + ":" + getPort();
   }

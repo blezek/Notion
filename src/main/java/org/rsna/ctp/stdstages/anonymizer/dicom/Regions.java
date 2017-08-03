@@ -38,7 +38,8 @@ public class Regions {
 	/**
 	 * Get the regions as a String.
 	 */
-	public String toString() {
+	@Override
+  public String toString() {
 		StringBuffer sb = new StringBuffer();
 		for (Region r : regions) {
 			sb.append("(" + r.left + "," + r.top + "," + r.right + "," + r.bottom + ")");

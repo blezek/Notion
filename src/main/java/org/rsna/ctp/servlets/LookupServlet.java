@@ -62,13 +62,14 @@ public class LookupServlet extends Servlet {
 	 * @param req The HttpServletRequest provided by the servlet container.
 	 * @param res The HttpServletResponse provided by the servlet container.
 	 */
-	public void doGet(
+	@Override
+  public void doGet(
 			HttpRequest req,
 			HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin")) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -121,13 +122,14 @@ public class LookupServlet extends Servlet {
 	 * @param req The HttpRequest provided by the servlet container.
 	 * @param res The HttpResponse provided by the servlet container.
 	 */
-	public void doPost(
+	@Override
+  public void doPost(
 			HttpRequest req,
 			HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin") || !req.isReferredFrom(context)) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -205,7 +207,7 @@ public class LookupServlet extends Servlet {
 			catch (Exception ex) { }
 		}
 		//If we get here, we couldn't handle the submission
-		res.setResponseCode(res.notfound); //Unable to perform the function.
+		res.setResponseCode(HttpResponse.notfound); //Unable to perform the function.
 		res.send();
 	}
 

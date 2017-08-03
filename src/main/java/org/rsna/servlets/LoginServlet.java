@@ -51,7 +51,8 @@ public class LoginServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		//Get the possible query parameters.
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
@@ -117,7 +118,8 @@ public class LoginServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doPost(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doPost(HttpRequest req, HttpResponse res) {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		login(req, res, username, password);

@@ -30,7 +30,8 @@ public class UsersTestLdapFileImpl extends UsersLdapFileImpl {
 	 * Accept any user whose username exists in the users.xml file,
 	 * regardless of the password.
 	 */
-	public User authenticate(String username, String password) {
+	@Override
+  public User authenticate(String username, String password) {
 		return getUser(username);
 	}
 

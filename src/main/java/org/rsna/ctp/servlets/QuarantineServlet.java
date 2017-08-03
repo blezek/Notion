@@ -65,12 +65,13 @@ public class QuarantineServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 
 		//Require that the user have the qadmin or admin role
 		boolean admin = req.userHasRole("qadmin") || req.userHasRole("admin");
 		if (!admin) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -134,7 +135,7 @@ public class QuarantineServlet extends Servlet {
 		Pipeline pipeline;
 		try { pipeline = Configuration.getInstance().getPipelines().get(pipelineIndex); }
 		catch (Exception quit) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}
@@ -234,13 +235,13 @@ public class QuarantineServlet extends Servlet {
 		PipelineStage stage;
 		try { pipeline = Configuration.getInstance().getPipelines().get(pipelineIndex); }
 		catch (Exception quit) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}
 		try { stage = pipeline.getStages().get(stageIndex); }
 		catch (Exception quit) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}
@@ -375,13 +376,13 @@ public class QuarantineServlet extends Servlet {
 		PipelineStage stage;
 		try { pipeline = Configuration.getInstance().getPipelines().get(pipelineIndex); }
 		catch (Exception quit) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}
 		try { stage = pipeline.getStages().get(stageIndex); }
 		catch (Exception quit) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}

@@ -49,7 +49,8 @@ public class UserServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		if (logger.isDebugEnabled()) {
 			logger.info(req.toString()
 						+"\nHeaders:\n"+req.listHeaders("      ")

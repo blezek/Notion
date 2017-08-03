@@ -44,7 +44,8 @@ public class SysPropsServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		res.disableCaching();
 		boolean admin = req.userHasRole("admin");
 		if (admin && (req.getParameter("gc") != null)) collect();
@@ -143,7 +144,8 @@ public class SysPropsServlet extends Servlet {
 		for (i=0; (usedMemory1 < usedMemory2) && (i < 40); i++) {
 			runtime.runFinalization();
 			runtime.gc();
-			Thread.currentThread().yield();
+			Thread.currentThread();
+      Thread.yield();
 			usedMemory2 = usedMemory1;
 			usedMemory1 = usedMemory();
 		}

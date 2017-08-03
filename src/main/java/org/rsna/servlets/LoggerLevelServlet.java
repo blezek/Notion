@@ -44,11 +44,12 @@ public class LoggerLevelServlet extends Servlet {
 	 * @param req the request object.
 	 * @param res the response object.
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) throws Exception {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) throws Exception {
 
 		//Require that the user have the admin role
 		if (!req.userHasRole("admin")) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}
@@ -75,11 +76,12 @@ public class LoggerLevelServlet extends Servlet {
 	 * @param req the request object.
 	 * @param res the response object.
 	 */
-	public void doPost(HttpRequest req, HttpResponse res) throws Exception {
+	@Override
+  public void doPost(HttpRequest req, HttpResponse res) throws Exception {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin") || !req.isReferredFrom(context)) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.send();
 			return;
 		}

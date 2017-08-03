@@ -89,7 +89,8 @@ public class HttpImportService extends AbstractImportService {
 	/**
 	 * Stop the pipeline stage.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		if (httpReceiver != null) httpReceiver.stopServer();
 		stop = true;
 	}
@@ -97,7 +98,8 @@ public class HttpImportService extends AbstractImportService {
 	/**
 	 * Start the receiver.
 	 */
-	public void start() {
+	@Override
+  public void start() {
 		if (httpReceiver != null) httpReceiver.start();
 	}
 
@@ -110,7 +112,8 @@ public class HttpImportService extends AbstractImportService {
 			this.requireAuthentication = requireAuthentication;
 		}
 
-		public void process(HttpRequest req, HttpResponse res) {
+		@Override
+    public void process(HttpRequest req, HttpResponse res) {
 			String connectionIP = req.getRemoteAddress();
 			boolean accept = ipWhiteList.contains(connectionIP) && !ipBlackList.contains(connectionIP);
 
@@ -145,7 +148,7 @@ public class HttpImportService extends AbstractImportService {
 							if (logAllConnections) logger.info("Posted file received successfully");
 						}
 						else {
-							res.setResponseCode(res.notfound); //error during transmission
+							res.setResponseCode(HttpResponse.notfound); //error during transmission
 							if (logAllConnections || logRejectedConnections) {
 								logger.info("Unable to obtain the posted file");
 							}
@@ -153,7 +156,7 @@ public class HttpImportService extends AbstractImportService {
 					}
 					else {
 						discardPostedFile(req);
-						res.setResponseCode(res.notfound); //error - wrong method or content type
+						res.setResponseCode(HttpResponse.notfound); //error - wrong method or content type
 						if (logAllConnections || logRejectedConnections) {
 							logger.info("Unacceptable method or Content-Type");
 						}
@@ -161,7 +164,7 @@ public class HttpImportService extends AbstractImportService {
 				}
 				else {
 					discardPostedFile(req);
-					res.setResponseCode(res.unauthorized);
+					res.setResponseCode(HttpResponse.unauthorized);
 				}
 				res.send();
 			}

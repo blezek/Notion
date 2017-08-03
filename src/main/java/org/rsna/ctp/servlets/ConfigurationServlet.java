@@ -42,12 +42,13 @@ public class ConfigurationServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		boolean admin = req.isFromLocalHost() || req.userHasRole("admin");
 
 		//Require that the user be an admin or be local
 		if (!admin) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}

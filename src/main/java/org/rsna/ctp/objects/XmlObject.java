@@ -55,7 +55,8 @@ public class XmlObject extends FileObject {
 	 * Get the standard extension for an XmlObject (".xml").
 	 * @return ".xml"
 	 */
-	public String getStandardExtension() {
+	@Override
+  public String getStandardExtension() {
 		return ".xml";
 	}
 
@@ -63,7 +64,8 @@ public class XmlObject extends FileObject {
 	 * Get a prefix for an XmlObject ("XML-").
 	 * @return a prefix for a XmlObject.
 	 */
-	public String getTypePrefix() {
+	@Override
+  public String getTypePrefix() {
 		return "XML-";
 	}
 
@@ -96,7 +98,8 @@ public class XmlObject extends FileObject {
 	 * If the UID is missing, a UID is generated from the hash of the text of the XML.
 	 * @return the UID.
 	 */
-	public String getUID() {
+	@Override
+  public String getUID() {
 		if (document == null) return "";
 		Element root = document.getDocumentElement();
 		String uid = root.getAttribute("uid").replaceAll("\\s","");
@@ -143,7 +146,8 @@ public class XmlObject extends FileObject {
 	 * </ol>
 	 * If no date is available it returns the empty string.
 	 */
-	public String getStudyDate() {
+	@Override
+  public String getStudyDate() {
 		if (document == null) return "";
 		Element root = document.getDocumentElement();
 		String date = root.getAttribute("date").replaceAll("\\s","");
@@ -161,7 +165,8 @@ public class XmlObject extends FileObject {
 	 * </ol>
 	 * @return the description, or the file name if it cannot be obtained.
 	 */
-	public String getDescription() {
+	@Override
+  public String getDescription() {
 		if (document == null) return "";
 		String desc;
 		Element root = document.getDocumentElement();
@@ -188,7 +193,8 @@ public class XmlObject extends FileObject {
 	 * </ol>
 	 * @return the patient name, if available; otherwise the empty string.
 	 */
-	public String getPatientName() {
+	@Override
+  public String getPatientName() {
 		if (document == null) return "";
 		String ptName;
 		Element root = document.getDocumentElement();
@@ -215,7 +221,8 @@ public class XmlObject extends FileObject {
 	 * </ol>
 	 * @return the patient ID, if available; otherwise the empty string.
 	 */
-	public String getPatientID() {
+	@Override
+  public String getPatientID() {
 		if (document == null) return "";
 		String ptID;
 		Element root = document.getDocumentElement();
@@ -246,7 +253,8 @@ public class XmlObject extends FileObject {
 	 * </ol>
 	 * @return the study's unique identifier, if available; otherwise the empty string.
 	 */
-	public String getStudyUID() {
+	@Override
+  public String getStudyUID() {
 		if (document == null) return "";
 		String siuid;
 		Element root = document.getDocumentElement();
@@ -301,7 +309,8 @@ public class XmlObject extends FileObject {
 	 * @return the XML string for the object, including
 	 * an XML declaration specifying an encoding of UTF-8.
 	 */
-	public String toString() {
+	@Override
+  public String toString() {
 		if (document == null) return "";
 		return XmlUtil.toString(document);
 	}

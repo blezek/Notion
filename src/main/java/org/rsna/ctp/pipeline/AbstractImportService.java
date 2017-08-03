@@ -78,7 +78,8 @@ public abstract class AbstractImportService extends AbstractPipelineStage implem
 	 * Get the size of the import queue.
 	 * @return the number of objects in the import queue.
 	 */
-	public synchronized int getQueueSize() {
+	@Override
+  public synchronized int getQueueSize() {
 		return queueManager.size();
 	}
 
@@ -104,7 +105,8 @@ public abstract class AbstractImportService extends AbstractPipelineStage implem
 	 * Get the next object available for processing.
 	 * @return the next object available, or null if no object is available.
 	 */
-	public synchronized FileObject getNextObject() {
+	@Override
+  public synchronized FileObject getNextObject() {
 		File file;
 		if (queueManager != null) {
 			while ((file = queueManager.dequeue(active)) != null) {
@@ -159,7 +161,8 @@ public abstract class AbstractImportService extends AbstractPipelineStage implem
 	 * @param file the file to be released, which must be the original file
 	 * supplied by the ImportService.
 	 */
-	public synchronized void release(File file) {
+	@Override
+  public synchronized void release(File file) {
 		if ((file != null)
 				&& file.exists()
 					&& file.getParentFile().getAbsolutePath().equals(activePath)) {
@@ -176,7 +179,8 @@ public abstract class AbstractImportService extends AbstractPipelineStage implem
 	 * this class is the parent.
 	 * @return HTML text displaying the active status of the stage.
 	 */
-	public synchronized String getStatusHTML(String childUniqueStatus) {
+	@Override
+  public synchronized String getStatusHTML(String childUniqueStatus) {
 		String stageUniqueStatus =
 			"<tr><td width=\"20%\">Files received:</td><td>" + count + "</td></tr>"
 			+ "<tr><td width=\"20%\">Queue size:</td>"

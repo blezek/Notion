@@ -303,7 +303,7 @@ public class StringUtil {
 				String repl = null;
 				if (table != null) repl = table.getProperty(key);
 				if ((repl == null) && includeEnvironmentVariables) repl = System.getenv(key);
-				if (repl == null) repl = matcher.quoteReplacement(group);
+				if (repl == null) repl = Matcher.quoteReplacement(group);
 				matcher.appendReplacement(sb, repl);
 			}
 			matcher.appendTail(sb);

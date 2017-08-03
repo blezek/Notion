@@ -54,11 +54,12 @@ public class ObjectTrackerServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin")) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -101,13 +102,14 @@ public class ObjectTrackerServlet extends Servlet {
 	 * @param req The HttpRequest provided by the servlet container.
 	 * @param res The HttpResponse provided by the servlet container.
 	 */
-	public void doPost(
+	@Override
+  public void doPost(
 			HttpRequest req,
 			HttpResponse res) {
 
 		//Make sure the user is authorized to do this.
 		if (!req.userHasRole("admin") || !req.isReferredFrom(context)) {
-			res.setResponseCode(res.forbidden);
+			res.setResponseCode(HttpResponse.forbidden);
 			res.send();
 			return;
 		}
@@ -137,7 +139,7 @@ public class ObjectTrackerServlet extends Servlet {
 			return;
 		}
 		if (tracker == null) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.setContentType("html");
 			res.disableCaching();
 			res.send();
@@ -147,7 +149,7 @@ public class ObjectTrackerServlet extends Servlet {
 		//Get the selected data
 		Document data = getData(tracker, keyType, keys);
 		if (data == null) {
-			res.setResponseCode(res.notfound);
+			res.setResponseCode(HttpResponse.notfound);
 			res.setContentType("html");
 			res.disableCaching();
 			res.send();

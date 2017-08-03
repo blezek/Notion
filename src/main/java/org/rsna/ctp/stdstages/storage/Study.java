@@ -125,7 +125,8 @@ public class Study implements Comparable {
 	 * @return the order of this Study compared to the supplied Study, in reverse
 	 * date order.
 	 */
-	public int compareTo(Object otherObject) {
+	@Override
+  public int compareTo(Object otherObject) {
 		if (otherObject instanceof Study) {
 			Study otherStudy = (Study)otherObject;
 			String otherDate = otherStudy.getStudyDate();

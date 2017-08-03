@@ -46,7 +46,8 @@ public class HttpService extends Thread {
 	}
 
 	// Start the HttpService and accept connections.
-	public void run() {
+	@Override
+  public void run() {
 		logger.info("HttpService open on port "+port + ((name!=null)?" ("+name+")":"") );
 		while (!this.isInterrupted()) {
 			try {
@@ -80,7 +81,8 @@ public class HttpService extends Thread {
 			this.socket = socket;
 		}
 
-		public void run() {
+		@Override
+    public void run() {
 			HttpResponse res = null;
 			HttpRequest req = null;
 			try {

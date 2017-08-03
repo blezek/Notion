@@ -43,7 +43,8 @@ public class PasswordServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 		//Get a password page from one of three places:
 		//-- the pages directory
 		//-- the root directory
@@ -75,7 +76,8 @@ public class PasswordServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doPost(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doPost(HttpRequest req, HttpResponse res) {
 		if (req.isReferredFrom(context)) {
 			String pw1 = req.getParameter("pw1", "").trim();
 			String pw2 = req.getParameter("pw2", "").trim();
@@ -96,7 +98,7 @@ public class PasswordServlet extends Servlet {
 				}
 			}
 		}
-		res.setResponseCode(res.forbidden);
+		res.setResponseCode(HttpResponse.forbidden);
 		res.send();
 	}
 }

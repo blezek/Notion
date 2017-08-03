@@ -762,7 +762,8 @@ public class XmlUtil {
 			int x = ops.indexOf(c);
 			return (x > 0);
 		}
-		public boolean isOperator() {
+		@Override
+    public boolean isOperator() {
 			return (p != -1);
 		}
 		public boolean isSentinel() {

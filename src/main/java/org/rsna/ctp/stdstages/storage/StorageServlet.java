@@ -44,13 +44,14 @@ public class StorageServlet extends Servlet {
 	 * @param req the request object
 	 * @param res the response object
 	 */
-	public void doGet(HttpRequest req, HttpResponse res) {
+	@Override
+  public void doGet(HttpRequest req, HttpResponse res) {
 
 		//Get the FileSystemManager.
 		FileSystemManager fsm = FileSystemManager.getInstance(root);
 		if (fsm == null) {
 			//There is no FileSystemManager for this root.
-			res.setResponseCode( res.notfound );
+			res.setResponseCode( HttpResponse.notfound );
 			res.send();
 		}
 
@@ -72,7 +73,7 @@ public class StorageServlet extends Servlet {
 		}
 
 		//Not one of those; return NotFound
-		res.setResponseCode( res.notfound );
+		res.setResponseCode( HttpResponse.notfound );
 		res.send();
 	}
 
@@ -206,7 +207,7 @@ public class StorageServlet extends Servlet {
 						}
 					}
 					catch (Exception ex) { logger.debug("Internal server error in zip export.", ex); }
-					res.setResponseCode( res.servererror );
+					res.setResponseCode( HttpResponse.servererror );
 					res.send();
 					return;
 				}
@@ -231,11 +232,11 @@ public class StorageServlet extends Servlet {
 						}
 						catch (Exception ex) {
 							logger.debug("Internal server error in directory export.", ex);
-							res.setResponseCode( res.servererror );
+							res.setResponseCode( HttpResponse.servererror );
 							res.send();
 						}
 					}
-					res.setResponseCode( res.forbidden ); //Not authorized
+					res.setResponseCode( HttpResponse.forbidden ); //Not authorized
 					res.send();
 					return;
 				}
@@ -248,7 +249,7 @@ public class StorageServlet extends Servlet {
 						res.redirect(subpath);
 						return;
 					}
-					res.setResponseCode( res.forbidden ); //Not authorized
+					res.setResponseCode( HttpResponse.forbidden ); //Not authorized
 					res.send();
 					return;
 				}
@@ -299,7 +300,7 @@ public class StorageServlet extends Servlet {
 						//No, create it
 						if (dob.saveAsJPEG(jpegFile, 0, q.maxWidth, q.minWidth, q.quality) == null) {
 							//Error, return a code
-							res.setResponseCode( res.servererror );
+							res.setResponseCode( HttpResponse.servererror );
 							res.send();
 							return;
 						}
@@ -319,7 +320,7 @@ public class StorageServlet extends Servlet {
 				res.setContentType(file);
 			}
 		}
-		else res.setResponseCode( res.notfound );
+		else res.setResponseCode( HttpResponse.notfound );
 		res.send();
 	}
 }

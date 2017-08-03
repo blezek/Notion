@@ -42,6 +42,7 @@ public class User implements Comparable<User> {
 	 * @param user the user to compare.
 	 * @return this.username.compareTo(user.getUsername())
 	 */
+    @Override
     public int compareTo(User user) {
 		return this.username.compareTo(user.getUsername());
 	}

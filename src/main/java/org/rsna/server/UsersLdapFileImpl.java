@@ -63,7 +63,8 @@ public class UsersLdapFileImpl extends UsersXmlFileImpl {
 	 * <b>and</b> the user's credentials must be accepted by the LDAP server.
 	 * @return true if the credentials match a user; false otherwise.
 	 */
-	public User authenticate(String username, String password) {
+	@Override
+  public User authenticate(String username, String password) {
 
 		User user = getUser(username);
 		if (user != null) {

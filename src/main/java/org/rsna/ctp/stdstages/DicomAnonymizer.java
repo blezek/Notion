@@ -62,14 +62,16 @@ public class DicomAnonymizer extends AbstractPipelineStage implements Processor,
 	/**
 	 * Get the script file.
 	 */
-	public File getScriptFile() {
+	@Override
+  public File getScriptFile() {
 		return scriptFile;
 	}
 
 	/**
 	 * Get the lookup table file.
 	 */
-	public File getLookupTableFile() {
+	@Override
+  public File getLookupTableFile() {
 		return lookupTableFile;
 	}
 
@@ -85,7 +87,8 @@ public class DicomAnonymizer extends AbstractPipelineStage implements Processor,
 	 * Get the script files.
 	 * @return the script files used by this stage.
 	 */
-	public File[] getScriptFiles() {
+	@Override
+  public File[] getScriptFiles() {
 		return new File[] { dicomScriptFile, null, null };
 	}
 
@@ -96,7 +99,8 @@ public class DicomAnonymizer extends AbstractPipelineStage implements Processor,
 	 * @param fileObject the object to process.
 	 * @return the processed FileObject.
 	 */
-	public FileObject process(FileObject fileObject) {
+	@Override
+  public FileObject process(FileObject fileObject) {
 		lastFileIn = new File(fileObject.getFile().getAbsolutePath());
 		lastTimeIn = System.currentTimeMillis();
 
@@ -133,7 +137,8 @@ public class DicomAnonymizer extends AbstractPipelineStage implements Processor,
 	/**
 	 * Stop the pipeline stage.
 	 */
-	public void shutdown() {
+	@Override
+  public void shutdown() {
 		intTable.close();
 		stop = true;
 	}
