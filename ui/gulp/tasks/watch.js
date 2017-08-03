@@ -6,10 +6,11 @@
 */
 
 var gulp = require('gulp');
+var browserSync = require('browser-sync');
 
 gulp.task('watch', ['setWatch', 'browserSync', 'vendor'], function() {
 
   // no need to watch our Javascript, browserify takes care of that
-  gulp.watch(['app/dashboard/**', 'app/js/*', 'app/*.html', 'app/partials/**'], ['build', 'jshint']);
+  gulp.watch(['app/viewer/**', 'app/dashboard/**', 'app/js/*', 'app/*.html', 'app/partials/**'], ['build', 'jshint']);
 
 });

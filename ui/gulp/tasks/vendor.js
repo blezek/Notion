@@ -11,6 +11,7 @@ gulp.task('vendor', function() {
     'bower_components/angular-ui-router/release/angular-ui-router.js',
     'bower_components/angular-ui-select/dist/select.js',
     'bower_components/backbone/backbone.js',
+    'bower_components/clipboard/dist/clipboard.js',
     'bower_components/notifyjs/dist/notify-combined.js',
     'bower_components/angular/angular.js',
     'bower_components/angular-route/angular-route.js',
@@ -19,7 +20,7 @@ gulp.task('vendor', function() {
     'bower_components/w11k-dropdownToggle/dist/w11k-dropdownToggle.js',
     'bower_components/w11k-select/dist/w11k-select.js',
     'bower_components/w11k-select/dist/w11k-select.tpl.js'
-    ])
+  ])
   // .pipe(uglify())
   .pipe(gulp.dest('public/js'));
 
