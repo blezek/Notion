@@ -1,0 +1,26 @@
+<div class="modal-header"><h3>{{title}}<h3></div>
+
+  <div class="modal-body">
+    <div class="text-center control-group">
+      {{message}}
+    </div>
+
+    <!-- Some blank space -->
+    <div class="help-block"></div>
+
+    <div class="text-center control-group">
+      <a ng-href="/viewer/index.html?hash={{hash}}">{{url}}</a>
+    </div>
+    <br>
+    <div class="text-center control-group">
+    <span class="text-center">
+      <button class="btn btn-secondary clipboard" data-clipboard-text="{{url}}">
+        Copy to clipboard
+      </button>
+    </span>
+    </div>
+    
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">OK</button>
+</div>
